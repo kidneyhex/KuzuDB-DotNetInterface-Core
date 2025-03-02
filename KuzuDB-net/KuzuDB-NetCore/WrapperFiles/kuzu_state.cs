@@ -8,11 +8,8 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public enum kuzu_state {
   KuzuSuccess = 0,
   KuzuError = 1
-}
-
 }

@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzu_internal_id_t : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -79,7 +78,5 @@ public class kuzu_internal_id_t : global::System.IDisposable {
 
   public kuzu_internal_id_t() : this(kuzunetPINVOKE.new_kuzu_internal_id_t(), true) {
   }
-
-}
 
 }

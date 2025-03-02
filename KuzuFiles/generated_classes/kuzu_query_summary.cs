@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzu_query_summary : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -36,16 +35,11 @@ public class kuzu_query_summary : global::System.IDisposable {
     }
   }
 
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_query_summary_destroy(kuzu_query_summary.getCPtr(this));
-	}
-
   ~kuzu_query_summary() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_query_summary_destroy(kuzu_query_summary.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -62,6 +56,10 @@ public class kuzu_query_summary : global::System.IDisposable {
     }
   }
 
+	public void Destroy() {
+		kuzunetPINVOKE.kuzu_query_summary_destroy(kuzu_query_summary.getCPtr(this));
+	}
+
   public SWIGTYPE_p_void _query_summary {
     set {
       kuzunetPINVOKE.kuzu_query_summary__query_summary_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
@@ -75,7 +73,5 @@ public class kuzu_query_summary : global::System.IDisposable {
 
   public kuzu_query_summary() : this(kuzunetPINVOKE.new_kuzu_query_summary(), true) {
   }
-
-}
 
 }

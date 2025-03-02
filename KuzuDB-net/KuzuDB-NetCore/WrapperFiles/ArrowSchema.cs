@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class ArrowSchema : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -153,7 +152,5 @@ public class ArrowSchema : global::System.IDisposable {
 
   public ArrowSchema() : this(kuzunetPINVOKE.new_ArrowSchema(), true) {
   }
-
-}
 
 }

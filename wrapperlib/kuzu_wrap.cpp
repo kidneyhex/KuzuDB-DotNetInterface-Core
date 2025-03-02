@@ -364,7 +364,7 @@ template <typename T> T SwigValueInit() {
 extern "C" {
 #endif
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_DICTIONARY_ORDERED_get() {
+SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_DICTIONARY_ORDERED_get() {
   int jresult ;
   int result;
   
@@ -374,7 +374,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_DICTIONARY_ORDERED_get() {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_NULLABLE_get() {
+SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_NULLABLE_get() {
   int jresult ;
   int result;
   
@@ -384,7 +384,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_NULLABLE_get() {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_MAP_KEYS_SORTED_get() {
+SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_MAP_KEYS_SORTED_get() {
   int jresult ;
   int result;
   
@@ -394,7 +394,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_ARROW_FLAG_MAP_KEYS_SORTED_get() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_format_set(void * jarg1, char * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_format_set(void * jarg1, char * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *arg2 = (char *) 0 ;
   
@@ -411,7 +411,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_format_set(void * jarg1, c
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_format_get(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_ArrowSchema_format_get(void * jarg1) {
   char * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *result = 0 ;
@@ -423,7 +423,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_format_get(void * jarg1)
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_name_set(void * jarg1, char * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_name_set(void * jarg1, char * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *arg2 = (char *) 0 ;
   
@@ -440,7 +440,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_name_set(void * jarg1, cha
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_name_get(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_ArrowSchema_name_get(void * jarg1) {
   char * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *result = 0 ;
@@ -452,7 +452,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_name_get(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_metadata_set(void * jarg1, char * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_metadata_set(void * jarg1, char * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *arg2 = (char *) 0 ;
   
@@ -469,7 +469,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_metadata_set(void * jarg1,
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_metadata_get(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_ArrowSchema_metadata_get(void * jarg1) {
   char * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   char *result = 0 ;
@@ -481,7 +481,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_metadata_get(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_flags_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_flags_set(void * jarg1, long long jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   int64_t arg2 ;
   
@@ -491,7 +491,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_flags_set(void * jarg1, lo
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_flags_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowSchema_flags_get(void * jarg1) {
   long long jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   int64_t result;
@@ -503,7 +503,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_flags_get(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_n_children_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_n_children_set(void * jarg1, long long jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   int64_t arg2 ;
   
@@ -513,7 +513,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_n_children_set(void * jarg
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_n_children_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowSchema_n_children_get(void * jarg1) {
   long long jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   int64_t result;
@@ -525,7 +525,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_n_children_get(void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_children_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_children_set(void * jarg1, void * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   ArrowSchema **arg2 = (ArrowSchema **) 0 ;
   
@@ -535,7 +535,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_children_set(void * jarg1,
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_children_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowSchema_children_get(void * jarg1) {
   void * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   ArrowSchema **result = 0 ;
@@ -547,7 +547,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_children_get(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_dictionary_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_dictionary_set(void * jarg1, void * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   ArrowSchema *arg2 = (ArrowSchema *) 0 ;
   
@@ -557,7 +557,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_dictionary_set(void * jarg
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_dictionary_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowSchema_dictionary_get(void * jarg1) {
   void * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   ArrowSchema *result = 0 ;
@@ -569,7 +569,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_dictionary_get(void * ja
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_release_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_release_set(void * jarg1, void * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   void (*arg2)(ArrowSchema *) = (void (*)(ArrowSchema *)) 0 ;
   
@@ -579,7 +579,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_release_set(void * jarg1, 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_release_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowSchema_release_get(void * jarg1) {
   void * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   void (*result)(ArrowSchema *) = 0 ;
@@ -591,7 +591,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_release_get(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_private_data_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowSchema_private_data_set(void * jarg1, void * jarg2) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -601,7 +601,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_private_data_set(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_private_data_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowSchema_private_data_get(void * jarg1) {
   void * jresult ;
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   void *result = 0 ;
@@ -613,7 +613,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowSchema_private_data_get(void * 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_ArrowSchema() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ArrowSchema() {
   void * jresult ;
   ArrowSchema *result = 0 ;
   
@@ -623,7 +623,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_ArrowSchema() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_ArrowSchema(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_ArrowSchema(void * jarg1) {
   ArrowSchema *arg1 = (ArrowSchema *) 0 ;
   
   arg1 = (ArrowSchema *)jarg1; 
@@ -631,7 +631,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_ArrowSchema(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_length_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_length_set(void * jarg1, long long jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t arg2 ;
   
@@ -641,7 +641,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_length_set(void * jarg1, lo
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_length_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowArray_length_get(void * jarg1) {
   long long jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t result;
@@ -653,7 +653,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_length_get(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_null_count_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_null_count_set(void * jarg1, long long jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t arg2 ;
   
@@ -663,7 +663,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_null_count_set(void * jarg1
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_null_count_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowArray_null_count_get(void * jarg1) {
   long long jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t result;
@@ -675,7 +675,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_null_count_get(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_offset_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_offset_set(void * jarg1, long long jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t arg2 ;
   
@@ -685,7 +685,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_offset_set(void * jarg1, lo
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_offset_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowArray_offset_get(void * jarg1) {
   long long jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t result;
@@ -697,7 +697,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_offset_get(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_buffers_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_n_buffers_set(void * jarg1, long long jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t arg2 ;
   
@@ -707,7 +707,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_buffers_set(void * jarg1,
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_buffers_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowArray_n_buffers_get(void * jarg1) {
   long long jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t result;
@@ -719,7 +719,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_buffers_get(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_children_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_n_children_set(void * jarg1, long long jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t arg2 ;
   
@@ -729,7 +729,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_children_set(void * jarg1
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_children_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_ArrowArray_n_children_get(void * jarg1) {
   long long jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   int64_t result;
@@ -741,7 +741,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_ArrowArray_n_children_get(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_buffers_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_buffers_set(void * jarg1, void * jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void **arg2 = (void **) 0 ;
   
@@ -751,7 +751,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_buffers_set(void * jarg1, v
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_buffers_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowArray_buffers_get(void * jarg1) {
   void * jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void **result = 0 ;
@@ -763,7 +763,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_buffers_get(void * jarg1)
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_children_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_children_set(void * jarg1, void * jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   ArrowArray **arg2 = (ArrowArray **) 0 ;
   
@@ -773,7 +773,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_children_set(void * jarg1, 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_children_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowArray_children_get(void * jarg1) {
   void * jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   ArrowArray **result = 0 ;
@@ -785,7 +785,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_children_get(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_dictionary_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_dictionary_set(void * jarg1, void * jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   ArrowArray *arg2 = (ArrowArray *) 0 ;
   
@@ -795,7 +795,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_dictionary_set(void * jarg1
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_dictionary_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowArray_dictionary_get(void * jarg1) {
   void * jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   ArrowArray *result = 0 ;
@@ -807,7 +807,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_dictionary_get(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_release_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_release_set(void * jarg1, void * jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void (*arg2)(ArrowArray *) = (void (*)(ArrowArray *)) 0 ;
   
@@ -817,7 +817,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_release_set(void * jarg1, v
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_release_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowArray_release_get(void * jarg1) {
   void * jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void (*result)(ArrowArray *) = 0 ;
@@ -829,7 +829,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_release_get(void * jarg1)
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_private_data_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_ArrowArray_private_data_set(void * jarg1, void * jarg2) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -839,7 +839,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_ArrowArray_private_data_set(void * jar
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_private_data_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_ArrowArray_private_data_get(void * jarg1) {
   void * jresult ;
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   void *result = 0 ;
@@ -851,7 +851,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_ArrowArray_private_data_get(void * j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_ArrowArray() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_ArrowArray() {
   void * jresult ;
   ArrowArray *result = 0 ;
   
@@ -861,7 +861,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_ArrowArray() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_ArrowArray(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_ArrowArray(void * jarg1) {
   ArrowArray *arg1 = (ArrowArray *) 0 ;
   
   arg1 = (ArrowArray *)jarg1; 
@@ -869,7 +869,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_ArrowArray(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_buffer_pool_size_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_buffer_pool_size_set(void * jarg1, unsigned long long jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t arg2 ;
   
@@ -879,7 +879,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_buffer_pool_size_se
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_buffer_pool_size_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_system_config_buffer_pool_size_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t result;
@@ -891,7 +891,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_buffe
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_num_threads_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_max_num_threads_set(void * jarg1, unsigned long long jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t arg2 ;
   
@@ -901,7 +901,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_num_threads_set
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_num_threads_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_system_config_max_num_threads_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t result;
@@ -913,7 +913,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_n
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_enable_compression_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_enable_compression_set(void * jarg1, unsigned int jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool arg2 ;
   
@@ -923,7 +923,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_enable_compression_
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_enable_compression_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_system_config_enable_compression_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool result;
@@ -935,7 +935,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_enable_comp
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_read_only_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_read_only_set(void * jarg1, unsigned int jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool arg2 ;
   
@@ -945,7 +945,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_read_only_set(void 
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_read_only_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_system_config_read_only_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool result;
@@ -957,7 +957,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_read_only_g
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_db_size_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_max_db_size_set(void * jarg1, unsigned long long jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t arg2 ;
   
@@ -967,7 +967,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_db_size_set(voi
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_db_size_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_system_config_max_db_size_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t result;
@@ -979,7 +979,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_max_d
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_auto_checkpoint_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_auto_checkpoint_set(void * jarg1, unsigned int jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool arg2 ;
   
@@ -989,7 +989,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_auto_checkpoint_set
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_auto_checkpoint_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_system_config_auto_checkpoint_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   bool result;
@@ -1001,7 +1001,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_auto_checkp
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_checkpoint_threshold_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_checkpoint_threshold_set(void * jarg1, unsigned long long jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t arg2 ;
   
@@ -1011,7 +1011,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_checkpoint_threshol
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_checkpoint_threshold_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_system_config_checkpoint_threshold_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   uint64_t result;
@@ -1023,7 +1023,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_system_config_check
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_system_config() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_system_config() {
   void * jresult ;
   kuzu_system_config *result = 0 ;
   
@@ -1033,7 +1033,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_system_config() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_system_config(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_system_config(void * jarg1) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
   
   arg1 = (kuzu_system_config *)jarg1; 
@@ -1041,7 +1041,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_system_config(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_database__database_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_database__database_set(void * jarg1, void * jarg2) {
   kuzu_database *arg1 = (kuzu_database *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1051,7 +1051,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_database__database_set(void * jar
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_database__database_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_database__database_get(void * jarg1) {
   void * jresult ;
   kuzu_database *arg1 = (kuzu_database *) 0 ;
   void *result = 0 ;
@@ -1063,7 +1063,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_database__database_get(void * j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_database() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_database() {
   void * jresult ;
   kuzu_database *result = 0 ;
   
@@ -1073,7 +1073,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_database() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_database(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_database(void * jarg1) {
   kuzu_database *arg1 = (kuzu_database *) 0 ;
   
   arg1 = (kuzu_database *)jarg1; 
@@ -1081,7 +1081,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_database(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection__connection_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_connection__connection_set(void * jarg1, void * jarg2) {
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1091,7 +1091,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection__connection_set(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_connection__connection_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_connection__connection_get(void * jarg1) {
   void * jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   void *result = 0 ;
@@ -1103,7 +1103,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_connection__connection_get(void
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_connection() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_connection() {
   void * jresult ;
   kuzu_connection *result = 0 ;
   
@@ -1113,7 +1113,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_connection() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_connection(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_connection(void * jarg1) {
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   
   arg1 = (kuzu_connection *)jarg1; 
@@ -1121,7 +1121,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_connection(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__prepared_statement_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_prepared_statement__prepared_statement_set(void * jarg1, void * jarg2) {
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1131,7 +1131,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__prepared_stat
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__prepared_statement_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_prepared_statement__prepared_statement_get(void * jarg1) {
   void * jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   void *result = 0 ;
@@ -1143,7 +1143,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__prepared_st
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__bound_values_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_prepared_statement__bound_values_set(void * jarg1, void * jarg2) {
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1153,7 +1153,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__bound_values_
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__bound_values_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_prepared_statement__bound_values_get(void * jarg1) {
   void * jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   void *result = 0 ;
@@ -1165,7 +1165,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement__bound_value
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_prepared_statement() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_prepared_statement() {
   void * jresult ;
   kuzu_prepared_statement *result = 0 ;
   
@@ -1175,7 +1175,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_prepared_statement() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_prepared_statement(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_prepared_statement(void * jarg1) {
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   
   arg1 = (kuzu_prepared_statement *)jarg1; 
@@ -1183,7 +1183,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_prepared_statement(void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__query_result_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result__query_result_set(void * jarg1, void * jarg2) {
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1193,7 +1193,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__query_result_set(vo
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__query_result_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_query_result__query_result_get(void * jarg1) {
   void * jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   void *result = 0 ;
@@ -1205,7 +1205,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__query_result_get(
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   bool arg2 ;
   
@@ -1215,7 +1215,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__is_owned_by_cpp_set
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__is_owned_by_cpp_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   bool result;
@@ -1227,7 +1227,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result__is_owned_by
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_query_result() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_query_result() {
   void * jresult ;
   kuzu_query_result *result = 0 ;
   
@@ -1237,7 +1237,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_query_result() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_query_result(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_query_result(void * jarg1) {
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   
   arg1 = (kuzu_query_result *)jarg1; 
@@ -1245,7 +1245,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_query_result(void * jarg1)
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__flat_tuple_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple__flat_tuple_set(void * jarg1, void * jarg2) {
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1255,7 +1255,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__flat_tuple_set(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__flat_tuple_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_flat_tuple__flat_tuple_get(void * jarg1) {
   void * jresult ;
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   void *result = 0 ;
@@ -1267,7 +1267,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__flat_tuple_get(void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   bool arg2 ;
   
@@ -1277,7 +1277,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__is_owned_by_cpp_set(v
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__is_owned_by_cpp_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   bool result;
@@ -1289,7 +1289,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple__is_owned_by_c
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_flat_tuple() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_flat_tuple() {
   void * jresult ;
   kuzu_flat_tuple *result = 0 ;
   
@@ -1299,7 +1299,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_flat_tuple() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_flat_tuple(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_flat_tuple(void * jarg1) {
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   
   arg1 = (kuzu_flat_tuple *)jarg1; 
@@ -1307,7 +1307,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_flat_tuple(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_logical_type__data_type_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_logical_type__data_type_set(void * jarg1, void * jarg2) {
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1317,7 +1317,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_logical_type__data_type_set(void 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_logical_type__data_type_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_logical_type__data_type_get(void * jarg1) {
   void * jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   void *result = 0 ;
@@ -1329,7 +1329,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_logical_type__data_type_get(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_logical_type() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_logical_type() {
   void * jresult ;
   kuzu_logical_type *result = 0 ;
   
@@ -1339,7 +1339,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_logical_type() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_logical_type(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_logical_type(void * jarg1) {
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   
   arg1 = (kuzu_logical_type *)jarg1; 
@@ -1347,7 +1347,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_logical_type(void * jarg1)
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value__value_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value__value_set(void * jarg1, void * jarg2) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1357,7 +1357,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value__value_set(void * jarg1, vo
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value__value_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value__value_get(void * jarg1) {
   void * jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   void *result = 0 ;
@@ -1369,7 +1369,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value__value_get(void * jarg1) 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   bool arg2 ;
   
@@ -1379,7 +1379,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value__is_owned_by_cpp_set(void *
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_value__is_owned_by_cpp_get(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_get(void * jarg1) {
   unsigned int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   bool result;
@@ -1391,7 +1391,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_value__is_owned_by_cpp_ge
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_value() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_value() {
   void * jresult ;
   kuzu_value *result = 0 ;
   
@@ -1401,7 +1401,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_value() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_value(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_value(void * jarg1) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   
   arg1 = (kuzu_value *)jarg1; 
@@ -1409,7 +1409,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_value(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_table_id_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_internal_id_t_table_id_set(void * jarg1, unsigned long long jarg2) {
   kuzu_internal_id_t *arg1 = (kuzu_internal_id_t *) 0 ;
   uint64_t arg2 ;
   
@@ -1419,7 +1419,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_table_id_set(void *
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_table_id_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_internal_id_t_table_id_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_internal_id_t *arg1 = (kuzu_internal_id_t *) 0 ;
   uint64_t result;
@@ -1431,7 +1431,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_table
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_offset_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_internal_id_t_offset_set(void * jarg1, unsigned long long jarg2) {
   kuzu_internal_id_t *arg1 = (kuzu_internal_id_t *) 0 ;
   uint64_t arg2 ;
   
@@ -1441,7 +1441,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_offset_set(void * j
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_offset_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_internal_id_t_offset_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_internal_id_t *arg1 = (kuzu_internal_id_t *) 0 ;
   uint64_t result;
@@ -1453,7 +1453,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_internal_id_t_offse
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_internal_id_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_internal_id_t() {
   void * jresult ;
   kuzu_internal_id_t *result = 0 ;
   
@@ -1463,7 +1463,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_internal_id_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_internal_id_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_internal_id_t(void * jarg1) {
   kuzu_internal_id_t *arg1 = (kuzu_internal_id_t *) 0 ;
   
   arg1 = (kuzu_internal_id_t *)jarg1; 
@@ -1471,7 +1471,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_internal_id_t(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_date_t_days_set(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_date_t_days_set(void * jarg1, int jarg2) {
   kuzu_date_t *arg1 = (kuzu_date_t *) 0 ;
   int32_t arg2 ;
   
@@ -1481,7 +1481,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_date_t_days_set(void * jarg1, int
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_t_days_get(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_date_t_days_get(void * jarg1) {
   int jresult ;
   kuzu_date_t *arg1 = (kuzu_date_t *) 0 ;
   int32_t result;
@@ -1493,7 +1493,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_t_days_get(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_date_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_date_t() {
   void * jresult ;
   kuzu_date_t *result = 0 ;
   
@@ -1503,7 +1503,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_date_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_date_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_date_t(void * jarg1) {
   kuzu_date_t *arg1 = (kuzu_date_t *) 0 ;
   
   arg1 = (kuzu_date_t *)jarg1; 
@@ -1511,7 +1511,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_date_t(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_t_value_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_timestamp_ns_t_value_set(void * jarg1, long long jarg2) {
   kuzu_timestamp_ns_t *arg1 = (kuzu_timestamp_ns_t *) 0 ;
   int64_t arg2 ;
   
@@ -1521,7 +1521,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_t_value_set(void * j
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_t_value_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_timestamp_ns_t_value_get(void * jarg1) {
   long long jresult ;
   kuzu_timestamp_ns_t *arg1 = (kuzu_timestamp_ns_t *) 0 ;
   int64_t result;
@@ -1533,7 +1533,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_t_value_get(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_ns_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_timestamp_ns_t() {
   void * jresult ;
   kuzu_timestamp_ns_t *result = 0 ;
   
@@ -1543,7 +1543,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_ns_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_ns_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_timestamp_ns_t(void * jarg1) {
   kuzu_timestamp_ns_t *arg1 = (kuzu_timestamp_ns_t *) 0 ;
   
   arg1 = (kuzu_timestamp_ns_t *)jarg1; 
@@ -1551,7 +1551,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_ns_t(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_t_value_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_timestamp_ms_t_value_set(void * jarg1, long long jarg2) {
   kuzu_timestamp_ms_t *arg1 = (kuzu_timestamp_ms_t *) 0 ;
   int64_t arg2 ;
   
@@ -1561,7 +1561,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_t_value_set(void * j
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_t_value_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_timestamp_ms_t_value_get(void * jarg1) {
   long long jresult ;
   kuzu_timestamp_ms_t *arg1 = (kuzu_timestamp_ms_t *) 0 ;
   int64_t result;
@@ -1573,7 +1573,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_t_value_get(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_ms_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_timestamp_ms_t() {
   void * jresult ;
   kuzu_timestamp_ms_t *result = 0 ;
   
@@ -1583,7 +1583,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_ms_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_ms_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_timestamp_ms_t(void * jarg1) {
   kuzu_timestamp_ms_t *arg1 = (kuzu_timestamp_ms_t *) 0 ;
   
   arg1 = (kuzu_timestamp_ms_t *)jarg1; 
@@ -1591,7 +1591,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_ms_t(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_t_value_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_timestamp_sec_t_value_set(void * jarg1, long long jarg2) {
   kuzu_timestamp_sec_t *arg1 = (kuzu_timestamp_sec_t *) 0 ;
   int64_t arg2 ;
   
@@ -1601,7 +1601,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_t_value_set(void * 
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_t_value_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_timestamp_sec_t_value_get(void * jarg1) {
   long long jresult ;
   kuzu_timestamp_sec_t *arg1 = (kuzu_timestamp_sec_t *) 0 ;
   int64_t result;
@@ -1613,7 +1613,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_t_value_get(vo
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_sec_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_timestamp_sec_t() {
   void * jresult ;
   kuzu_timestamp_sec_t *result = 0 ;
   
@@ -1623,7 +1623,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_sec_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_sec_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_timestamp_sec_t(void * jarg1) {
   kuzu_timestamp_sec_t *arg1 = (kuzu_timestamp_sec_t *) 0 ;
   
   arg1 = (kuzu_timestamp_sec_t *)jarg1; 
@@ -1631,7 +1631,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_sec_t(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_t_value_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_timestamp_tz_t_value_set(void * jarg1, long long jarg2) {
   kuzu_timestamp_tz_t *arg1 = (kuzu_timestamp_tz_t *) 0 ;
   int64_t arg2 ;
   
@@ -1641,7 +1641,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_t_value_set(void * j
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_t_value_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_timestamp_tz_t_value_get(void * jarg1) {
   long long jresult ;
   kuzu_timestamp_tz_t *arg1 = (kuzu_timestamp_tz_t *) 0 ;
   int64_t result;
@@ -1653,7 +1653,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_t_value_get(voi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_tz_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_timestamp_tz_t() {
   void * jresult ;
   kuzu_timestamp_tz_t *result = 0 ;
   
@@ -1663,7 +1663,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_tz_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_tz_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_timestamp_tz_t(void * jarg1) {
   kuzu_timestamp_tz_t *arg1 = (kuzu_timestamp_tz_t *) 0 ;
   
   arg1 = (kuzu_timestamp_tz_t *)jarg1; 
@@ -1671,7 +1671,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_tz_t(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_t_value_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_timestamp_t_value_set(void * jarg1, long long jarg2) {
   kuzu_timestamp_t *arg1 = (kuzu_timestamp_t *) 0 ;
   int64_t arg2 ;
   
@@ -1681,7 +1681,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_t_value_set(void * jarg
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_t_value_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_timestamp_t_value_get(void * jarg1) {
   long long jresult ;
   kuzu_timestamp_t *arg1 = (kuzu_timestamp_t *) 0 ;
   int64_t result;
@@ -1693,7 +1693,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_t_value_get(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_timestamp_t() {
   void * jresult ;
   kuzu_timestamp_t *result = 0 ;
   
@@ -1703,7 +1703,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_timestamp_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_timestamp_t(void * jarg1) {
   kuzu_timestamp_t *arg1 = (kuzu_timestamp_t *) 0 ;
   
   arg1 = (kuzu_timestamp_t *)jarg1; 
@@ -1711,7 +1711,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_timestamp_t(void * jarg1) 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_months_set(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_interval_t_months_set(void * jarg1, int jarg2) {
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int32_t arg2 ;
   
@@ -1721,7 +1721,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_months_set(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_months_get(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_interval_t_months_get(void * jarg1) {
   int jresult ;
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int32_t result;
@@ -1733,7 +1733,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_months_get(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_days_set(void * jarg1, int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_interval_t_days_set(void * jarg1, int jarg2) {
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int32_t arg2 ;
   
@@ -1743,7 +1743,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_days_set(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_days_get(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_interval_t_days_get(void * jarg1) {
   int jresult ;
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int32_t result;
@@ -1755,7 +1755,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_days_get(void * jarg1) 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_micros_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_interval_t_micros_set(void * jarg1, long long jarg2) {
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int64_t arg2 ;
   
@@ -1765,7 +1765,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_micros_set(void * jarg
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_micros_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_interval_t_micros_get(void * jarg1) {
   long long jresult ;
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   int64_t result;
@@ -1777,7 +1777,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_t_micros_get(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_interval_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_interval_t() {
   void * jresult ;
   kuzu_interval_t *result = 0 ;
   
@@ -1787,7 +1787,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_interval_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_interval_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_interval_t(void * jarg1) {
   kuzu_interval_t *arg1 = (kuzu_interval_t *) 0 ;
   
   arg1 = (kuzu_interval_t *)jarg1; 
@@ -1795,7 +1795,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_interval_t(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary__query_summary_set(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_summary__query_summary_set(void * jarg1, void * jarg2) {
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   void *arg2 = (void *) 0 ;
   
@@ -1805,7 +1805,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary__query_summary_set(
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary__query_summary_get(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_query_summary__query_summary_get(void * jarg1) {
   void * jresult ;
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   void *result = 0 ;
@@ -1817,7 +1817,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary__query_summary_ge
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_query_summary() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_query_summary() {
   void * jresult ;
   kuzu_query_summary *result = 0 ;
   
@@ -1827,7 +1827,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_query_summary() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_query_summary(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_query_summary(void * jarg1) {
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   
   arg1 = (kuzu_query_summary *)jarg1; 
@@ -1835,7 +1835,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_query_summary(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_low_set(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_int128_t_low_set(void * jarg1, unsigned long long jarg2) {
   kuzu_int128_t *arg1 = (kuzu_int128_t *) 0 ;
   uint64_t arg2 ;
   
@@ -1845,7 +1845,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_low_set(void * jarg1, un
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_low_get(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_int128_t_low_get(void * jarg1) {
   unsigned long long jresult ;
   kuzu_int128_t *arg1 = (kuzu_int128_t *) 0 ;
   uint64_t result;
@@ -1857,7 +1857,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_low_get(vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_high_set(void * jarg1, long long jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_int128_t_high_set(void * jarg1, long long jarg2) {
   kuzu_int128_t *arg1 = (kuzu_int128_t *) 0 ;
   int64_t arg2 ;
   
@@ -1867,7 +1867,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_high_set(void * jarg1, l
 }
 
 
-SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_high_get(void * jarg1) {
+SWIGEXPORT long long SWIGSTDCALL CSharp_kuzu_int128_t_high_get(void * jarg1) {
   long long jresult ;
   kuzu_int128_t *arg1 = (kuzu_int128_t *) 0 ;
   int64_t result;
@@ -1879,7 +1879,7 @@ SWIGEXPORT long long SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_high_get(void * jar
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_int128_t() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_int128_t() {
   void * jresult ;
   kuzu_int128_t *result = 0 ;
   
@@ -1889,7 +1889,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_new_kuzu_int128_t() {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_int128_t(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_int128_t(void * jarg1) {
   kuzu_int128_t *arg1 = (kuzu_int128_t *) 0 ;
   
   arg1 = (kuzu_int128_t *)jarg1; 
@@ -1897,7 +1897,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_delete_kuzu_int128_t(void * jarg1) {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_database_init(char * jarg1, void * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_database_init(char * jarg1, void * jarg2, void * jarg3) {
   int jresult ;
   char *arg1 = (char *) 0 ;
   kuzu_system_config arg2 ;
@@ -1919,7 +1919,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_database_init(char * jarg1, void *
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_database_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_database_destroy(void * jarg1) {
   kuzu_database *arg1 = (kuzu_database *) 0 ;
   
   arg1 = (kuzu_database *)jarg1; 
@@ -1927,7 +1927,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_database_destroy(void * jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_default_system_config() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_default_system_config() {
   void * jresult ;
   kuzu_system_config result;
   
@@ -1937,7 +1937,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_default_system_config() {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_init(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_init(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_database *arg1 = (kuzu_database *) 0 ;
   kuzu_connection *arg2 = (kuzu_connection *) 0 ;
@@ -1951,7 +1951,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_init(void * jarg1, void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_connection_destroy(void * jarg1) {
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   
   arg1 = (kuzu_connection *)jarg1; 
@@ -1959,7 +1959,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_destroy(void * jarg1) 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_set_max_num_thread_for_exec(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_set_max_num_thread_for_exec(void * jarg1, unsigned long long jarg2) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   uint64_t arg2 ;
@@ -1973,7 +1973,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_set_max_num_thread_for_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_get_max_num_thread_for_exec(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_get_max_num_thread_for_exec(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -1987,7 +1987,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_get_max_num_thread_for_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_query(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_query(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2003,7 +2003,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_query(void * jarg1, cha
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_prepare(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_prepare(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2019,7 +2019,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_prepare(void * jarg1, c
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_execute(void * jarg1, void * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_execute(void * jarg1, void * jarg2, void * jarg3) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   kuzu_prepared_statement *arg2 = (kuzu_prepared_statement *) 0 ;
@@ -2035,7 +2035,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_execute(void * jarg1, v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_interrupt(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_connection_interrupt(void * jarg1) {
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   
   arg1 = (kuzu_connection *)jarg1; 
@@ -2043,7 +2043,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_interrupt(void * jarg1
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_set_query_timeout(void * jarg1, unsigned long long jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_connection_set_query_timeout(void * jarg1, unsigned long long jarg2) {
   int jresult ;
   kuzu_connection *arg1 = (kuzu_connection *) 0 ;
   uint64_t arg2 ;
@@ -2057,7 +2057,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_connection_set_query_timeout(void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_prepared_statement_destroy(void * jarg1) {
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   
   arg1 = (kuzu_prepared_statement *)jarg1; 
@@ -2065,7 +2065,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_destroy(void *
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_is_success(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_prepared_statement_is_success(void * jarg1) {
   unsigned int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   bool result;
@@ -2077,7 +2077,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_is_suc
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_get_error_message(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_prepared_statement_get_error_message(void * jarg1) {
   char * jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *result = 0 ;
@@ -2089,7 +2089,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_get_error_me
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_bool(void * jarg1, char * jarg2, unsigned int jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_bool(void * jarg1, char * jarg2, unsigned int jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2105,7 +2105,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_bool(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int64(void * jarg1, char * jarg2, long long jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_int64(void * jarg1, char * jarg2, long long jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2121,7 +2121,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int64(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int32(void * jarg1, char * jarg2, int jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_int32(void * jarg1, char * jarg2, int jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2137,7 +2137,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int32(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int16(void * jarg1, char * jarg2, short jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_int16(void * jarg1, char * jarg2, short jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2153,7 +2153,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int16(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int8(void * jarg1, char * jarg2, signed char jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_int8(void * jarg1, char * jarg2, signed char jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2169,7 +2169,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_int8(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint64(void * jarg1, char * jarg2, unsigned long long jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_uint64(void * jarg1, char * jarg2, unsigned long long jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2185,7 +2185,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint64(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint32(void * jarg1, char * jarg2, unsigned int jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_uint32(void * jarg1, char * jarg2, unsigned int jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2201,7 +2201,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint32(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint16(void * jarg1, char * jarg2, unsigned short jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_uint16(void * jarg1, char * jarg2, unsigned short jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2217,7 +2217,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint16(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint8(void * jarg1, char * jarg2, unsigned char jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_uint8(void * jarg1, char * jarg2, unsigned char jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2233,7 +2233,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_uint8(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_double(void * jarg1, char * jarg2, double jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_double(void * jarg1, char * jarg2, double jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2249,7 +2249,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_double(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_float(void * jarg1, char * jarg2, float jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_float(void * jarg1, char * jarg2, float jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2265,7 +2265,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_float(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_date(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_date(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2287,7 +2287,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_date(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_ns(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_timestamp_ns(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2309,7 +2309,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_sec(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_timestamp_sec(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2331,7 +2331,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_tz(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_timestamp_tz(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2353,7 +2353,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_ms(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_timestamp_ms(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2375,7 +2375,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp_
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_timestamp(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2397,7 +2397,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_timestamp(
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_interval(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_interval(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2419,7 +2419,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_interval(v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_string(void * jarg1, char * jarg2, char * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_string(void * jarg1, char * jarg2, char * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2435,7 +2435,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_string(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_value(void * jarg1, char * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_prepared_statement_bind_value(void * jarg1, char * jarg2, void * jarg3) {
   int jresult ;
   kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
   char *arg2 = (char *) 0 ;
@@ -2451,7 +2451,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_prepared_statement_bind_value(void
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result_destroy(void * jarg1) {
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   
   arg1 = (kuzu_query_result *)jarg1; 
@@ -2459,7 +2459,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_destroy(void * jarg1
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_is_success(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result_is_success(void * jarg1) {
   unsigned int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   bool result;
@@ -2471,7 +2471,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_is_success(v
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_error_message(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_query_result_get_error_message(void * jarg1) {
   char * jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   char *result = 0 ;
@@ -2483,7 +2483,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_error_message(
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_num_columns(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_query_result_get_num_columns(void * jarg1) {
   unsigned long long jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   uint64_t result;
@@ -2495,7 +2495,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_nu
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_column_name(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_column_name(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   uint64_t arg2 ;
@@ -2511,7 +2511,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_column_name(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_column_data_type(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_column_data_type(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   uint64_t arg2 ;
@@ -2527,7 +2527,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_column_data_type(
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_num_tuples(void * jarg1) {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_query_result_get_num_tuples(void * jarg1) {
   unsigned long long jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   uint64_t result;
@@ -2539,7 +2539,7 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_nu
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_query_summary(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_query_summary(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   kuzu_query_summary *arg2 = (kuzu_query_summary *) 0 ;
@@ -2553,7 +2553,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_query_summary(voi
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_has_next(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result_has_next(void * jarg1) {
   unsigned int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   bool result;
@@ -2565,7 +2565,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_has_next(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_next(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   kuzu_flat_tuple *arg2 = (kuzu_flat_tuple *) 0 ;
@@ -2579,7 +2579,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next(void * jarg1
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_has_next_query_result(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result_has_next_query_result(void * jarg1) {
   unsigned int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   bool result;
@@ -2591,7 +2591,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_has_next_que
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next_query_result(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_next_query_result(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   kuzu_query_result *arg2 = (kuzu_query_result *) 0 ;
@@ -2605,7 +2605,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next_query_result
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_to_string(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_query_result_to_string(void * jarg1) {
   char * jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   char *result = 0 ;
@@ -2617,7 +2617,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_to_string(void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_reset_iterator(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result_reset_iterator(void * jarg1) {
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   
   arg1 = (kuzu_query_result *)jarg1; 
@@ -2625,7 +2625,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_reset_iterator(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_arrow_schema(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_arrow_schema(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   ArrowSchema *arg2 = (ArrowSchema *) 0 ;
@@ -2639,7 +2639,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_arrow_schema(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next_arrow_chunk(void * jarg1, long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_query_result_get_next_arrow_chunk(void * jarg1, long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
   int64_t arg2 ;
@@ -2655,7 +2655,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_query_result_get_next_arrow_chunk(
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple_destroy(void * jarg1) {
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   
   arg1 = (kuzu_flat_tuple *)jarg1; 
@@ -2663,7 +2663,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_destroy(void * jarg1) 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_get_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_flat_tuple_get_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   uint64_t arg2 ;
@@ -2679,7 +2679,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_get_value(void * jarg1,
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_to_string(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_flat_tuple_to_string(void * jarg1) {
   char * jresult ;
   kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
   char *result = 0 ;
@@ -2691,7 +2691,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_flat_tuple_to_string(void * jar
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_create(int jarg1, void * jarg2, unsigned long long jarg3, void * jarg4) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_data_type_create(int jarg1, void * jarg2, unsigned long long jarg3, void * jarg4) {
   kuzu_data_type_id arg1 ;
   kuzu_logical_type *arg2 = (kuzu_logical_type *) 0 ;
   uint64_t arg3 ;
@@ -2705,7 +2705,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_create(int jarg1, void 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_clone(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_data_type_clone(void * jarg1, void * jarg2) {
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   kuzu_logical_type *arg2 = (kuzu_logical_type *) 0 ;
   
@@ -2715,7 +2715,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_clone(void * jarg1, voi
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_data_type_destroy(void * jarg1) {
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   
   arg1 = (kuzu_logical_type *)jarg1; 
@@ -2723,7 +2723,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_destroy(void * jarg1) {
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_equals(void * jarg1, void * jarg2) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_data_type_equals(void * jarg1, void * jarg2) {
   unsigned int jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   kuzu_logical_type *arg2 = (kuzu_logical_type *) 0 ;
@@ -2737,7 +2737,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_equals(void * j
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_get_id(void * jarg1) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_data_type_get_id(void * jarg1) {
   int jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   kuzu_data_type_id result;
@@ -2749,7 +2749,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_get_id(void * jarg1) {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_get_num_elements_in_array(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_data_type_get_num_elements_in_array(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -2763,7 +2763,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_data_type_get_num_elements_in_arra
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_null() {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_null() {
   void * jresult ;
   kuzu_value *result = 0 ;
   
@@ -2773,7 +2773,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_null() {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_null_with_data_type(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_null_with_data_type(void * jarg1) {
   void * jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   kuzu_value *result = 0 ;
@@ -2785,7 +2785,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_null_with_data_typ
 }
 
 
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_is_null(void * jarg1) {
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_value_is_null(void * jarg1) {
   unsigned int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   bool result;
@@ -2797,7 +2797,7 @@ SWIGEXPORT unsigned int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_is_null(void * jarg
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_set_null(void * jarg1, unsigned int jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value_set_null(void * jarg1, unsigned int jarg2) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   bool arg2 ;
   
@@ -2807,7 +2807,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_set_null(void * jarg1, unsi
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_default(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_default(void * jarg1) {
   void * jresult ;
   kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
   kuzu_value *result = 0 ;
@@ -2819,7 +2819,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_default(void * jar
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_bool(unsigned int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_bool(unsigned int jarg1) {
   void * jresult ;
   bool arg1 ;
   kuzu_value *result = 0 ;
@@ -2831,7 +2831,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_bool(unsigned int 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int8(signed char jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_int8(signed char jarg1) {
   void * jresult ;
   int8_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2843,7 +2843,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int8(signed char j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int16(short jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_int16(short jarg1) {
   void * jresult ;
   int16_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2855,7 +2855,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int16(short jarg1)
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int32(int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_int32(int jarg1) {
   void * jresult ;
   int32_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2867,7 +2867,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int32(int jarg1) {
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int64(long long jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_int64(long long jarg1) {
   void * jresult ;
   int64_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2879,7 +2879,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int64(long long ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint8(unsigned char jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_uint8(unsigned char jarg1) {
   void * jresult ;
   uint8_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2891,7 +2891,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint8(unsigned cha
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint16(unsigned short jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_uint16(unsigned short jarg1) {
   void * jresult ;
   uint16_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2903,7 +2903,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint16(unsigned sh
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint32(unsigned int jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_uint32(unsigned int jarg1) {
   void * jresult ;
   uint32_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2915,7 +2915,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint32(unsigned in
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint64(unsigned long long jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_uint64(unsigned long long jarg1) {
   void * jresult ;
   uint64_t arg1 ;
   kuzu_value *result = 0 ;
@@ -2927,7 +2927,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_uint64(unsigned lo
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int128(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_int128(void * jarg1) {
   void * jresult ;
   kuzu_int128_t arg1 ;
   kuzu_int128_t *argp1 ;
@@ -2945,7 +2945,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_int128(void * jarg
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_float(float jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_float(float jarg1) {
   void * jresult ;
   float arg1 ;
   kuzu_value *result = 0 ;
@@ -2957,7 +2957,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_float(float jarg1)
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_double(double jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_double(double jarg1) {
   void * jresult ;
   double arg1 ;
   kuzu_value *result = 0 ;
@@ -2969,7 +2969,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_double(double jarg
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_internal_id(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_internal_id(void * jarg1) {
   void * jresult ;
   kuzu_internal_id_t arg1 ;
   kuzu_internal_id_t *argp1 ;
@@ -2987,7 +2987,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_internal_id(void *
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_date(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_date(void * jarg1) {
   void * jresult ;
   kuzu_date_t arg1 ;
   kuzu_date_t *argp1 ;
@@ -3005,7 +3005,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_date(void * jarg1)
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_ns(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_timestamp_ns(void * jarg1) {
   void * jresult ;
   kuzu_timestamp_ns_t arg1 ;
   kuzu_timestamp_ns_t *argp1 ;
@@ -3023,7 +3023,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_ns(void 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_ms(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_timestamp_ms(void * jarg1) {
   void * jresult ;
   kuzu_timestamp_ms_t arg1 ;
   kuzu_timestamp_ms_t *argp1 ;
@@ -3041,7 +3041,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_ms(void 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_sec(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_timestamp_sec(void * jarg1) {
   void * jresult ;
   kuzu_timestamp_sec_t arg1 ;
   kuzu_timestamp_sec_t *argp1 ;
@@ -3059,7 +3059,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_sec(void
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_tz(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_timestamp_tz(void * jarg1) {
   void * jresult ;
   kuzu_timestamp_tz_t arg1 ;
   kuzu_timestamp_tz_t *argp1 ;
@@ -3077,7 +3077,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp_tz(void 
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_timestamp(void * jarg1) {
   void * jresult ;
   kuzu_timestamp_t arg1 ;
   kuzu_timestamp_t *argp1 ;
@@ -3095,7 +3095,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_timestamp(void * j
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_interval(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_interval(void * jarg1) {
   void * jresult ;
   kuzu_interval_t arg1 ;
   kuzu_interval_t *argp1 ;
@@ -3113,7 +3113,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_interval(void * ja
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_string(char * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_create_string(char * jarg1) {
   void * jresult ;
   char *arg1 = (char *) 0 ;
   kuzu_value *result = 0 ;
@@ -3125,7 +3125,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_string(char * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_list(unsigned long long jarg1, void * jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_create_list(unsigned long long jarg1, void * jarg2, void * jarg3) {
   int jresult ;
   uint64_t arg1 ;
   kuzu_value **arg2 = (kuzu_value **) 0 ;
@@ -3141,7 +3141,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_list(unsigned long lo
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_struct(unsigned long long jarg1, void * jarg2, void * jarg3, void * jarg4) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_create_struct(unsigned long long jarg1, void * jarg2, void * jarg3, void * jarg4) {
   int jresult ;
   uint64_t arg1 ;
   char **arg2 = (char **) 0 ;
@@ -3159,7 +3159,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_struct(unsigned long 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_map(unsigned long long jarg1, void * jarg2, void * jarg3, void * jarg4) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_create_map(unsigned long long jarg1, void * jarg2, void * jarg3, void * jarg4) {
   int jresult ;
   uint64_t arg1 ;
   kuzu_value **arg2 = (kuzu_value **) 0 ;
@@ -3177,7 +3177,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_create_map(unsigned long lon
 }
 
 
-SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_clone(void * jarg1) {
+SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value_clone(void * jarg1) {
   void * jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *result = 0 ;
@@ -3189,7 +3189,7 @@ SWIGEXPORT void * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_clone(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_copy(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value_copy(void * jarg1, void * jarg2) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
   
@@ -3199,7 +3199,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_copy(void * jarg1, void * j
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value_destroy(void * jarg1) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   
   arg1 = (kuzu_value *)jarg1; 
@@ -3207,7 +3207,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_destroy(void * jarg1) {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_list_size(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_list_size(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3221,7 +3221,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_list_size(void * jarg1, 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_list_element(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_list_element(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3237,7 +3237,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_list_element(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_num_fields(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_struct_num_fields(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3251,7 +3251,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_num_fields(void *
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_field_name(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_struct_field_name(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3267,7 +3267,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_field_name(void *
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_field_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_struct_field_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3283,7 +3283,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_struct_field_value(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_size(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_map_size(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3297,7 +3297,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_size(void * jarg1, u
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_key(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_map_key(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3313,7 +3313,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_key(void * jarg1, un
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_map_value(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3329,7 +3329,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_map_value(void * jarg1, 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_recursive_rel_node_list(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_recursive_rel_node_list(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3343,7 +3343,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_recursive_rel_node_list(
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_recursive_rel_rel_list(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_recursive_rel_rel_list(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3357,7 +3357,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_recursive_rel_rel_list(v
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_data_type(void * jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value_get_data_type(void * jarg1, void * jarg2) {
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_logical_type *arg2 = (kuzu_logical_type *) 0 ;
   
@@ -3367,7 +3367,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_data_type(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_bool(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_bool(void * jarg1, unsigned int * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   bool *arg2 = (bool *) 0 ;
@@ -3382,7 +3382,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_bool(void * jarg1, unsig
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int8(void * jarg1, signed char * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_int8(void * jarg1, signed char * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   int8_t *arg2 = (int8_t *) 0 ;
@@ -3396,7 +3396,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int8(void * jarg1, signe
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int16(void * jarg1, short * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_int16(void * jarg1, short * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   int16_t *arg2 = (int16_t *) 0 ;
@@ -3410,7 +3410,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int16(void * jarg1, shor
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int32(void * jarg1, int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_int32(void * jarg1, int * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   int32_t *arg2 = (int32_t *) 0 ;
@@ -3424,7 +3424,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int32(void * jarg1, int 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int64(void * jarg1, int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_int64(void * jarg1, long long * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   int64_t *arg2 = (int64_t *) 0 ;
@@ -3438,7 +3438,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int64(void * jarg1, int 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint8(void * jarg1, unsigned char * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_uint8(void * jarg1, unsigned char * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint8_t *arg2 = (uint8_t *) 0 ;
@@ -3452,7 +3452,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint8(void * jarg1, unsi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint16(void * jarg1, unsigned short * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_uint16(void * jarg1, unsigned short * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint16_t *arg2 = (uint16_t *) 0 ;
@@ -3466,7 +3466,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint16(void * jarg1, uns
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint32(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_uint32(void * jarg1, unsigned int * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint32_t *arg2 = (uint32_t *) 0 ;
@@ -3480,7 +3480,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint32(void * jarg1, uns
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint64(void * jarg1, unsigned int * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_uint64(void * jarg1, unsigned long long * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3494,7 +3494,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uint64(void * jarg1, uns
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int128(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_int128(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_int128_t *arg2 = (kuzu_int128_t *) 0 ;
@@ -3508,7 +3508,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_int128(void * jarg1, voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_from_string(char * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_int128_t_from_string(char * jarg1, void * jarg2) {
   int jresult ;
   char *arg1 = (char *) 0 ;
   kuzu_int128_t *arg2 = (kuzu_int128_t *) 0 ;
@@ -3522,7 +3522,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_from_string(char * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_to_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_int128_t_to_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_int128_t arg1 ;
   char **arg2 = (char **) 0 ;
@@ -3542,7 +3542,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_int128_t_to_string(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_float(void * jarg1, float * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_float(void * jarg1, float * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   float *arg2 = (float *) 0 ;
@@ -3556,7 +3556,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_float(void * jarg1, floa
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_double(void * jarg1, double * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_double(void * jarg1, double * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   double *arg2 = (double *) 0 ;
@@ -3570,7 +3570,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_double(void * jarg1, dou
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_internal_id(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_internal_id(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_internal_id_t *arg2 = (kuzu_internal_id_t *) 0 ;
@@ -3584,7 +3584,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_internal_id(void * jarg1
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_date(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_date(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_date_t *arg2 = (kuzu_date_t *) 0 ;
@@ -3598,7 +3598,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_date(void * jarg1, void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_timestamp(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_timestamp_t *arg2 = (kuzu_timestamp_t *) 0 ;
@@ -3612,7 +3612,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp(void * jarg1, 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_ns(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_timestamp_ns(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_timestamp_ns_t *arg2 = (kuzu_timestamp_ns_t *) 0 ;
@@ -3626,7 +3626,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_ns(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_ms(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_timestamp_ms(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_timestamp_ms_t *arg2 = (kuzu_timestamp_ms_t *) 0 ;
@@ -3640,7 +3640,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_ms(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_sec(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_timestamp_sec(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_timestamp_sec_t *arg2 = (kuzu_timestamp_sec_t *) 0 ;
@@ -3654,7 +3654,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_sec(void * jar
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_tz(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_timestamp_tz(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_timestamp_tz_t *arg2 = (kuzu_timestamp_tz_t *) 0 ;
@@ -3668,7 +3668,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_timestamp_tz(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_interval(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_interval(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_interval_t *arg2 = (kuzu_interval_t *) 0 ;
@@ -3682,7 +3682,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_interval(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_decimal_as_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_decimal_as_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char **arg2 = (char **) 0 ;
@@ -3696,7 +3696,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_decimal_as_string(void *
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char **arg2 = (char **) 0 ;
@@ -3710,7 +3710,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_string(void * jarg1, voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_blob(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_blob(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint8_t **arg2 = (uint8_t **) 0 ;
@@ -3724,7 +3724,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_blob(void * jarg1, void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uuid(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_value_get_uuid(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char **arg2 = (char **) 0 ;
@@ -3738,7 +3738,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_value_get_uuid(void * jarg1, void 
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_to_string(void * jarg1) {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_value_to_string(void * jarg1) {
   char * jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char *result = 0 ;
@@ -3750,7 +3750,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_value_to_string(void * jarg1) {
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_id_val(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_get_id_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3764,7 +3764,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_id_val(void * jarg1, 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_label_val(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_get_label_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3778,7 +3778,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_label_val(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_size(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_get_property_size(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3792,7 +3792,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_size(void * 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_name_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_get_property_name_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3808,7 +3808,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_name_at(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_value_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_get_property_value_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3824,7 +3824,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_get_property_value_at(voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_to_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_to_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char **arg2 = (char **) 0 ;
@@ -3838,7 +3838,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_node_val_to_string(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_src_id_val(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_src_id_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3852,7 +3852,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_src_id_val(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_dst_id_val(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_dst_id_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3866,7 +3866,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_dst_id_val(void * jarg
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_label_val(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_label_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   kuzu_value *arg2 = (kuzu_value *) 0 ;
@@ -3880,7 +3880,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_label_val(void * jarg1
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_size(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_property_size(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t *arg2 = (uint64_t *) 0 ;
@@ -3894,7 +3894,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_size(void * j
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_name_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_property_name_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3910,7 +3910,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_name_at(void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_value_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_property_value_at(void * jarg1, unsigned long long jarg2, void * jarg3) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   uint64_t arg2 ;
@@ -3926,7 +3926,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_get_property_value_at(void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_to_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_to_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;
   char **arg2 = (char **) 0 ;
@@ -3940,7 +3940,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_rel_val_to_string(void * jarg1, vo
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_destroy_string(char * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_destroy_string(char * jarg1) {
   char *arg1 = (char *) 0 ;
   
   arg1 = (char *)jarg1; 
@@ -3948,7 +3948,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_destroy_string(char * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_destroy_blob(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_destroy_blob(void * jarg1) {
   uint8_t *arg1 = (uint8_t *) 0 ;
   
   arg1 = (uint8_t *)jarg1; 
@@ -3956,7 +3956,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_destroy_blob(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_destroy(void * jarg1) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_summary_destroy(void * jarg1) {
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   
   arg1 = (kuzu_query_summary *)jarg1; 
@@ -3964,7 +3964,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_destroy(void * jarg
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_get_compiling_time(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_kuzu_query_summary_get_compiling_time(void * jarg1) {
   double jresult ;
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   double result;
@@ -3976,7 +3976,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_get_compiling_tim
 }
 
 
-SWIGEXPORT double SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_get_execution_time(void * jarg1) {
+SWIGEXPORT double SWIGSTDCALL CSharp_kuzu_query_summary_get_execution_time(void * jarg1) {
   double jresult ;
   kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
   double result;
@@ -3988,7 +3988,7 @@ SWIGEXPORT double SWIGSTDCALL CSharp_KuzuDB_kuzu_query_summary_get_execution_tim
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_ns_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_timestamp_ns_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4008,7 +4008,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_to_tm(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_ms_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_timestamp_ms_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4028,7 +4028,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_to_tm(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_sec_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_timestamp_sec_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4048,7 +4048,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_to_tm(void * jarg1, 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_tz_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_timestamp_tz_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4068,7 +4068,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_to_tm(void * jarg1, v
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_timestamp_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4088,7 +4088,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_to_tm(void * jarg1, void
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_ns_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_timestamp_ns_t *arg2 = (kuzu_timestamp_ns_t *) 0 ;
@@ -4108,7 +4108,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ns_from_tm(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_ms_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_timestamp_ms_t *arg2 = (kuzu_timestamp_ms_t *) 0 ;
@@ -4128,7 +4128,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_ms_from_tm(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_sec_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_timestamp_sec_t *arg2 = (kuzu_timestamp_sec_t *) 0 ;
@@ -4148,7 +4148,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_sec_from_tm(void * jarg1
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_tz_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_timestamp_tz_t *arg2 = (kuzu_timestamp_tz_t *) 0 ;
@@ -4168,7 +4168,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_tz_from_tm(void * jarg1,
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_timestamp_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_timestamp_t *arg2 = (kuzu_timestamp_t *) 0 ;
@@ -4188,7 +4188,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_timestamp_from_tm(void * jarg1, vo
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_to_string(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_date_to_string(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_date_t arg1 ;
   char **arg2 = (char **) 0 ;
@@ -4208,7 +4208,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_to_string(void * jarg1, void 
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_from_string(char * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_date_from_string(char * jarg1, void * jarg2) {
   int jresult ;
   char *arg1 = (char *) 0 ;
   kuzu_date_t *arg2 = (kuzu_date_t *) 0 ;
@@ -4222,7 +4222,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_from_string(char * jarg1, voi
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_to_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_date_to_tm(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_date_t arg1 ;
   tm *arg2 = (tm *) 0 ;
@@ -4242,7 +4242,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_to_tm(void * jarg1, void * ja
 }
 
 
-SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_from_tm(void * jarg1, void * jarg2) {
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_date_from_tm(void * jarg1, void * jarg2) {
   int jresult ;
   tm arg1 ;
   kuzu_date_t *arg2 = (kuzu_date_t *) 0 ;
@@ -4262,7 +4262,7 @@ SWIGEXPORT int SWIGSTDCALL CSharp_KuzuDB_kuzu_date_from_tm(void * jarg1, void * 
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_to_difftime(void * jarg1, double * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_interval_to_difftime(void * jarg1, double * jarg2) {
   kuzu_interval_t arg1 ;
   double *arg2 = (double *) 0 ;
   kuzu_interval_t *argp1 ;
@@ -4278,7 +4278,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_to_difftime(void * jarg1
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_from_difftime(double jarg1, void * jarg2) {
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_interval_from_difftime(double jarg1, void * jarg2) {
   double arg1 ;
   kuzu_interval_t *arg2 = (kuzu_interval_t *) 0 ;
   
@@ -4288,7 +4288,7 @@ SWIGEXPORT void SWIGSTDCALL CSharp_KuzuDB_kuzu_interval_from_difftime(double jar
 }
 
 
-SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_get_version() {
+SWIGEXPORT char * SWIGSTDCALL CSharp_kuzu_get_version() {
   char * jresult ;
   char *result = 0 ;
   
@@ -4298,7 +4298,7 @@ SWIGEXPORT char * SWIGSTDCALL CSharp_KuzuDB_kuzu_get_version() {
 }
 
 
-SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_KuzuDB_kuzu_get_storage_version() {
+SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_get_storage_version() {
   unsigned long long jresult ;
   uint64_t result;
   

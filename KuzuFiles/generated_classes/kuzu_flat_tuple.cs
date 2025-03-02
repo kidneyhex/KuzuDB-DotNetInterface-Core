@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzu_flat_tuple : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -36,16 +35,11 @@ public class kuzu_flat_tuple : global::System.IDisposable {
     }
   }
 
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
-	}
-
   ~kuzu_flat_tuple() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -61,6 +55,10 @@ public class kuzu_flat_tuple : global::System.IDisposable {
       }
     }
   }
+
+	public void Destroy() {
+		kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
+	}
 
   public SWIGTYPE_p_void _flat_tuple {
     set {
@@ -85,7 +83,5 @@ public class kuzu_flat_tuple : global::System.IDisposable {
 
   public kuzu_flat_tuple() : this(kuzunetPINVOKE.new_kuzu_flat_tuple(), true) {
   }
-
-}
 
 }

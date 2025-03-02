@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzunet {
   public static kuzu_state kuzu_database_init(string database_path, kuzu_system_config system_config, out kuzu_database out_database) {
@@ -46,7 +45,7 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_connection_get_max_num_thread_for_exec(kuzu_connection connection, out uint out_result) {
+  public static kuzu_state kuzu_connection_get_max_num_thread_for_exec(kuzu_connection connection, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_get_max_num_thread_for_exec(kuzu_connection.getCPtr(connection), out out_result);
     return ret;
   }
@@ -325,7 +324,7 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_data_type_get_num_elements_in_array(kuzu_logical_type data_type, out uint out_result) {
+  public static kuzu_state kuzu_data_type_get_num_elements_in_array(kuzu_logical_type data_type, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_data_type_get_num_elements_in_array(kuzu_logical_type.getCPtr(data_type), out out_result);
     return ret;
   }
@@ -521,7 +520,7 @@ public class kuzunet {
     kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(value));
   }
 
-  public static kuzu_state kuzu_value_get_list_size(kuzu_value value, out uint out_result) {
+  public static kuzu_state kuzu_value_get_list_size(kuzu_value value, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_list_size(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
@@ -534,7 +533,7 @@ public class kuzunet {
     }
   }
 
-  public static kuzu_state kuzu_value_get_struct_num_fields(kuzu_value value, out uint out_result) {
+  public static kuzu_state kuzu_value_get_struct_num_fields(kuzu_value value, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_struct_num_fields(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
@@ -552,7 +551,7 @@ public class kuzunet {
     }
   }
 
-  public static kuzu_state kuzu_value_get_map_size(kuzu_value value, out uint out_result) {
+  public static kuzu_state kuzu_value_get_map_size(kuzu_value value, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_map_size(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
@@ -610,7 +609,7 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_int64(kuzu_value value, out int out_result) {
+  public static kuzu_state kuzu_value_get_int64(kuzu_value value, out long out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_int64(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
@@ -630,7 +629,7 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_uint64(kuzu_value value, out uint out_result) {
+  public static kuzu_state kuzu_value_get_uint64(kuzu_value value, out ulong out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_uint64(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
@@ -939,6 +938,4 @@ public class kuzunet {
   public static readonly int ARROW_FLAG_DICTIONARY_ORDERED = kuzunetPINVOKE.ARROW_FLAG_DICTIONARY_ORDERED_get();
   public static readonly int ARROW_FLAG_NULLABLE = kuzunetPINVOKE.ARROW_FLAG_NULLABLE_get();
   public static readonly int ARROW_FLAG_MAP_KEYS_SORTED = kuzunetPINVOKE.ARROW_FLAG_MAP_KEYS_SORTED_get();
-}
-
 }

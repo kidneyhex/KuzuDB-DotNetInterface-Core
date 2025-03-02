@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class SWIGTYPE_p_p_char {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -28,6 +27,4 @@ public class SWIGTYPE_p_p_char {
   internal static global::System.Runtime.InteropServices.HandleRef swigRelease(SWIGTYPE_p_p_char obj) {
     return (obj == null) ? new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero) : obj.swigCPtr;
   }
-}
-
 }

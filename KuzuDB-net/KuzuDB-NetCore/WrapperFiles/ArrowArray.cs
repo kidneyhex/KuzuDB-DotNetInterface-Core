@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class ArrowArray : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -164,7 +163,5 @@ public class ArrowArray : global::System.IDisposable {
 
   public ArrowArray() : this(kuzunetPINVOKE.new_ArrowArray(), true) {
   }
-
-}
 
 }

@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzu_database : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -36,16 +35,11 @@ public class kuzu_database : global::System.IDisposable {
     }
   }
 
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
-	}
-
   ~kuzu_database() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -62,6 +56,10 @@ public class kuzu_database : global::System.IDisposable {
     }
   }
 
+	public void Destroy() {
+		kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
+	}
+
   public SWIGTYPE_p_void _database {
     set {
       kuzunetPINVOKE.kuzu_database__database_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
@@ -75,7 +73,5 @@ public class kuzu_database : global::System.IDisposable {
 
   public kuzu_database() : this(kuzunetPINVOKE.new_kuzu_database(), true) {
   }
-
-}
 
 }

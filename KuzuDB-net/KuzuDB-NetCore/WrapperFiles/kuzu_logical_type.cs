@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public class kuzu_logical_type : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
@@ -70,7 +69,5 @@ public class kuzu_logical_type : global::System.IDisposable {
 
   public kuzu_logical_type() : this(kuzunetPINVOKE.new_kuzu_logical_type(), true) {
   }
-
-}
 
 }

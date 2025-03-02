@@ -20,6 +20,9 @@
 %apply long long { int64_t };
 
 
+// -----------------
+// -- Map any output variables to their classes and add an "out" to the parameter
+
 // kuzu_connection
 %typemap(cstype) (kuzu_connection *out_connection) "out $csclassname";
 %typemap(csin, pre="    $1_name = new $csclassname();") 
@@ -50,13 +53,13 @@
 %typemap(csin, pre="    $1_name = new $csclassname();") 
 	(kuzu_flat_tuple *out_flat_tuple) "$csclassname.getCPtr($csinput)";
 
-
+// --------------
 // Pass strings around letting C# handle marshalling
 %typemap(cstype) (char **out_result) "out string"
 %typemap(imtype) (char **out_result) "out string"
 %typemap(csin) (char **out_result) "out $csinput"
 
-
+// --------------------
 // Map the kuzu_value_get_{type} methods to use "out {type}"
 %apply signed char *OUTPUT { int8_t *out_result };
 %apply unsigned char *OUTPUT { uint8_t *out_result };
@@ -67,8 +70,8 @@
 %apply int *OUTPUT { int32_t *out_result};
 %apply unsigned int *OUTPUT { uint32_t *out_result};
 
-%apply long *OUTPUT { int64_t *out_result};
-%apply unsigned long *OUTPUT { uint64_t *out_result};
+%apply long long *OUTPUT { int64_t *out_result};
+%apply unsigned long long *OUTPUT { uint64_t *out_result};
 
 %apply bool *OUTPUT { bool *out_result };
 %apply float *OUTPUT { float *out_result };
@@ -79,8 +82,9 @@
 //%apply unsigned long long *OUTPUT { uint128_t *out_result};
 
 
-// Replace destructor and dispose to call destroy
-%typemap(csdispose) 
+// ------------------
+// Add {class}.Destroy for the following:
+%typemap(cscode) 
 kuzu_connection, 
 kuzu_database, 
 kuzu_value, 
@@ -93,31 +97,12 @@ kuzu_query_result
 	public void Destroy() {
 		$modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
 	}
-
-  ~$csclassname() {
-    Dispose();
-  }
-
-  public void Dispose() {
-    $modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
-    Dispose(true);
-    global::System.GC.SuppressFinalize(this);
-  }
 %}
 
-// // Add {class}.Destroy for the following:
-// %typemap(cscode) 
-// kuzu_connection, 
-// kuzu_database, 
-// kuzu_value, 
-// kuzu_prepared_statement, 
-// kuzu_flat_tuple, 
-// kuzu_data_type, 
-// kuzu_query_summary,
-// kuzu_query_result
-// {%
 
-// %}
+// --------------------------
+// Experimenting with adding methods to kuzu_value
+// Note: you can only do one "cscode" typemap per type, so this would remove the "Destroy"
 
 // %typemap(cscode) kuzu_value 
 // %{
@@ -146,10 +131,11 @@ kuzu_query_result
 // 		return result;
 // 	}
 
-// 	public $csclassname Copy() {
-// 		$modulePINVOKE.kuzu_value_copy
-// 	}
 // %}
+
+
+// --------------------------
+// Not sure how or if SWIG needs something to tell it these are destructors?
 
 // %delobject kuzu_connection_destroy;
 // %delobject kuzu_database_destroy;

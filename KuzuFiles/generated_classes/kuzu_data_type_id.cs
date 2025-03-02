@@ -8,7 +8,6 @@
 // the SWIG interface file instead.
 //------------------------------------------------------------------------------
 
-namespace KuzuDB {
 
 public enum kuzu_data_type_id {
   KUZU_ANY = 0,
@@ -46,6 +45,4 @@ public enum kuzu_data_type_id {
   KUZU_UNION = 56,
   KUZU_POINTER = 58,
   KUZU_UUID = 59
-}
-
 }
