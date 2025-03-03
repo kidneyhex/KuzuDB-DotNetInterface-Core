@@ -1,60 +1,86 @@
 ﻿'this simple app demonstrates the usage of Kuzu v.0.3.2
 
+Imports System.Drawing.Design
+Imports System.IO
 Imports kuzunet
+
+' 3/3/2025 - Kuzu 0.8.2 update: this stopped working for me...
+'            .NET claims it can't load the types from DLL
 
 Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        Dim config As kuzu_system_config = kuzu_default_system_config()
+        Using db As New kuzu_database
+            Using conn As New kuzu_connection
 
-        Dim db As kuzu_database = kuzu_database_init("test", config)
-        Dim conn As kuzu_connection = kuzu_connection_init(db)
+                Dim state As kuzu_state
 
-        Dim result As kuzu_query_result = kuzu_connection_query(conn, "CREATE NODE TABLE User(name STRING, age INT64, PRIMARY KEY (name))")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "CREATE NODE TABLE City(name STRING, population INT64, PRIMARY KEY (name))")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "CREATE REL TABLE Follows(FROM User TO User, since INT64)")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "CREATE REL TABLE LivesIn(FROM User TO City)")
-        kuzu_query_result_destroy(result)
+                Using config As New kuzu_system_config
 
-        result = kuzu_connection_query(conn, "COPY User FROM ""csvs/users.csv""")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "COPY City FROM ""csvs/cities.csv""")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "COPY Follows FROM ""csvs/follows.csv""")
-        kuzu_query_result_destroy(result)
-        result = kuzu_connection_query(conn, "COPY LivesIn FROM ""csvs/lives_in.csv""")
-        kuzu_query_result_destroy(result)
+                    state = kuzunet.kuzu_database_init("test", config, db)
+                    If state = kuzu_state.KuzuError Then
+                        MessageBox.Show("Error creating DB")
+                        Return
+                    End If
 
-        result = kuzu_connection_query(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;")
+                End Using
 
-        While (kuzu_query_result_has_next(result))
-            Dim tuple As kuzu_flat_tuple = kuzu_query_result_get_next(result)
+                state = kuzu_connection_init(db, conn)
+                If state = kuzu_state.KuzuError Then
+                    MessageBox.Show("Error connecting to DB")
+                    Return
+                End If
 
-            Dim value As kuzu_value = kuzu_flat_tuple_get_value(tuple, 0)
-            Dim name As String = kuzu_value_get_string(value)
-            kuzu_value_destroy(value)
+                PerformNonQuery(conn, "CREATE NODE TABLE City(name STRING, population INT64, PRIMARY KEY (name))")
+                PerformNonQuery(conn, "CREATE REL TABLE Follows(FROM User TO User, since INT64)")
+                PerformNonQuery(conn, "CREATE REL TABLE LivesIn(FROM User TO City)")
 
-            value = kuzu_flat_tuple_get_value(tuple, 1)
-            Dim since As Long = kuzu_value_get_int64(value)
-            kuzu_value_destroy(value)
+                PerformNonQuery(conn, "COPY User FROM ""csvs/users.csv""")
+                PerformNonQuery(conn, "COPY City FROM ""csvs/cities.csv""")
+                PerformNonQuery(conn, "COPY Follows FROM ""csvs/follows.csv""")
+                PerformNonQuery(conn, "COPY LivesIn FROM ""csvs/lives_in.csv""")
 
-            value = kuzu_flat_tuple_get_value(tuple, 2)
-            Dim name2 As String = kuzu_value_get_string(value)
-            kuzu_value_destroy(value)
+                Using result As New kuzu_query_result
 
-            MessageBox.Show(String.Format("{0} follows {1} since {2}", name, name2, since))
-            kuzu_flat_tuple_destroy(tuple)
-        End While
+                    state = kuzu_connection_query(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;", result)
+                    If state = kuzu_state.KuzuError Then
+                        MessageBox.Show("Error with MATCH query")
+                        Return
+                    End If
 
 
-        kuzu_query_result_destroy(result)
-        kuzu_connection_destroy(conn)
-        kuzu_database_destroy(db)
+                    'While (kuzu_query_result_has_next(result))
+                    '    Dim tuple As kuzu_flat_tuple
+                    '    Dim value As kuzu_value
+                    '    Dim name As String
+                    '    Dim since As Long
+                    '    Dim name2 As String
 
-        Debugger.Break()
+                    '    kuzu_query_result_get_next(result, tuple)
+
+
+                    '    kuzu_flat_tuple_get_value(tuple, 0, value)
+                    '    kuzu_value_get_string(value, name)
+                    '    value.Destroy()
+
+                    '    kuzu_flat_tuple_get_value(tuple, 1, value)
+                    '    kuzu_value_get_int64(value, since)
+                    '    value.Destroy()
+
+                    '    kuzu_flat_tuple_get_value(tuple, 2, value)
+                    '    kuzu_value_get_string(value, name2)
+                    '    value.Destroy()
+
+                    '    MessageBox.Show(String.Format("{0} follows {1} since {2}", name, name2, since))
+                    '    tuple.Destroy()
+                    'End While
+
+                End Using ' result
+            End Using ' conn
+        End Using ' db
+
+
+        'Debugger.Break()
 
         'Dim systemConfig As New SystemConfig(1UL << 31) ' set buffer manager size to 2GB
         'Dim database As New KuzuDB.kuzu_database(databaseConfig, systemConfig)
@@ -75,6 +101,15 @@ Public Class frmMain
         '    Console.WriteLine(row.GetResultValue(0).GetStringVal())
         'End While
 
+    End Sub
+
+    Private Sub PerformNonQuery(ByRef conn As kuzu_connection, ByVal query As String)
+        Using result As New kuzu_query_result
+            Dim state As kuzu_state = kuzu_connection_query(conn, query, result)
+            If state = kuzu_state.KuzuError Then
+                MessageBox.Show("Error with query" + query)
+            End If
+        End Using
     End Sub
 
 End Class

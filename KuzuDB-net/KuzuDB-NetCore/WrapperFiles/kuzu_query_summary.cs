@@ -36,10 +36,11 @@ public class kuzu_query_summary : global::System.IDisposable {
   }
 
   ~kuzu_query_summary() {
-    Dispose(false);
+    Dispose();
   }
 
   public void Dispose() {
+    kuzunetPINVOKE.kuzu_query_summary_destroy(kuzu_query_summary.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -55,10 +56,6 @@ public class kuzu_query_summary : global::System.IDisposable {
       }
     }
   }
-
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_query_summary_destroy(kuzu_query_summary.getCPtr(this));
-	}
 
   public SWIGTYPE_p_void _query_summary {
     set {

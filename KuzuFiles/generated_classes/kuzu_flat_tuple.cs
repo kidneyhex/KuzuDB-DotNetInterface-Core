@@ -36,10 +36,11 @@ public class kuzu_flat_tuple : global::System.IDisposable {
   }
 
   ~kuzu_flat_tuple() {
-    Dispose(false);
+    Dispose();
   }
 
   public void Dispose() {
+    kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -55,10 +56,6 @@ public class kuzu_flat_tuple : global::System.IDisposable {
       }
     }
   }
-
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
-	}
 
   public SWIGTYPE_p_void _flat_tuple {
     set {

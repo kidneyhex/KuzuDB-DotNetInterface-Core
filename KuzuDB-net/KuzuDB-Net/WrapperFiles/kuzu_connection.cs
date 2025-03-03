@@ -36,10 +36,11 @@ public class kuzu_connection : global::System.IDisposable {
   }
 
   ~kuzu_connection() {
-    Dispose(false);
+    Dispose();
   }
 
   public void Dispose() {
+    kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -55,10 +56,6 @@ public class kuzu_connection : global::System.IDisposable {
       }
     }
   }
-
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
-	}
 
   public SWIGTYPE_p_void _connection {
     set {

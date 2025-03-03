@@ -10,13 +10,10 @@
 
 
 public class kuzunet {
-  public static kuzu_state kuzu_database_init(string database_path, kuzu_system_config system_config, out kuzu_database out_database) {
-    out_database = new kuzu_database();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_database_init(database_path, kuzu_system_config.getCPtr(system_config), kuzu_database.getCPtr(out_database));
-      if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
-      return ret;
-    }
+  public static kuzu_state kuzu_database_init(string database_path, kuzu_system_config system_config, kuzu_database out_database) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_database_init(database_path, kuzu_system_config.getCPtr(system_config), kuzu_database.getCPtr(out_database));
+    if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
+    return ret;
   }
 
   public static void kuzu_database_destroy(kuzu_database database) {
@@ -28,12 +25,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_connection_init(kuzu_database database, out kuzu_connection out_connection) {
-    out_connection = new kuzu_connection();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_init(kuzu_database.getCPtr(database), kuzu_connection.getCPtr(out_connection));
-      return ret;
-    }
+  public static kuzu_state kuzu_connection_init(kuzu_database database, kuzu_connection out_connection) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_init(kuzu_database.getCPtr(database), kuzu_connection.getCPtr(out_connection));
+    return ret;
   }
 
   public static void kuzu_connection_destroy(kuzu_connection connection) {
@@ -50,12 +44,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_connection_query(kuzu_connection connection, string query, out kuzu_query_result out_query_result) {
-    out_query_result = new kuzu_query_result();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_query(kuzu_connection.getCPtr(connection), query, kuzu_query_result.getCPtr(out_query_result));
-      return ret;
-    }
+  public static kuzu_state kuzu_connection_query(kuzu_connection connection, string query, kuzu_query_result out_query_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_query(kuzu_connection.getCPtr(connection), query, kuzu_query_result.getCPtr(out_query_result));
+    return ret;
   }
 
   public static kuzu_state kuzu_connection_prepare(kuzu_connection connection, string query, kuzu_prepared_statement out_prepared_statement) {
@@ -63,12 +54,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_connection_execute(kuzu_connection connection, kuzu_prepared_statement prepared_statement, out kuzu_query_result out_query_result) {
-    out_query_result = new kuzu_query_result();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_execute(kuzu_connection.getCPtr(connection), kuzu_prepared_statement.getCPtr(prepared_statement), kuzu_query_result.getCPtr(out_query_result));
-      return ret;
-    }
+  public static kuzu_state kuzu_connection_execute(kuzu_connection connection, kuzu_prepared_statement prepared_statement, kuzu_query_result out_query_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_connection_execute(kuzu_connection.getCPtr(connection), kuzu_prepared_statement.getCPtr(prepared_statement), kuzu_query_result.getCPtr(out_query_result));
+    return ret;
   }
 
   public static void kuzu_connection_interrupt(kuzu_connection connection) {
@@ -245,12 +233,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_query_result_get_next(kuzu_query_result query_result, out kuzu_flat_tuple out_flat_tuple) {
-    out_flat_tuple = new kuzu_flat_tuple();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_next(kuzu_query_result.getCPtr(query_result), kuzu_flat_tuple.getCPtr(out_flat_tuple));
-      return ret;
-    }
+  public static kuzu_state kuzu_query_result_get_next(kuzu_query_result query_result, kuzu_flat_tuple out_flat_tuple) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_next(kuzu_query_result.getCPtr(query_result), kuzu_flat_tuple.getCPtr(out_flat_tuple));
+    return ret;
   }
 
   public static bool kuzu_query_result_has_next_query_result(kuzu_query_result query_result) {
@@ -272,12 +257,9 @@ public class kuzunet {
     kuzunetPINVOKE.kuzu_query_result_reset_iterator(kuzu_query_result.getCPtr(query_result));
   }
 
-  public static kuzu_state kuzu_query_result_get_arrow_schema(kuzu_query_result query_result, out ArrowSchema out_schema) {
-    out_schema = new ArrowSchema();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_arrow_schema(kuzu_query_result.getCPtr(query_result), ArrowSchema.getCPtr(out_schema));
-      return ret;
-    }
+  public static kuzu_state kuzu_query_result_get_arrow_schema(kuzu_query_result query_result, ArrowSchema out_schema) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_arrow_schema(kuzu_query_result.getCPtr(query_result), ArrowSchema.getCPtr(out_schema));
+    return ret;
   }
 
   public static kuzu_state kuzu_query_result_get_next_arrow_chunk(kuzu_query_result query_result, long chunk_size, ArrowArray out_arrow_array) {
@@ -289,12 +271,9 @@ public class kuzunet {
     kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(flat_tuple));
   }
 
-  public static kuzu_state kuzu_flat_tuple_get_value(kuzu_flat_tuple flat_tuple, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_flat_tuple_get_value(kuzu_flat_tuple.getCPtr(flat_tuple), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_flat_tuple_get_value(kuzu_flat_tuple flat_tuple, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_flat_tuple_get_value(kuzu_flat_tuple.getCPtr(flat_tuple), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static string kuzu_flat_tuple_to_string(kuzu_flat_tuple flat_tuple) {
@@ -525,12 +504,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_list_element(kuzu_value value, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_list_element(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_value_get_list_element(kuzu_value value, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_list_element(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_value_get_struct_num_fields(kuzu_value value, out ulong out_result) {
@@ -543,12 +519,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_struct_field_value(kuzu_value value, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_struct_field_value(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_value_get_struct_field_value(kuzu_value value, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_struct_field_value(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_value_get_map_size(kuzu_value value, out ulong out_result) {
@@ -561,28 +534,19 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_map_value(kuzu_value value, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_map_value(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_value_get_map_value(kuzu_value value, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_map_value(kuzu_value.getCPtr(value), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
-  public static kuzu_state kuzu_value_get_recursive_rel_node_list(kuzu_value value, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_recursive_rel_node_list(kuzu_value.getCPtr(value), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_value_get_recursive_rel_node_list(kuzu_value value, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_recursive_rel_node_list(kuzu_value.getCPtr(value), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
-  public static kuzu_state kuzu_value_get_recursive_rel_rel_list(kuzu_value value, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_recursive_rel_rel_list(kuzu_value.getCPtr(value), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_value_get_recursive_rel_rel_list(kuzu_value value, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_recursive_rel_rel_list(kuzu_value.getCPtr(value), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static void kuzu_value_get_data_type(kuzu_value value, kuzu_logical_type out_type) {
@@ -725,20 +689,14 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_node_val_get_id_val(kuzu_value node_val, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_id_val(kuzu_value.getCPtr(node_val), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_node_val_get_id_val(kuzu_value node_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_id_val(kuzu_value.getCPtr(node_val), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
-  public static kuzu_state kuzu_node_val_get_label_val(kuzu_value node_val, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_label_val(kuzu_value.getCPtr(node_val), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_node_val_get_label_val(kuzu_value node_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_label_val(kuzu_value.getCPtr(node_val), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_node_val_get_property_size(kuzu_value node_val, SWIGTYPE_p_uint64_t out_value) {
@@ -751,12 +709,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_node_val_get_property_value_at(kuzu_value node_val, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_property_value_at(kuzu_value.getCPtr(node_val), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_node_val_get_property_value_at(kuzu_value node_val, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_property_value_at(kuzu_value.getCPtr(node_val), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_node_val_to_string(kuzu_value node_val, out string out_result) {
@@ -764,28 +719,19 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_rel_val_get_src_id_val(kuzu_value rel_val, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_src_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_rel_val_get_src_id_val(kuzu_value rel_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_src_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
-  public static kuzu_state kuzu_rel_val_get_dst_id_val(kuzu_value rel_val, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_dst_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_rel_val_get_dst_id_val(kuzu_value rel_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_dst_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
-  public static kuzu_state kuzu_rel_val_get_label_val(kuzu_value rel_val, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_label_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_rel_val_get_label_val(kuzu_value rel_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_label_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_rel_val_get_property_size(kuzu_value rel_val, SWIGTYPE_p_uint64_t out_value) {
@@ -798,12 +744,9 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_rel_val_get_property_value_at(kuzu_value rel_val, ulong index, out kuzu_value out_value) {
-    out_value = new kuzu_value();
-    {
-      kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_property_value_at(kuzu_value.getCPtr(rel_val), index, kuzu_value.getCPtr(out_value));
-      return ret;
-    }
+  public static kuzu_state kuzu_rel_val_get_property_value_at(kuzu_value rel_val, ulong index, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_property_value_at(kuzu_value.getCPtr(rel_val), index, kuzu_value.getCPtr(out_value));
+    return ret;
   }
 
   public static kuzu_state kuzu_rel_val_to_string(kuzu_value rel_val, out string out_result) {

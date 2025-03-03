@@ -10,14 +10,18 @@ namespace KuzuDB_ConsoleCore
             if (System.IO.Directory.Exists("test"))
                 System.IO.Directory.Delete("test", true);
 
-            var state = kuzu_database_init("test", kuzu_default_system_config(), out var db);
+            using kuzu_database db = new();
+            using kuzu_connection conn = new();
+            using kuzu_system_config config = kuzu_default_system_config();
+
+            var state = kuzu_database_init("test", config, db);
             if (state == kuzu_state.KuzuError)
             {
                 Console.WriteLine("Could not create DB");
                 return;
             }
 
-            state = kuzu_connection_init(db, out var conn);
+            state = kuzu_connection_init(db, conn);
             if (state == kuzu_state.KuzuError)
             {
                 Console.WriteLine("Could not connect to DB");
@@ -34,53 +38,59 @@ namespace KuzuDB_ConsoleCore
             PerformNonQuery(conn, "COPY Follows FROM \"csv/follows.csv\"");
             PerformNonQuery(conn, "COPY LivesIn FROM \"csv/lives-in.csv\"");
 
-            state = PerformQuery(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;", out var result);
+            using kuzu_query_result result = new();
+            state = PerformQuery(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;", result);
             if (state == kuzu_state.KuzuError)
             {
                 Console.WriteLine("Error performing MATCH");
                 return;
             }
 
-
             while (kuzu_query_result_has_next(result))
             {
-                kuzu_query_result_get_next(result, out var tuple);
+                string name, name2;
+                long since;
 
-                kuzu_flat_tuple_get_value(tuple, 0, out var value);
-                kuzu_value_get_string(value, out string name);
-                value.Destroy();
+                using kuzu_flat_tuple tuple = new();
+                kuzu_query_result_get_next(result, tuple);
 
-                kuzu_flat_tuple_get_value(tuple, 1, out value);
-                kuzu_value_get_int64(value, out long since);
-                value.Destroy();
+                using (kuzu_value value = new())
+                {
+                    kuzu_flat_tuple_get_value(tuple, 0, value);
+                    kuzu_value_get_string(value, out name);
+                }
 
-                kuzu_flat_tuple_get_value(tuple, 2, out value);
-                kuzu_value_get_string(value, out string name2);
-                value.Destroy();
+                using (kuzu_value value = new())
+                {
+                    kuzu_flat_tuple_get_value(tuple, 1, value);
+                    kuzu_value_get_int64(value, out since);
+                }
+
+                using (kuzu_value value = new())
+                {
+                    kuzu_flat_tuple_get_value(tuple, 2, value);
+                    kuzu_value_get_string(value, out name2);
+                }
 
                 Console.WriteLine(String.Format("{0} follows {1} since {2}", name, name2, since));
-                tuple.Destroy();
             }
-
-            result.Destroy();
-            conn.Destroy();
-            db.Destroy();
         }
 
         private static void PerformNonQuery(kuzu_connection conn, string query)
         {
-            var state = kuzu_connection_query(conn, query, out kuzu_query_result result);
+            using kuzu_query_result result = new();
+
+            var state = kuzu_connection_query(conn, query, result);
             if (state == kuzu_state.KuzuError)
             {
                 Console.WriteLine("Could not perform: " + query);
                 return;
             }
-            result.Destroy();
         }
 
-        private static kuzu_state PerformQuery(kuzu_connection conn, string query, out kuzu_query_result result)
+        private static kuzu_state PerformQuery(kuzu_connection conn, string query, kuzu_query_result result)
         {
-            return kuzu_connection_query(conn, query, out result);
+            return kuzu_connection_query(conn, query, result);
         }
     }
 }

@@ -36,10 +36,11 @@ public class kuzu_database : global::System.IDisposable {
   }
 
   ~kuzu_database() {
-    Dispose(false);
+    Dispose();
   }
 
   public void Dispose() {
+    kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -55,10 +56,6 @@ public class kuzu_database : global::System.IDisposable {
       }
     }
   }
-
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
-	}
 
   public SWIGTYPE_p_void _database {
     set {

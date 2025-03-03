@@ -13,57 +13,74 @@ namespace ConsoleAppExample
             if (System.IO.Directory.Exists("test"))
                 System.IO.Directory.Delete("test", true);
 
-            var state = kuzu_database_init("test", kuzu_default_system_config(), out var db);
-            if (state == kuzu_state.KuzuError)
+            using (kuzu_database db = new kuzu_database())
+            using (kuzu_connection conn = new kuzu_connection())
             {
-                Console.WriteLine("Could not create DB");
-                return;
-            }
+                kuzu_state state;
 
-            state = kuzu_connection_init(db, out var conn);
-            if (state == kuzu_state.KuzuError)
-            {
-                Console.WriteLine("Could not connect to DB");
-                return;
-            }
+                using (kuzu_system_config config = kuzu_default_system_config())
+                { 
+                    state = kuzu_database_init("test", config, db);
+                    if (state == kuzu_state.KuzuError)
+                    {
+                        Console.WriteLine("Could not create DB");
+                        return;
+                    }
+                }
 
-            PerformNonQuery(conn, "CREATE NODE TABLE User(name STRING, age INT64, PRIMARY KEY (name))");
-            PerformNonQuery(conn, "CREATE NODE TABLE City(name STRING, population INT64, PRIMARY KEY (name))");
-            PerformNonQuery(conn, "CREATE REL TABLE Follows(FROM User TO User, since INT64)");
-            PerformNonQuery(conn, "CREATE REL TABLE LivesIn(FROM User TO City)");
-
-            PerformNonQuery(conn, "COPY User FROM \"csv/users.csv\"");
-            PerformNonQuery(conn, "COPY City FROM \"csv/cities.csv\"");
-            PerformNonQuery(conn, "COPY Follows FROM \"csv/follows.csv\"");
-            PerformNonQuery(conn, "COPY LivesIn FROM \"csv/lives-in.csv\"");
-
-            state = kuzu_connection_query(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;", out var result);
-
-            while (kuzu_query_result_has_next(result))
-            {
-                kuzu_query_result_get_next(result, out var tuple);
-                using (tuple)
+                state = kuzu_connection_init(db, conn);
+                if (state == kuzu_state.KuzuError)
                 {
-                    kuzu_flat_tuple_get_value(tuple, 0, out var value);
-                    kuzu_value_get_string(value, out string name);
-                    value.Destroy();
+                    Console.WriteLine("Could not connect to DB");
+                    return;
+                }
 
-                    kuzu_flat_tuple_get_value(tuple, 1, out value);
-                    kuzu_value_get_int64(value, out long since);
-                    value.Destroy();
+                PerformNonQuery(conn, "CREATE NODE TABLE User(name STRING, age INT64, PRIMARY KEY (name))");
+                PerformNonQuery(conn, "CREATE NODE TABLE City(name STRING, population INT64, PRIMARY KEY (name))");
+                PerformNonQuery(conn, "CREATE REL TABLE Follows(FROM User TO User, since INT64)");
+                PerformNonQuery(conn, "CREATE REL TABLE LivesIn(FROM User TO City)");
 
-                    kuzu_flat_tuple_get_value(tuple, 2, out value);
-                    kuzu_value_get_string(value, out string name2);
-                    value.Destroy();
+                PerformNonQuery(conn, "COPY User FROM \"csv/users.csv\"");
+                PerformNonQuery(conn, "COPY City FROM \"csv/cities.csv\"");
+                PerformNonQuery(conn, "COPY Follows FROM \"csv/follows.csv\"");
+                PerformNonQuery(conn, "COPY LivesIn FROM \"csv/lives-in.csv\"");
 
-                    Console.WriteLine(String.Format("{0} follows {1} since {2}", name, name2, since));
-                    tuple.Destroy();
+                using (var result = new kuzu_query_result())
+                {
+                    state = kuzu_connection_query(conn, "MATCH (a:User)-[f:Follows]->(b:User) RETURN a.name, f.since, b.name;", result);
+
+                    while (kuzu_query_result_has_next(result))
+                    {
+                        string name, name2;
+                        long since;
+
+                        using (var tuple = new kuzu_flat_tuple())
+                        {
+                            kuzu_query_result_get_next(result, tuple);
+
+                            using (var value = new kuzu_value())
+                            {
+                                kuzu_flat_tuple_get_value(tuple, 0, value);
+                                kuzu_value_get_string(value, out name);
+                            }
+
+                            using (var value = new kuzu_value())
+                            {
+                                kuzu_flat_tuple_get_value(tuple, 1, value);
+                                kuzu_value_get_int64(value, out since);
+                            }
+
+                            using (var value = new kuzu_value())
+                            {
+                                kuzu_flat_tuple_get_value(tuple, 2, value);
+                                kuzu_value_get_string(value, out name2);
+                            }
+                        }
+
+                        Console.WriteLine(String.Format("{0} follows {1} since {2}", name, name2, since));
+                    }
                 }
             }
-
-            result.Destroy();
-            conn.Destroy();
-            db.Destroy();
 
             Console.WriteLine("Press enter to close...");
             Console.ReadLine();
@@ -71,13 +88,15 @@ namespace ConsoleAppExample
 
         private static void PerformNonQuery(kuzu_connection conn, string query)
         {
-            var state = kuzu_connection_query(conn, query, out kuzu_query_result result);
-            if (state == kuzu_state.KuzuError)
+            using (var result = new kuzu_query_result())
             {
-                Console.WriteLine("Could not perform: " + query);
-                return;
+                var state = kuzu_connection_query(conn, query, result);
+                if (state == kuzu_state.KuzuError)
+                {
+                    Console.WriteLine("Could not perform: " + query);
+                    return;
+                }
             }
-            result.Destroy();
         }
     }
 }

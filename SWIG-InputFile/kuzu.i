@@ -21,37 +21,39 @@
 
 
 // -----------------
-// -- Map any output variables to their classes and add an "out" to the parameter
+// If you want to have things like kuzu_connection_init create a 
+//   connection and pass it as an "out" parameter you could do this
+//   Side effect is that disposing with using statements gets harder
 
-// kuzu_connection
-%typemap(cstype) (kuzu_connection *out_connection) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(kuzu_connection *out_connection) "$csclassname.getCPtr($csinput)";
+// // kuzu_connection
+// %typemap(cstype) (kuzu_connection *out_connection) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(kuzu_connection *out_connection) "$csclassname.getCPtr($csinput)";
 
-// kuzu_database
-%typemap(cstype) (kuzu_database *out_database) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(kuzu_database *out_database) "$csclassname.getCPtr($csinput)";
+// // kuzu_database
+// %typemap(cstype) (kuzu_database *out_database) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(kuzu_database *out_database) "$csclassname.getCPtr($csinput)";
 
-// kuzu_query_result
-%typemap(cstype) (kuzu_query_result *out_query_result) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(kuzu_query_result *out_query_result) "$csclassname.getCPtr($csinput)";
+// // kuzu_query_result
+// %typemap(cstype) (kuzu_query_result *out_query_result) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(kuzu_query_result *out_query_result) "$csclassname.getCPtr($csinput)";
 
-// ArrowSchema
-%typemap(cstype) (ArrowSchema *out_schema) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(ArrowSchema *out_schema) "$csclassname.getCPtr($csinput)";
+// // ArrowSchema
+// %typemap(cstype) (ArrowSchema *out_schema) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(ArrowSchema *out_schema) "$csclassname.getCPtr($csinput)";
 
-// kuzu_value
-%typemap(cstype) (kuzu_value *out_value) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(kuzu_value *out_value) "$csclassname.getCPtr($csinput)";
+// // kuzu_value
+// %typemap(cstype) (kuzu_value *out_value) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(kuzu_value *out_value) "$csclassname.getCPtr($csinput)";
 
-// kuzu_flat_tuple
-%typemap(cstype) (kuzu_flat_tuple *out_flat_tuple) "out $csclassname";
-%typemap(csin, pre="    $1_name = new $csclassname();") 
-	(kuzu_flat_tuple *out_flat_tuple) "$csclassname.getCPtr($csinput)";
+// // kuzu_flat_tuple
+// %typemap(cstype) (kuzu_flat_tuple *out_flat_tuple) "$csclassname";
+// %typemap(csin, pre="    $1_name = new $csclassname();") 
+// 	(kuzu_flat_tuple *out_flat_tuple) "$csclassname.getCPtr($csinput)";
 
 // --------------
 // Pass strings around letting C# handle marshalling
@@ -81,10 +83,27 @@
 //%apply long long *OUTPUT { int128_t *out_result};
 //%apply unsigned long long *OUTPUT { uint128_t *out_result};
 
+// // ------------------
+// // Add {class}.Destroy for the following:
+// %typemap(cscode) 
+// kuzu_connection, 
+// kuzu_database, 
+// kuzu_value, 
+// kuzu_prepared_statement, 
+// kuzu_flat_tuple, 
+// kuzu_data_type, 
+// kuzu_query_summary,
+// kuzu_query_result
+// %{
+// 	public void Destroy() {
+// 		$modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
+// 	}
+// %}
 
-// ------------------
-// Add {class}.Destroy for the following:
-%typemap(cscode) 
+
+// Replace destructor and dispose to call destroy automatically
+// This way both the SWIG wrapper and kuzu object get disposed by using statements
+%typemap(csdispose) 
 kuzu_connection, 
 kuzu_database, 
 kuzu_value, 
@@ -94,15 +113,21 @@ kuzu_data_type,
 kuzu_query_summary,
 kuzu_query_result
 %{
-	public void Destroy() {
-		$modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
-	}
+  ~$csclassname() {
+    Dispose();
+  }
+
+  public void Dispose() {
+    $modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
+    Dispose(true);
+    global::System.GC.SuppressFinalize(this);
+  }
 %}
 
 
 // --------------------------
 // Experimenting with adding methods to kuzu_value
-// Note: you can only do one "cscode" typemap per type, so this would remove the "Destroy"
+// Note: should add these as a partial class or extension methods?
 
 // %typemap(cscode) kuzu_value 
 // %{
@@ -132,20 +157,6 @@ kuzu_query_result
 // 	}
 
 // %}
-
-
-// --------------------------
-// Not sure how or if SWIG needs something to tell it these are destructors?
-
-// %delobject kuzu_connection_destroy;
-// %delobject kuzu_database_destroy;
-// %delobject kuzu_value_destroy;
-// %delobject kuzu_query_result_destroy;
-// %delobject kuzu_data_type_destroy;
-// %delobject kuzu_flat_tuple_destroy;
-// %delobject kuzu_query_summary_destroy;
-// %delobject kuzu_prepared_statement_destroy;
-
 
 
 %include <windows.i>

@@ -36,10 +36,11 @@ public class kuzu_prepared_statement : global::System.IDisposable {
   }
 
   ~kuzu_prepared_statement() {
-    Dispose(false);
+    Dispose();
   }
 
   public void Dispose() {
+    kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
@@ -55,10 +56,6 @@ public class kuzu_prepared_statement : global::System.IDisposable {
       }
     }
   }
-
-	public void Destroy() {
-		kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
-	}
 
   public SWIGTYPE_p_void _prepared_statement {
     set {
