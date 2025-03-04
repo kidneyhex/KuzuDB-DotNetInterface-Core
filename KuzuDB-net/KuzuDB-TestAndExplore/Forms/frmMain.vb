@@ -4,8 +4,6 @@ Imports System.Drawing.Design
 Imports System.IO
 Imports kuzunet
 
-' 3/3/2025 - Kuzu 0.8.2 update: this stopped working for me...
-'            .NET claims it can't load the types from DLL
 
 Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
