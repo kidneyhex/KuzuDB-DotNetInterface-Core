@@ -10,20 +10,22 @@ Imports kuzunet
 Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        If (System.IO.Directory.Exists("test")) Then
+            System.IO.Directory.Delete("test", True)
+        End If
+
         Using db As New kuzu_database
             Using conn As New kuzu_connection
 
+
                 Dim state As kuzu_state
-
-                Using config As New kuzu_system_config
-
-                    state = kuzunet.kuzu_database_init("test", config, db)
+                Using config As kuzu_system_config = kuzu_default_system_config()
+                    state = kuzu_database_init("test", config, db)
                     If state = kuzu_state.KuzuError Then
                         MessageBox.Show("Error creating DB")
                         Return
                     End If
-
-                End Using
+                End Using ' Config
 
                 state = kuzu_connection_init(db, conn)
                 If state = kuzu_state.KuzuError Then
@@ -31,6 +33,7 @@ Public Class frmMain
                     Return
                 End If
 
+                PerformNonQuery(conn, "CREATE NODE TABLE User(name STRING, age INT64, PRIMARY KEY (name))")
                 PerformNonQuery(conn, "CREATE NODE TABLE City(name STRING, population INT64, PRIMARY KEY (name))")
                 PerformNonQuery(conn, "CREATE REL TABLE Follows(FROM User TO User, since INT64)")
                 PerformNonQuery(conn, "CREATE REL TABLE LivesIn(FROM User TO City)")
@@ -38,7 +41,7 @@ Public Class frmMain
                 PerformNonQuery(conn, "COPY User FROM ""csvs/users.csv""")
                 PerformNonQuery(conn, "COPY City FROM ""csvs/cities.csv""")
                 PerformNonQuery(conn, "COPY Follows FROM ""csvs/follows.csv""")
-                PerformNonQuery(conn, "COPY LivesIn FROM ""csvs/lives_in.csv""")
+                PerformNonQuery(conn, "COPY LivesIn FROM ""csvs/lives-in.csv""")
 
                 Using result As New kuzu_query_result
 
@@ -49,33 +52,37 @@ Public Class frmMain
                     End If
 
 
-                    'While (kuzu_query_result_has_next(result))
-                    '    Dim tuple As kuzu_flat_tuple
-                    '    Dim value As kuzu_value
-                    '    Dim name As String
-                    '    Dim since As Long
-                    '    Dim name2 As String
+                    While (kuzu_query_result_has_next(result))
+                        Dim name As String
+                        Dim since As Long
+                        Dim name2 As String
 
-                    '    kuzu_query_result_get_next(result, tuple)
+                        Using tuple As New kuzu_flat_tuple
+                            kuzu_query_result_get_next(result, tuple)
 
+                            Using value As New kuzu_value
+                                kuzu_flat_tuple_get_value(tuple, 0, value)
+                                kuzu_value_get_string(value, name)
+                            End Using
 
-                    '    kuzu_flat_tuple_get_value(tuple, 0, value)
-                    '    kuzu_value_get_string(value, name)
-                    '    value.Destroy()
+                            Using value As New kuzu_value
+                                kuzu_flat_tuple_get_value(tuple, 1, value)
+                                kuzu_value_get_int64(value, since)
+                            End Using
 
-                    '    kuzu_flat_tuple_get_value(tuple, 1, value)
-                    '    kuzu_value_get_int64(value, since)
-                    '    value.Destroy()
+                            Using value As New kuzu_value
+                                kuzu_flat_tuple_get_value(tuple, 2, value)
+                                kuzu_value_get_string(value, name2)
+                            End Using
 
-                    '    kuzu_flat_tuple_get_value(tuple, 2, value)
-                    '    kuzu_value_get_string(value, name2)
-                    '    value.Destroy()
+                        End Using ' tuple
 
-                    '    MessageBox.Show(String.Format("{0} follows {1} since {2}", name, name2, since))
-                    '    tuple.Destroy()
-                    'End While
+                        MessageBox.Show(String.Format("{0} follows {1} since {2}", name, name2, since))
+
+                    End While
 
                 End Using ' result
+
             End Using ' conn
         End Using ' db
 
@@ -107,7 +114,7 @@ Public Class frmMain
         Using result As New kuzu_query_result
             Dim state As kuzu_state = kuzu_connection_query(conn, query, result)
             If state = kuzu_state.KuzuError Then
-                MessageBox.Show("Error with query" + query)
+                MessageBox.Show("Error with query: " + query)
             End If
         End Using
     End Sub
