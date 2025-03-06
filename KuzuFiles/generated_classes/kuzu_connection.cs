@@ -36,26 +36,30 @@ public class kuzu_connection : global::System.IDisposable {
   }
 
   ~kuzu_connection() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
 
-  protected virtual void Dispose(bool disposing) {
+  protected virtual void Dispose(bool disposing) 
+  {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
+
         if (swigCMemOwn) {
-          swigCMemOwn = false;
+          swigMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_connection(swigCPtr);
         }
+
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
+
 
   public SWIGTYPE_p_void _connection {
     set {

@@ -36,26 +36,30 @@ public class kuzu_query_result : global::System.IDisposable {
   }
 
   ~kuzu_query_result() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
 
-  protected virtual void Dispose(bool disposing) {
+  protected virtual void Dispose(bool disposing) 
+  {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
+
         if (swigCMemOwn) {
-          swigCMemOwn = false;
+          swigMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_query_result(swigCPtr);
         }
+
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
+
 
   public SWIGTYPE_p_void _query_result {
     set {

@@ -36,26 +36,30 @@ public class kuzu_prepared_statement : global::System.IDisposable {
   }
 
   ~kuzu_prepared_statement() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
 
-  protected virtual void Dispose(bool disposing) {
+  protected virtual void Dispose(bool disposing) 
+  {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
+
         if (swigCMemOwn) {
-          swigCMemOwn = false;
+          swigMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_prepared_statement(swigCPtr);
         }
+
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
+
 
   public SWIGTYPE_p_void _prepared_statement {
     set {

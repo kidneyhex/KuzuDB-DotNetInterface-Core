@@ -36,26 +36,30 @@ public class kuzu_flat_tuple : global::System.IDisposable {
   }
 
   ~kuzu_flat_tuple() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
 
-  protected virtual void Dispose(bool disposing) {
+  protected virtual void Dispose(bool disposing) 
+  {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
+
         if (swigCMemOwn) {
-          swigCMemOwn = false;
+          swigMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_flat_tuple(swigCPtr);
         }
+
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
+
 
   public SWIGTYPE_p_void _flat_tuple {
     set {

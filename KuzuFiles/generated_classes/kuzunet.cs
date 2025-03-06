@@ -208,8 +208,8 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_query_result_get_column_name(kuzu_query_result query_result, ulong index, SWIGTYPE_p_p_char out_column_name) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_column_name(kuzu_query_result.getCPtr(query_result), index, SWIGTYPE_p_p_char.getCPtr(out_column_name));
+  public static kuzu_state kuzu_query_result_get_column_name(kuzu_query_result query_result, ulong index, out string out_column_name) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_column_name(kuzu_query_result.getCPtr(query_result), index, out out_column_name);
     return ret;
   }
 
@@ -255,16 +255,6 @@ public class kuzunet {
 
   public static void kuzu_query_result_reset_iterator(kuzu_query_result query_result) {
     kuzunetPINVOKE.kuzu_query_result_reset_iterator(kuzu_query_result.getCPtr(query_result));
-  }
-
-  public static kuzu_state kuzu_query_result_get_arrow_schema(kuzu_query_result query_result, ArrowSchema out_schema) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_arrow_schema(kuzu_query_result.getCPtr(query_result), ArrowSchema.getCPtr(out_schema));
-    return ret;
-  }
-
-  public static kuzu_state kuzu_query_result_get_next_arrow_chunk(kuzu_query_result query_result, long chunk_size, ArrowArray out_arrow_array) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_query_result_get_next_arrow_chunk(kuzu_query_result.getCPtr(query_result), chunk_size, ArrowArray.getCPtr(out_arrow_array));
-    return ret;
   }
 
   public static void kuzu_flat_tuple_destroy(kuzu_flat_tuple flat_tuple) {
@@ -470,18 +460,18 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_list(ulong num_elements, SWIGTYPE_p_p_kuzu_value elements, SWIGTYPE_p_p_kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_list(num_elements, SWIGTYPE_p_p_kuzu_value.getCPtr(elements), SWIGTYPE_p_p_kuzu_value.getCPtr(out_value));
+  public static kuzu_state kuzu_value_create_list(ulong num_elements, kuzu_value[] elements, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_list(num_elements, elements, out_value);
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_struct(ulong num_fields, SWIGTYPE_p_p_char field_names, SWIGTYPE_p_p_kuzu_value field_values, SWIGTYPE_p_p_kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_struct(num_fields, SWIGTYPE_p_p_char.getCPtr(field_names), SWIGTYPE_p_p_kuzu_value.getCPtr(field_values), SWIGTYPE_p_p_kuzu_value.getCPtr(out_value));
+  public static kuzu_state kuzu_value_create_struct(ulong num_fields, string[] field_names, kuzu_value[] field_values, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_struct(num_fields, field_names, field_values, out_value);
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_map(ulong num_fields, SWIGTYPE_p_p_kuzu_value keys, SWIGTYPE_p_p_kuzu_value values, SWIGTYPE_p_p_kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_map(num_fields, SWIGTYPE_p_p_kuzu_value.getCPtr(keys), SWIGTYPE_p_p_kuzu_value.getCPtr(values), SWIGTYPE_p_p_kuzu_value.getCPtr(out_value));
+  public static kuzu_state kuzu_value_create_map(ulong num_fields, kuzu_value[] keys, kuzu_value[] values, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_map(num_fields, keys, values, out_value);
     return ret;
   }
 
@@ -674,8 +664,8 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_value_get_blob(kuzu_value value, SWIGTYPE_p_p_uint8_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_blob(kuzu_value.getCPtr(value), SWIGTYPE_p_p_uint8_t.getCPtr(out_result));
+  public static kuzu_state kuzu_value_get_blob(kuzu_value value, out byte[] out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_blob(kuzu_value.getCPtr(value), out_result);
     return ret;
   }
 
@@ -699,8 +689,8 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_node_val_get_property_size(kuzu_value node_val, SWIGTYPE_p_uint64_t out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_property_size(kuzu_value.getCPtr(node_val), SWIGTYPE_p_uint64_t.getCPtr(out_value));
+  public static kuzu_state kuzu_node_val_get_property_size(kuzu_value node_val, out ulong out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_node_val_get_property_size(kuzu_value.getCPtr(node_val), out out_value);
     return ret;
   }
 
@@ -734,8 +724,8 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_rel_val_get_property_size(kuzu_value rel_val, SWIGTYPE_p_uint64_t out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_property_size(kuzu_value.getCPtr(rel_val), SWIGTYPE_p_uint64_t.getCPtr(out_value));
+  public static kuzu_state kuzu_rel_val_get_property_size(kuzu_value rel_val, out ulong out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_property_size(kuzu_value.getCPtr(rel_val), out out_value);
     return ret;
   }
 
@@ -752,14 +742,6 @@ public class kuzunet {
   public static kuzu_state kuzu_rel_val_to_string(kuzu_value rel_val, out string out_result) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_to_string(kuzu_value.getCPtr(rel_val), out out_result);
     return ret;
-  }
-
-  public static void kuzu_destroy_string(string str) {
-    kuzunetPINVOKE.kuzu_destroy_string(str);
-  }
-
-  public static void kuzu_destroy_blob(SWIGTYPE_p_uint8_t blob) {
-    kuzunetPINVOKE.kuzu_destroy_blob(SWIGTYPE_p_uint8_t.getCPtr(blob));
   }
 
   public static void kuzu_query_summary_destroy(kuzu_query_summary query_summary) {

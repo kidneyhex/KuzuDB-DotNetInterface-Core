@@ -7,15 +7,38 @@
 #include "kuzu.h"
 %}
 
-%include "typemaps.i"
 
+// // Not sure how to make SWIG give tm a class; so doing it manually...
+// %inline %{
+// extern struct tm
+// {
+//     int tm_sec;   // seconds after the minute - [0, 60] including leap second
+//     int tm_min;   // minutes after the hour - [0, 59]
+//     int tm_hour;  // hours since midnight - [0, 23]
+//     int tm_mday;  // day of the month - [1, 31]
+//     int tm_mon;   // months since January - [0, 11]
+//     int tm_year;  // years since 1900
+//     int tm_wday;  // days since Sunday - [0, 6]
+//     int tm_yday;  // days since January 1 - [0, 365]
+//     int tm_isdst; // daylight savings time flag
+// };
+// %}
+
+%include "typemaps.i"
+%include "arrays_csharp.i"
+
+//%pragma(csharp) moduleclassmodifiers="internal sealed class";
+//%typemap(csclassmodifiers) SWIGTYPE "internal sealed class";
 
 %apply unsigned char { uint8_t };
 %apply signed char { int8_t };
+
 %apply unsigned short { uint16_t };
 %apply short { int16_t };
+
 %apply unsigned int { uint32_t };
 %apply int { int32_t };
+
 %apply unsigned long long { uint64_t };
 %apply long long { int64_t };
 
@@ -55,11 +78,58 @@
 // %typemap(csin, pre="    $1_name = new $csclassname();") 
 // 	(kuzu_flat_tuple *out_flat_tuple) "$csclassname.getCPtr($csinput)";
 
+
 // --------------
 // Pass strings around letting C# handle marshalling
-%typemap(cstype) (char **out_result) "out string"
-%typemap(imtype) (char **out_result) "out string"
-%typemap(csin) (char **out_result) "out $csinput"
+%typemap(cstype) (char **out_result) "out string";
+%typemap(imtype) (char **out_result) "out string";
+%typemap(csin) (char **out_result) "out $csinput";
+
+// Ignore blob and strings; C# will handle destroying (maybe?)
+%ignore kuzu_destroy_string;
+%ignore kuzu_destroy_blob;
+%typemap(cstype) (uint8_t **out_result) "out byte[]";
+%typemap(imtype) (uint8_t **out_result) "out byte[]";
+%typemap(csin) (uint8_t **out_result) "$csinput";
+
+%typemap(cstype) (kuzu_value **out_value) "kuzu_value";
+%typemap(imtype) (kuzu_value **out_value) "kuzu_value";
+%typemap(csin) (kuzu_value **out_value) "$csinput";
+
+%typemap(cstype) char **out_column_name "out string";
+%typemap(imtype) char **out_column_name "out string";
+%typemap(csin) char **out_column_name "out $csinput";
+
+%typemap(cstype) (char **field_names) "string[]";
+%typemap(imtype) (char **field_names) "string[]";
+%typemap(csin) (char **field_names) "$csinput";
+
+%typemap(cstype) 
+SWIGTYPE **elements, 
+SWIGTYPE **values, 
+SWIGTYPE **field_values,
+SWIGTYPE **keys
+"$1_basetype[]";
+
+%typemap(imtype) 
+SWIGTYPE **elements, 
+SWIGTYPE **values, 
+SWIGTYPE **field_values,
+SWIGTYPE **keys
+"$1_basetype[]"
+
+%typemap(csin) 
+SWIGTYPE **elements, 
+SWIGTYPE **values, 
+SWIGTYPE **field_values,
+SWIGTYPE **keys
+"$csinput"
+
+// Ignore the Arrow array stuff
+%ignore ArrowArray;
+%ignore ArrowSchema;
+%ignore kuzu_query_result_get_arrow_schema;
+%ignore kuzu_query_result_get_next_arrow_chunk;
 
 // --------------------
 // Map the kuzu_value_get_{type} methods to use "out {type}"
@@ -74,6 +144,7 @@
 
 %apply long long *OUTPUT { int64_t *out_result};
 %apply unsigned long long *OUTPUT { uint64_t *out_result};
+%apply unsigned long long *OUTPUT { uint64_t *out_value};
 
 %apply bool *OUTPUT { bool *out_result };
 %apply float *OUTPUT { float *out_result };
@@ -82,6 +153,8 @@
 
 //%apply long long *OUTPUT { int128_t *out_result};
 //%apply unsigned long long *OUTPUT { uint128_t *out_result};
+
+
 
 // // ------------------
 // // Add {class}.Destroy for the following:
@@ -96,14 +169,14 @@
 // kuzu_query_result
 // %{
 // 	public void Destroy() {
-// 		$modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
+//         $modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
 // 	}
 // %}
 
 
 // Replace destructor and dispose to call destroy automatically
 // This way both the SWIG wrapper and kuzu object get disposed by using statements
-%typemap(csdispose) 
+%typemap(csdisposing, methodname="Dispose", methodmodifiers="protected", parameters="bool disposing") 
 kuzu_connection, 
 kuzu_database, 
 kuzu_value, 
@@ -113,14 +186,19 @@ kuzu_data_type,
 kuzu_query_summary,
 kuzu_query_result
 %{
-  ~$csclassname() {
-    Dispose();
-  }
+  {
+    lock(this) {
+      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        $modulePINVOKE.$csclassname_destroy($csclassname.getCPtr(this));
 
-  public void Dispose() {
-    $modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
-    Dispose(true);
-    global::System.GC.SuppressFinalize(this);
+        if (swigCMemOwn) {
+          swigMemOwn = false;
+          $modulePINVOKE.delete_$csclassname(swigCPtr);
+        }
+
+        swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+      }
+    }
   }
 %}
 

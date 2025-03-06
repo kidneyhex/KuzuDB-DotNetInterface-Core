@@ -233,132 +233,6 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ARROW_FLAG_MAP_KEYS_SORTED_get")]
   public static extern int ARROW_FLAG_MAP_KEYS_SORTED_get();
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_format_set")]
-  public static extern void ArrowSchema_format_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_format_get")]
-  public static extern string ArrowSchema_format_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_name_set")]
-  public static extern void ArrowSchema_name_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_name_get")]
-  public static extern string ArrowSchema_name_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_metadata_set")]
-  public static extern void ArrowSchema_metadata_set(global::System.Runtime.InteropServices.HandleRef jarg1, string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_metadata_get")]
-  public static extern string ArrowSchema_metadata_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_flags_set")]
-  public static extern void ArrowSchema_flags_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_flags_get")]
-  public static extern long ArrowSchema_flags_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_n_children_set")]
-  public static extern void ArrowSchema_n_children_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_n_children_get")]
-  public static extern long ArrowSchema_n_children_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_children_set")]
-  public static extern void ArrowSchema_children_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_children_get")]
-  public static extern global::System.IntPtr ArrowSchema_children_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_dictionary_set")]
-  public static extern void ArrowSchema_dictionary_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_dictionary_get")]
-  public static extern global::System.IntPtr ArrowSchema_dictionary_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_release_set")]
-  public static extern void ArrowSchema_release_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_release_get")]
-  public static extern global::System.IntPtr ArrowSchema_release_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_private_data_set")]
-  public static extern void ArrowSchema_private_data_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowSchema_private_data_get")]
-  public static extern global::System.IntPtr ArrowSchema_private_data_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_ArrowSchema")]
-  public static extern global::System.IntPtr new_ArrowSchema();
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_ArrowSchema")]
-  public static extern void delete_ArrowSchema(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_length_set")]
-  public static extern void ArrowArray_length_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_length_get")]
-  public static extern long ArrowArray_length_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_null_count_set")]
-  public static extern void ArrowArray_null_count_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_null_count_get")]
-  public static extern long ArrowArray_null_count_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_offset_set")]
-  public static extern void ArrowArray_offset_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_offset_get")]
-  public static extern long ArrowArray_offset_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_n_buffers_set")]
-  public static extern void ArrowArray_n_buffers_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_n_buffers_get")]
-  public static extern long ArrowArray_n_buffers_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_n_children_set")]
-  public static extern void ArrowArray_n_children_set(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_n_children_get")]
-  public static extern long ArrowArray_n_children_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_buffers_set")]
-  public static extern void ArrowArray_buffers_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_buffers_get")]
-  public static extern global::System.IntPtr ArrowArray_buffers_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_children_set")]
-  public static extern void ArrowArray_children_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_children_get")]
-  public static extern global::System.IntPtr ArrowArray_children_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_dictionary_set")]
-  public static extern void ArrowArray_dictionary_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_dictionary_get")]
-  public static extern global::System.IntPtr ArrowArray_dictionary_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_release_set")]
-  public static extern void ArrowArray_release_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_release_get")]
-  public static extern global::System.IntPtr ArrowArray_release_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_private_data_set")]
-  public static extern void ArrowArray_private_data_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ArrowArray_private_data_get")]
-  public static extern global::System.IntPtr ArrowArray_private_data_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_ArrowArray")]
-  public static extern global::System.IntPtr new_ArrowArray();
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_ArrowArray")]
-  public static extern void delete_ArrowArray(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_system_config_buffer_pool_size_set")]
   public static extern void kuzu_system_config_buffer_pool_size_set(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2);
 
@@ -777,7 +651,7 @@ class kuzunetPINVOKE {
   public static extern ulong kuzu_query_result_get_num_columns(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result_get_column_name")]
-  public static extern int kuzu_query_result_get_column_name(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  public static extern int kuzu_query_result_get_column_name(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, out string jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result_get_column_data_type")]
   public static extern int kuzu_query_result_get_column_data_type(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
@@ -805,12 +679,6 @@ class kuzunetPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result_reset_iterator")]
   public static extern void kuzu_query_result_reset_iterator(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result_get_arrow_schema")]
-  public static extern int kuzu_query_result_get_arrow_schema(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result_get_next_arrow_chunk")]
-  public static extern int kuzu_query_result_get_next_arrow_chunk(global::System.Runtime.InteropServices.HandleRef jarg1, long jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple_destroy")]
   public static extern void kuzu_flat_tuple_destroy(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -918,13 +786,13 @@ class kuzunetPINVOKE {
   public static extern global::System.IntPtr kuzu_value_create_string(string jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_list")]
-  public static extern int kuzu_value_create_list(ulong jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3);
+  public static extern int kuzu_value_create_list(ulong jarg1, kuzu_value[] jarg2, kuzu_value jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_struct")]
-  public static extern int kuzu_value_create_struct(ulong jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
+  public static extern int kuzu_value_create_struct(ulong jarg1, string[] jarg2, kuzu_value[] jarg3, kuzu_value jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_map")]
-  public static extern int kuzu_value_create_map(ulong jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, global::System.Runtime.InteropServices.HandleRef jarg3, global::System.Runtime.InteropServices.HandleRef jarg4);
+  public static extern int kuzu_value_create_map(ulong jarg1, kuzu_value[] jarg2, kuzu_value[] jarg3, kuzu_value jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_clone")]
   public static extern global::System.IntPtr kuzu_value_clone(global::System.Runtime.InteropServices.HandleRef jarg1);
@@ -1041,7 +909,7 @@ class kuzunetPINVOKE {
   public static extern int kuzu_value_get_string(global::System.Runtime.InteropServices.HandleRef jarg1, out string jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_get_blob")]
-  public static extern int kuzu_value_get_blob(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  public static extern int kuzu_value_get_blob(global::System.Runtime.InteropServices.HandleRef jarg1, out byte[] jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_get_uuid")]
   public static extern int kuzu_value_get_uuid(global::System.Runtime.InteropServices.HandleRef jarg1, out string jarg2);
@@ -1056,7 +924,7 @@ class kuzunetPINVOKE {
   public static extern int kuzu_node_val_get_label_val(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_node_val_get_property_size")]
-  public static extern int kuzu_node_val_get_property_size(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  public static extern int kuzu_node_val_get_property_size(global::System.Runtime.InteropServices.HandleRef jarg1, out ulong jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_node_val_get_property_name_at")]
   public static extern int kuzu_node_val_get_property_name_at(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, out string jarg3);
@@ -1077,7 +945,7 @@ class kuzunetPINVOKE {
   public static extern int kuzu_rel_val_get_label_val(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_rel_val_get_property_size")]
-  public static extern int kuzu_rel_val_get_property_size(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+  public static extern int kuzu_rel_val_get_property_size(global::System.Runtime.InteropServices.HandleRef jarg1, out ulong jarg2);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_rel_val_get_property_name_at")]
   public static extern int kuzu_rel_val_get_property_name_at(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2, out string jarg3);
@@ -1087,12 +955,6 @@ class kuzunetPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_rel_val_to_string")]
   public static extern int kuzu_rel_val_to_string(global::System.Runtime.InteropServices.HandleRef jarg1, out string jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_destroy_string")]
-  public static extern void kuzu_destroy_string(string jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_destroy_blob")]
-  public static extern void kuzu_destroy_blob(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_summary_destroy")]
   public static extern void kuzu_query_summary_destroy(global::System.Runtime.InteropServices.HandleRef jarg1);

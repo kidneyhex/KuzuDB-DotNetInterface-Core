@@ -36,26 +36,30 @@ public class kuzu_database : global::System.IDisposable {
   }
 
   ~kuzu_database() {
-    Dispose();
+    Dispose(false);
   }
 
   public void Dispose() {
-    kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
     Dispose(true);
     global::System.GC.SuppressFinalize(this);
   }
 
-  protected virtual void Dispose(bool disposing) {
+  protected virtual void Dispose(bool disposing) 
+  {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
+
         if (swigCMemOwn) {
-          swigCMemOwn = false;
+          swigMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_database(swigCPtr);
         }
+
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
+
 
   public SWIGTYPE_p_void _database {
     set {
