@@ -51,7 +51,7 @@ public class kuzu_flat_tuple : global::System.IDisposable {
         kuzunetPINVOKE.kuzu_flat_tuple_destroy(kuzu_flat_tuple.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_flat_tuple(swigCPtr);
         }
 
@@ -60,27 +60,6 @@ public class kuzu_flat_tuple : global::System.IDisposable {
     }
   }
 
-
-  public SWIGTYPE_p_void _flat_tuple {
-    set {
-      kuzunetPINVOKE.kuzu_flat_tuple__flat_tuple_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_flat_tuple__flat_tuple_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public bool _is_owned_by_cpp {
-    set {
-      kuzunetPINVOKE.kuzu_flat_tuple__is_owned_by_cpp_set(swigCPtr, value);
-    } 
-    get {
-      bool ret = kuzunetPINVOKE.kuzu_flat_tuple__is_owned_by_cpp_get(swigCPtr);
-      return ret;
-    } 
-  }
 
   public kuzu_flat_tuple() : this(kuzunetPINVOKE.new_kuzu_flat_tuple(), true) {
   }

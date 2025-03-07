@@ -51,7 +51,7 @@ public class kuzu_value : global::System.IDisposable {
         kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_value(swigCPtr);
         }
 
@@ -60,27 +60,6 @@ public class kuzu_value : global::System.IDisposable {
     }
   }
 
-
-  public SWIGTYPE_p_void _value {
-    set {
-      kuzunetPINVOKE.kuzu_value__value_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value__value_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public bool _is_owned_by_cpp {
-    set {
-      kuzunetPINVOKE.kuzu_value__is_owned_by_cpp_set(swigCPtr, value);
-    } 
-    get {
-      bool ret = kuzunetPINVOKE.kuzu_value__is_owned_by_cpp_get(swigCPtr);
-      return ret;
-    } 
-  }
 
   public kuzu_value() : this(kuzunetPINVOKE.new_kuzu_value(), true) {
   }

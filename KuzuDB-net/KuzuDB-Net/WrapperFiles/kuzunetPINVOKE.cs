@@ -224,15 +224,6 @@ class kuzunetPINVOKE {
   }
 
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ARROW_FLAG_DICTIONARY_ORDERED_get")]
-  public static extern int ARROW_FLAG_DICTIONARY_ORDERED_get();
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ARROW_FLAG_NULLABLE_get")]
-  public static extern int ARROW_FLAG_NULLABLE_get();
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_ARROW_FLAG_MAP_KEYS_SORTED_get")]
-  public static extern int ARROW_FLAG_MAP_KEYS_SORTED_get();
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_system_config_buffer_pool_size_set")]
   public static extern void kuzu_system_config_buffer_pool_size_set(global::System.Runtime.InteropServices.HandleRef jarg1, ulong jarg2);
 
@@ -281,23 +272,11 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_system_config")]
   public static extern void delete_kuzu_system_config(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_database__database_set")]
-  public static extern void kuzu_database__database_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_database__database_get")]
-  public static extern global::System.IntPtr kuzu_database__database_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_database")]
   public static extern global::System.IntPtr new_kuzu_database();
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_database")]
   public static extern void delete_kuzu_database(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_connection__connection_set")]
-  public static extern void kuzu_connection__connection_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_connection__connection_get")]
-  public static extern global::System.IntPtr kuzu_connection__connection_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_connection")]
   public static extern global::System.IntPtr new_kuzu_connection();
@@ -305,35 +284,11 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_connection")]
   public static extern void delete_kuzu_connection(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_prepared_statement__prepared_statement_set")]
-  public static extern void kuzu_prepared_statement__prepared_statement_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_prepared_statement__prepared_statement_get")]
-  public static extern global::System.IntPtr kuzu_prepared_statement__prepared_statement_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_prepared_statement__bound_values_set")]
-  public static extern void kuzu_prepared_statement__bound_values_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_prepared_statement__bound_values_get")]
-  public static extern global::System.IntPtr kuzu_prepared_statement__bound_values_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_prepared_statement")]
   public static extern global::System.IntPtr new_kuzu_prepared_statement();
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_prepared_statement")]
   public static extern void delete_kuzu_prepared_statement(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__query_result_set")]
-  public static extern void kuzu_query_result__query_result_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__query_result_get")]
-  public static extern global::System.IntPtr kuzu_query_result__query_result_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__is_owned_by_cpp_set")]
-  public static extern void kuzu_query_result__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__is_owned_by_cpp_get")]
-  public static extern bool kuzu_query_result__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_query_result")]
   public static extern global::System.IntPtr new_kuzu_query_result();
@@ -341,47 +296,17 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_query_result")]
   public static extern void delete_kuzu_query_result(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__flat_tuple_set")]
-  public static extern void kuzu_flat_tuple__flat_tuple_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__flat_tuple_get")]
-  public static extern global::System.IntPtr kuzu_flat_tuple__flat_tuple_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__is_owned_by_cpp_set")]
-  public static extern void kuzu_flat_tuple__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__is_owned_by_cpp_get")]
-  public static extern bool kuzu_flat_tuple__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_flat_tuple")]
   public static extern global::System.IntPtr new_kuzu_flat_tuple();
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_flat_tuple")]
   public static extern void delete_kuzu_flat_tuple(global::System.Runtime.InteropServices.HandleRef jarg1);
 
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_logical_type__data_type_set")]
-  public static extern void kuzu_logical_type__data_type_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_logical_type__data_type_get")]
-  public static extern global::System.IntPtr kuzu_logical_type__data_type_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_logical_type")]
   public static extern global::System.IntPtr new_kuzu_logical_type();
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_logical_type")]
   public static extern void delete_kuzu_logical_type(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__value_set")]
-  public static extern void kuzu_value__value_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__value_get")]
-  public static extern global::System.IntPtr kuzu_value__value_get(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__is_owned_by_cpp_set")]
-  public static extern void kuzu_value__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__is_owned_by_cpp_get")]
-  public static extern bool kuzu_value__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_value")]
   public static extern global::System.IntPtr new_kuzu_value();
@@ -502,12 +427,6 @@ class kuzunetPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_interval_t")]
   public static extern void delete_kuzu_interval_t(global::System.Runtime.InteropServices.HandleRef jarg1);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_summary__query_summary_set")]
-  public static extern void kuzu_query_summary__query_summary_set(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
-
-  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_summary__query_summary_get")]
-  public static extern global::System.IntPtr kuzu_query_summary__query_summary_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_query_summary")]
   public static extern global::System.IntPtr new_kuzu_query_summary();
@@ -1018,4 +937,64 @@ class kuzunetPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_get_storage_version")]
   public static extern ulong kuzu_get_storage_version();
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_sec_set")]
+  public static extern void tm_tm_sec_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_sec_get")]
+  public static extern int tm_tm_sec_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_min_set")]
+  public static extern void tm_tm_min_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_min_get")]
+  public static extern int tm_tm_min_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_hour_set")]
+  public static extern void tm_tm_hour_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_hour_get")]
+  public static extern int tm_tm_hour_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_mday_set")]
+  public static extern void tm_tm_mday_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_mday_get")]
+  public static extern int tm_tm_mday_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_mon_set")]
+  public static extern void tm_tm_mon_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_mon_get")]
+  public static extern int tm_tm_mon_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_year_set")]
+  public static extern void tm_tm_year_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_year_get")]
+  public static extern int tm_tm_year_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_wday_set")]
+  public static extern void tm_tm_wday_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_wday_get")]
+  public static extern int tm_tm_wday_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_yday_set")]
+  public static extern void tm_tm_yday_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_yday_get")]
+  public static extern int tm_tm_yday_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_isdst_set")]
+  public static extern void tm_tm_isdst_set(global::System.Runtime.InteropServices.HandleRef jarg1, int jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_tm_tm_isdst_get")]
+  public static extern int tm_tm_isdst_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_tm")]
+  public static extern global::System.IntPtr new_tm();
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_tm")]
+  public static extern void delete_tm(global::System.Runtime.InteropServices.HandleRef jarg1);
 }

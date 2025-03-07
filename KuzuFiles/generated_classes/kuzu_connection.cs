@@ -51,7 +51,7 @@ public class kuzu_connection : global::System.IDisposable {
         kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_connection(swigCPtr);
         }
 
@@ -60,17 +60,6 @@ public class kuzu_connection : global::System.IDisposable {
     }
   }
 
-
-  public SWIGTYPE_p_void _connection {
-    set {
-      kuzunetPINVOKE.kuzu_connection__connection_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_connection__connection_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
 
   public kuzu_connection() : this(kuzunetPINVOKE.new_kuzu_connection(), true) {
   }

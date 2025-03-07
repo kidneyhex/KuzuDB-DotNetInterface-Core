@@ -61,8 +61,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WrapperFiles\ArrowArray.cs" />
-    <Compile Include="WrapperFiles\ArrowSchema.cs" />
     <Compile Include="WrapperFiles\kuzunet.cs" />
     <Compile Include="WrapperFiles\kuzunetPINVOKE.cs" />
     <Compile Include="WrapperFiles\kuzu_connection.cs" />
@@ -85,18 +83,7 @@
     <Compile Include="WrapperFiles\kuzu_timestamp_t.cs" />
     <Compile Include="WrapperFiles\kuzu_timestamp_tz_t.cs" />
     <Compile Include="WrapperFiles\kuzu_value.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_f_p_ArrowArray__void.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_f_p_ArrowSchema__void.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_ArrowArray.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_ArrowSchema.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_char.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_kuzu_value.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_uint8_t.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_p_void.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_tm.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_uint64_t.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_uint8_t.cs" />
-    <Compile Include="WrapperFiles\SWIGTYPE_p_void.cs" />
+    <Compile Include="WrapperFiles\tm.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="kuzunet.dll">

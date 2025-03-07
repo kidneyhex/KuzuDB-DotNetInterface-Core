@@ -56,17 +56,6 @@ public class kuzu_logical_type : global::System.IDisposable {
     }
   }
 
-  public SWIGTYPE_p_void _data_type {
-    set {
-      kuzunetPINVOKE.kuzu_logical_type__data_type_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_logical_type__data_type_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
-
   public kuzu_logical_type() : this(kuzunetPINVOKE.new_kuzu_logical_type(), true) {
   }
 

@@ -51,7 +51,7 @@ public class kuzu_query_result : global::System.IDisposable {
         kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_query_result(swigCPtr);
         }
 
@@ -60,27 +60,6 @@ public class kuzu_query_result : global::System.IDisposable {
     }
   }
 
-
-  public SWIGTYPE_p_void _query_result {
-    set {
-      kuzunetPINVOKE.kuzu_query_result__query_result_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_query_result__query_result_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public bool _is_owned_by_cpp {
-    set {
-      kuzunetPINVOKE.kuzu_query_result__is_owned_by_cpp_set(swigCPtr, value);
-    } 
-    get {
-      bool ret = kuzunetPINVOKE.kuzu_query_result__is_owned_by_cpp_get(swigCPtr);
-      return ret;
-    } 
-  }
 
   public kuzu_query_result() : this(kuzunetPINVOKE.new_kuzu_query_result(), true) {
   }

@@ -357,39 +357,24 @@ template <typename T> T SwigValueInit() {
 #include "kuzu.h"
 
 
+#ifdef SWIG
+typedef struct {
+    int tm_sec;   // seconds after the minute - [0, 60] including leap second
+    int tm_min;   // minutes after the hour - [0, 59]
+    int tm_hour;  // hours since midnight - [0, 23]
+    int tm_mday;  // day of the month - [1, 31]
+    int tm_mon;   // months since January - [0, 11]
+    int tm_year;  // years since 1900
+    int tm_wday;  // days since Sunday - [0, 6]
+    int tm_yday;  // days since January 1 - [0, 365]
+    int tm_isdst; // daylight savings time flag
+} tm;
+#endif
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_DICTIONARY_ORDERED_get() {
-  int jresult ;
-  int result;
-  
-  result = (int)(1);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_NULLABLE_get() {
-  int jresult ;
-  int result;
-  
-  result = (int)(2);
-  jresult = result; 
-  return jresult;
-}
-
-
-SWIGEXPORT int SWIGSTDCALL CSharp_ARROW_FLAG_MAP_KEYS_SORTED_get() {
-  int jresult ;
-  int result;
-  
-  result = (int)(4);
-  jresult = result; 
-  return jresult;
-}
-
 
 SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_system_config_buffer_pool_size_set(void * jarg1, unsigned long long jarg2) {
   kuzu_system_config *arg1 = (kuzu_system_config *) 0 ;
@@ -563,28 +548,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_system_config(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_database__database_set(void * jarg1, void * jarg2) {
-  kuzu_database *arg1 = (kuzu_database *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_database *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_database = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_database__database_get(void * jarg1) {
-  void * jresult ;
-  kuzu_database *arg1 = (kuzu_database *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_database *)jarg1; 
-  result = (void *) ((arg1)->_database);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_database() {
   void * jresult ;
   kuzu_database *result = 0 ;
@@ -600,28 +563,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_database(void * jarg1) {
   
   arg1 = (kuzu_database *)jarg1; 
   delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_connection__connection_set(void * jarg1, void * jarg2) {
-  kuzu_connection *arg1 = (kuzu_connection *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_connection *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_connection = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_connection__connection_get(void * jarg1) {
-  void * jresult ;
-  kuzu_connection *arg1 = (kuzu_connection *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_connection *)jarg1; 
-  result = (void *) ((arg1)->_connection);
-  jresult = (void *)result; 
-  return jresult;
 }
 
 
@@ -643,50 +584,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_connection(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_prepared_statement__prepared_statement_set(void * jarg1, void * jarg2) {
-  kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_prepared_statement *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_prepared_statement = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_prepared_statement__prepared_statement_get(void * jarg1) {
-  void * jresult ;
-  kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_prepared_statement *)jarg1; 
-  result = (void *) ((arg1)->_prepared_statement);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_prepared_statement__bound_values_set(void * jarg1, void * jarg2) {
-  kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_prepared_statement *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_bound_values = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_prepared_statement__bound_values_get(void * jarg1) {
-  void * jresult ;
-  kuzu_prepared_statement *arg1 = (kuzu_prepared_statement *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_prepared_statement *)jarg1; 
-  result = (void *) ((arg1)->_bound_values);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_prepared_statement() {
   void * jresult ;
   kuzu_prepared_statement *result = 0 ;
@@ -702,50 +599,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_prepared_statement(void * jarg1) 
   
   arg1 = (kuzu_prepared_statement *)jarg1; 
   delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result__query_result_set(void * jarg1, void * jarg2) {
-  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_query_result *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_query_result = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_query_result__query_result_get(void * jarg1) {
-  void * jresult ;
-  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_query_result *)jarg1; 
-  result = (void *) ((arg1)->_query_result);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
-  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
-  bool arg2 ;
-  
-  arg1 = (kuzu_query_result *)jarg1; 
-  arg2 = jarg2 ? true : false; 
-  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
-}
-
-
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_get(void * jarg1) {
-  unsigned int jresult ;
-  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
-  bool result;
-  
-  arg1 = (kuzu_query_result *)jarg1; 
-  result = (bool) ((arg1)->_is_owned_by_cpp);
-  jresult = result; 
-  return jresult;
 }
 
 
@@ -767,50 +620,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_query_result(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple__flat_tuple_set(void * jarg1, void * jarg2) {
-  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_flat_tuple *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_flat_tuple = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_flat_tuple__flat_tuple_get(void * jarg1) {
-  void * jresult ;
-  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_flat_tuple *)jarg1; 
-  result = (void *) ((arg1)->_flat_tuple);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
-  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
-  bool arg2 ;
-  
-  arg1 = (kuzu_flat_tuple *)jarg1; 
-  arg2 = jarg2 ? true : false; 
-  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
-}
-
-
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_get(void * jarg1) {
-  unsigned int jresult ;
-  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
-  bool result;
-  
-  arg1 = (kuzu_flat_tuple *)jarg1; 
-  result = (bool) ((arg1)->_is_owned_by_cpp);
-  jresult = result; 
-  return jresult;
-}
-
-
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_flat_tuple() {
   void * jresult ;
   kuzu_flat_tuple *result = 0 ;
@@ -829,28 +638,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_flat_tuple(void * jarg1) {
 }
 
 
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_logical_type__data_type_set(void * jarg1, void * jarg2) {
-  kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_logical_type *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_data_type = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_logical_type__data_type_get(void * jarg1) {
-  void * jresult ;
-  kuzu_logical_type *arg1 = (kuzu_logical_type *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_logical_type *)jarg1; 
-  result = (void *) ((arg1)->_data_type);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_logical_type() {
   void * jresult ;
   kuzu_logical_type *result = 0 ;
@@ -866,50 +653,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_logical_type(void * jarg1) {
   
   arg1 = (kuzu_logical_type *)jarg1; 
   delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value__value_set(void * jarg1, void * jarg2) {
-  kuzu_value *arg1 = (kuzu_value *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_value *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_value = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_value__value_get(void * jarg1) {
-  void * jresult ;
-  kuzu_value *arg1 = (kuzu_value *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_value *)jarg1; 
-  result = (void *) ((arg1)->_value);
-  jresult = (void *)result; 
-  return jresult;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
-  kuzu_value *arg1 = (kuzu_value *) 0 ;
-  bool arg2 ;
-  
-  arg1 = (kuzu_value *)jarg1; 
-  arg2 = jarg2 ? true : false; 
-  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
-}
-
-
-SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_get(void * jarg1) {
-  unsigned int jresult ;
-  kuzu_value *arg1 = (kuzu_value *) 0 ;
-  bool result;
-  
-  arg1 = (kuzu_value *)jarg1; 
-  result = (bool) ((arg1)->_is_owned_by_cpp);
-  jresult = result; 
-  return jresult;
 }
 
 
@@ -1314,28 +1057,6 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_interval_t(void * jarg1) {
   
   arg1 = (kuzu_interval_t *)jarg1; 
   delete arg1;
-}
-
-
-SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_summary__query_summary_set(void * jarg1, void * jarg2) {
-  kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
-  void *arg2 = (void *) 0 ;
-  
-  arg1 = (kuzu_query_summary *)jarg1; 
-  arg2 = (void *)jarg2; 
-  if (arg1) (arg1)->_query_summary = arg2;
-}
-
-
-SWIGEXPORT void * SWIGSTDCALL CSharp_kuzu_query_summary__query_summary_get(void * jarg1) {
-  void * jresult ;
-  kuzu_query_summary *arg1 = (kuzu_query_summary *) 0 ;
-  void *result = 0 ;
-  
-  arg1 = (kuzu_query_summary *)jarg1; 
-  result = (void *) ((arg1)->_query_summary);
-  jresult = (void *)result; 
-  return jresult;
 }
 
 
@@ -3781,6 +3502,222 @@ SWIGEXPORT unsigned long long SWIGSTDCALL CSharp_kuzu_get_storage_version() {
   result = kuzu_get_storage_version();
   jresult = result; 
   return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_sec_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_sec = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_sec_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_sec);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_min_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_min = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_min_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_min);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_hour_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_hour = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_hour_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_hour);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_mday_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_mday = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_mday_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_mday);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_mon_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_mon = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_mon_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_mon);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_year_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_year = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_year_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_year);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_wday_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_wday = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_wday_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_wday);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_yday_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_yday = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_yday_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_yday);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_tm_tm_isdst_set(void * jarg1, int jarg2) {
+  tm *arg1 = (tm *) 0 ;
+  int arg2 ;
+  
+  arg1 = (tm *)jarg1; 
+  arg2 = (int)jarg2; 
+  if (arg1) (arg1)->tm_isdst = arg2;
+}
+
+
+SWIGEXPORT int SWIGSTDCALL CSharp_tm_tm_isdst_get(void * jarg1) {
+  int jresult ;
+  tm *arg1 = (tm *) 0 ;
+  int result;
+  
+  arg1 = (tm *)jarg1; 
+  result = (int) ((arg1)->tm_isdst);
+  jresult = result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void * SWIGSTDCALL CSharp_new_tm() {
+  void * jresult ;
+  tm *result = 0 ;
+  
+  result = (tm *)new tm();
+  jresult = (void *)result; 
+  return jresult;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_delete_tm(void * jarg1) {
+  tm *arg1 = (tm *) 0 ;
+  
+  arg1 = (tm *)jarg1; 
+  delete arg1;
 }
 
 

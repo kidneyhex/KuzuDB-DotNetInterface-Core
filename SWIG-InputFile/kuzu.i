@@ -8,21 +8,7 @@
 %}
 
 
-// // Not sure how to make SWIG give tm a class; so doing it manually...
-// %inline %{
-// extern struct tm
-// {
-//     int tm_sec;   // seconds after the minute - [0, 60] including leap second
-//     int tm_min;   // minutes after the hour - [0, 59]
-//     int tm_hour;  // hours since midnight - [0, 23]
-//     int tm_mday;  // day of the month - [1, 31]
-//     int tm_mon;   // months since January - [0, 11]
-//     int tm_year;  // years since 1900
-//     int tm_wday;  // days since Sunday - [0, 6]
-//     int tm_yday;  // days since January 1 - [0, 365]
-//     int tm_isdst; // daylight savings time flag
-// };
-// %}
+
 
 %include "typemaps.i"
 %include "arrays_csharp.i"
@@ -90,7 +76,7 @@
 %ignore kuzu_destroy_blob;
 %typemap(cstype) (uint8_t **out_result) "out byte[]";
 %typemap(imtype) (uint8_t **out_result) "out byte[]";
-%typemap(csin) (uint8_t **out_result) "$csinput";
+%typemap(csin) (uint8_t **out_result) "out $csinput";
 
 %typemap(cstype) (kuzu_value **out_value) "kuzu_value";
 %typemap(imtype) (kuzu_value **out_value) "kuzu_value";
@@ -128,6 +114,9 @@ SWIGTYPE **keys
 // Ignore the Arrow array stuff
 %ignore ArrowArray;
 %ignore ArrowSchema;
+%ignore ARROW_FLAG_DICTIONARY_ORDERED;
+%ignore ARROW_FLAG_MAP_KEYS_SORTED;
+%ignore ARROW_FLAG_NULLABLE;
 %ignore kuzu_query_result_get_arrow_schema;
 %ignore kuzu_query_result_get_next_arrow_chunk;
 
@@ -151,10 +140,18 @@ SWIGTYPE **keys
 %apply double *OUTPUT { double *out_result };
 
 
-//%apply long long *OUTPUT { int128_t *out_result};
-//%apply unsigned long long *OUTPUT { uint128_t *out_result};
-
-
+// ------ 
+// Ignore private members of structs
+%ignore _connection;
+%ignore _database;
+%ignore _flat_tuple;
+%ignore _data_type;
+%ignore _value;
+%ignore _prepared_statement;
+%ignore _query_result;
+%ignore _query_summary;
+%ignore _bound_values;
+%ignore _is_owned_by_cpp;
 
 // // ------------------
 // // Add {class}.Destroy for the following:
@@ -192,7 +189,7 @@ kuzu_query_result
         $modulePINVOKE.$csclassname_destroy($csclassname.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           $modulePINVOKE.delete_$csclassname(swigCPtr);
         }
 
@@ -240,3 +237,20 @@ kuzu_query_result
 %include <windows.i>
 %include "kuzu.h"
 
+
+// Not sure how to make SWIG give tm a class; so doing it manually...
+%inline %{
+#ifdef SWIG
+typedef struct {
+    int tm_sec;   // seconds after the minute - [0, 60] including leap second
+    int tm_min;   // minutes after the hour - [0, 59]
+    int tm_hour;  // hours since midnight - [0, 23]
+    int tm_mday;  // day of the month - [1, 31]
+    int tm_mon;   // months since January - [0, 11]
+    int tm_year;  // years since 1900
+    int tm_wday;  // days since Sunday - [0, 6]
+    int tm_yday;  // days since January 1 - [0, 365]
+    int tm_isdst; // daylight savings time flag
+} tm;
+#endif
+%}

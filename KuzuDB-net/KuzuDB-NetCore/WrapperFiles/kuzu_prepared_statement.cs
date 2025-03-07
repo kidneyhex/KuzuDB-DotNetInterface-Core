@@ -51,7 +51,7 @@ public class kuzu_prepared_statement : global::System.IDisposable {
         kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
 
         if (swigCMemOwn) {
-          swigMemOwn = false;
+          swigCMemOwn = false;
           kuzunetPINVOKE.delete_kuzu_prepared_statement(swigCPtr);
         }
 
@@ -60,28 +60,6 @@ public class kuzu_prepared_statement : global::System.IDisposable {
     }
   }
 
-
-  public SWIGTYPE_p_void _prepared_statement {
-    set {
-      kuzunetPINVOKE.kuzu_prepared_statement__prepared_statement_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_prepared_statement__prepared_statement_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
-
-  public SWIGTYPE_p_void _bound_values {
-    set {
-      kuzunetPINVOKE.kuzu_prepared_statement__bound_values_set(swigCPtr, SWIGTYPE_p_void.getCPtr(value));
-    } 
-    get {
-      global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_prepared_statement__bound_values_get(swigCPtr);
-      SWIGTYPE_p_void ret = (cPtr == global::System.IntPtr.Zero) ? null : new SWIGTYPE_p_void(cPtr, false);
-      return ret;
-    } 
-  }
 
   public kuzu_prepared_statement() : this(kuzunetPINVOKE.new_kuzu_prepared_statement(), true) {
   }

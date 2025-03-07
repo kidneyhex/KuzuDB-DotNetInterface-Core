@@ -665,7 +665,7 @@ public class kuzunet {
   }
 
   public static kuzu_state kuzu_value_get_blob(kuzu_value value, out byte[] out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_blob(kuzu_value.getCPtr(value), out_result);
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_get_blob(kuzu_value.getCPtr(value), out out_result);
     return ret;
   }
 
@@ -758,62 +758,62 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_ns_to_tm(kuzu_timestamp_ns_t timestamp, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ns_to_tm(kuzu_timestamp_ns_t.getCPtr(timestamp), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_ns_to_tm(kuzu_timestamp_ns_t timestamp, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ns_to_tm(kuzu_timestamp_ns_t.getCPtr(timestamp), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_ms_to_tm(kuzu_timestamp_ms_t timestamp, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ms_to_tm(kuzu_timestamp_ms_t.getCPtr(timestamp), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_ms_to_tm(kuzu_timestamp_ms_t timestamp, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ms_to_tm(kuzu_timestamp_ms_t.getCPtr(timestamp), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_sec_to_tm(kuzu_timestamp_sec_t timestamp, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_sec_to_tm(kuzu_timestamp_sec_t.getCPtr(timestamp), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_sec_to_tm(kuzu_timestamp_sec_t timestamp, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_sec_to_tm(kuzu_timestamp_sec_t.getCPtr(timestamp), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_tz_to_tm(kuzu_timestamp_tz_t timestamp, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_tz_to_tm(kuzu_timestamp_tz_t.getCPtr(timestamp), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_tz_to_tm(kuzu_timestamp_tz_t timestamp, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_tz_to_tm(kuzu_timestamp_tz_t.getCPtr(timestamp), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_to_tm(kuzu_timestamp_t timestamp, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_to_tm(kuzu_timestamp_t.getCPtr(timestamp), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_to_tm(kuzu_timestamp_t timestamp, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_to_tm(kuzu_timestamp_t.getCPtr(timestamp), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_ns_from_tm(SWIGTYPE_p_tm tm, kuzu_timestamp_ns_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ns_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_timestamp_ns_t.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_ns_from_tm(tm tm, kuzu_timestamp_ns_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ns_from_tm(tm.getCPtr(tm), kuzu_timestamp_ns_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_ms_from_tm(SWIGTYPE_p_tm tm, kuzu_timestamp_ms_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ms_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_timestamp_ms_t.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_ms_from_tm(tm tm, kuzu_timestamp_ms_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_ms_from_tm(tm.getCPtr(tm), kuzu_timestamp_ms_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_sec_from_tm(SWIGTYPE_p_tm tm, kuzu_timestamp_sec_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_sec_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_timestamp_sec_t.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_sec_from_tm(tm tm, kuzu_timestamp_sec_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_sec_from_tm(tm.getCPtr(tm), kuzu_timestamp_sec_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_tz_from_tm(SWIGTYPE_p_tm tm, kuzu_timestamp_tz_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_tz_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_timestamp_tz_t.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_tz_from_tm(tm tm, kuzu_timestamp_tz_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_tz_from_tm(tm.getCPtr(tm), kuzu_timestamp_tz_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_timestamp_from_tm(SWIGTYPE_p_tm tm, kuzu_timestamp_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_timestamp_t.getCPtr(out_result));
+  public static kuzu_state kuzu_timestamp_from_tm(tm tm, kuzu_timestamp_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_timestamp_from_tm(tm.getCPtr(tm), kuzu_timestamp_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -829,14 +829,14 @@ public class kuzunet {
     return ret;
   }
 
-  public static kuzu_state kuzu_date_to_tm(kuzu_date_t date, SWIGTYPE_p_tm out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_date_to_tm(kuzu_date_t.getCPtr(date), SWIGTYPE_p_tm.getCPtr(out_result));
+  public static kuzu_state kuzu_date_to_tm(kuzu_date_t date, tm out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_date_to_tm(kuzu_date_t.getCPtr(date), tm.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
-  public static kuzu_state kuzu_date_from_tm(SWIGTYPE_p_tm tm, kuzu_date_t out_result) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_date_from_tm(SWIGTYPE_p_tm.getCPtr(tm), kuzu_date_t.getCPtr(out_result));
+  public static kuzu_state kuzu_date_from_tm(tm tm, kuzu_date_t out_result) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_date_from_tm(tm.getCPtr(tm), kuzu_date_t.getCPtr(out_result));
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
@@ -860,7 +860,4 @@ public class kuzunet {
     return ret;
   }
 
-  public static readonly int ARROW_FLAG_DICTIONARY_ORDERED = kuzunetPINVOKE.ARROW_FLAG_DICTIONARY_ORDERED_get();
-  public static readonly int ARROW_FLAG_NULLABLE = kuzunetPINVOKE.ARROW_FLAG_NULLABLE_get();
-  public static readonly int ARROW_FLAG_MAP_KEYS_SORTED = kuzunetPINVOKE.ARROW_FLAG_MAP_KEYS_SORTED_get();
 }
