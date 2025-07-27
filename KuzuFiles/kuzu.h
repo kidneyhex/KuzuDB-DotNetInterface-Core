@@ -132,6 +132,12 @@ typedef struct {
     // The threshold of the WAL file size in bytes. When the size of the
     // WAL file exceeds this threshold, the database will checkpoint if auto_checkpoint is true.
     uint64_t checkpoint_threshold;
+
+#if defined(__APPLE__)
+    // The thread quality of service (QoS) for the worker threads.
+    // This works for Swift bindings on Apple platforms only.
+    uint32_t thread_qos;
+#endif
 } kuzu_system_config;
 
 /**
@@ -428,8 +434,11 @@ KUZU_C_API void kuzu_prepared_statement_destroy(kuzu_prepared_statement* prepare
  */
 KUZU_C_API bool kuzu_prepared_statement_is_success(kuzu_prepared_statement* prepared_statement);
 /**
+ * @brief Returns the error message if the prepared statement is not prepared successfully.
+ * The caller is responsible for freeing the returned string with `kuzu_destroy_string`.
  * @param prepared_statement The prepared statement instance.
- * @return the error message if the statement is not prepared successfully.
+ * @return the error message if the statement is not prepared successfully or null
+ * if the statement is prepared successfully.
  */
 KUZU_C_API char* kuzu_prepared_statement_get_error_message(
     kuzu_prepared_statement* prepared_statement);
@@ -629,8 +638,9 @@ KUZU_C_API void kuzu_query_result_destroy(kuzu_query_result* query_result);
 KUZU_C_API bool kuzu_query_result_is_success(kuzu_query_result* query_result);
 /**
  * @brief Returns the error message if the query is failed.
+ * The caller is responsible for freeing the returned string with `kuzu_destroy_string`.
  * @param query_result The query result instance to check and return error message.
- * @return The error message if the query has failed.
+ * @return The error message if the query has failed, or null if the query is successful.
  */
 KUZU_C_API char* kuzu_query_result_get_error_message(kuzu_query_result* query_result);
 /**
@@ -1357,6 +1367,13 @@ KUZU_C_API kuzu_state kuzu_node_val_get_property_value_at(kuzu_value* node_val, 
  */
 KUZU_C_API kuzu_state kuzu_node_val_to_string(kuzu_value* node_val, char** out_result);
 /**
+ * @brief Returns the internal id value of the rel value as a kuzu value.
+ * @param rel_val The rel value to return.
+ * @param[out] out_value The output parameter that will hold the internal id value.
+ * @return The state indicating the success or failure of the operation.
+ */
+KUZU_C_API kuzu_state kuzu_rel_val_get_id_val(kuzu_value* rel_val, kuzu_value* out_value);
+/**
  * @brief Returns the internal id value of the source node of the given rel value as a kuzu value.
  * @param rel_val The rel value to return.
  * @param[out] out_value The output parameter that will hold the internal id value.
@@ -1411,7 +1428,7 @@ KUZU_C_API kuzu_state kuzu_rel_val_get_property_value_at(kuzu_value* rel_val, ui
  */
 KUZU_C_API kuzu_state kuzu_rel_val_to_string(kuzu_value* rel_val, char** out_result);
 /**
- * @brief Destroys any string created by the Kùzu C API, including both the error message and the
+ * @brief Destroys any string created by the Kuzu C API, including both the error message and the
  * values returned by the API functions. This function is provided to avoid the inconsistency
  * between the memory allocation and deallocation across different libraries and is preferred over
  * using the standard C free function.
@@ -1419,7 +1436,7 @@ KUZU_C_API kuzu_state kuzu_rel_val_to_string(kuzu_value* rel_val, char** out_res
  */
 KUZU_C_API void kuzu_destroy_string(char* str);
 /**
- * @brief Destroys any blob created by the Kùzu C API. This function is provided to avoid the
+ * @brief Destroys any blob created by the Kuzu C API. This function is provided to avoid the
  * inconsistency between the memory allocation and deallocation across different libraries and
  * is preferred over using the standard C free function.
  * @param blob The blob to destroy.
@@ -1558,12 +1575,12 @@ KUZU_C_API void kuzu_interval_from_difftime(double difftime, kuzu_interval_t* ou
 
 // Version
 /**
- * @brief Returns the version of the Kùzu library.
+ * @brief Returns the version of the Kuzu library.
  */
 KUZU_C_API char* kuzu_get_version();
 
 /**
- * @brief Returns the storage version of the Kùzu library.
+ * @brief Returns the storage version of the Kuzu library.
  */
 KUZU_C_API uint64_t kuzu_get_storage_version();
 #undef KUZU_C_API

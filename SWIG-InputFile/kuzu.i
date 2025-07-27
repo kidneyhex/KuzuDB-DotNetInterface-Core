@@ -111,7 +111,7 @@ SWIGTYPE **field_values,
 SWIGTYPE **keys
 "$csinput"
 
-// Ignore the Arrow array stuff
+// Ignore the Arrow array stuff -- I'm not sure how to get SWIG to handle it
 %ignore ArrowArray;
 %ignore ArrowSchema;
 %ignore ARROW_FLAG_DICTIONARY_ORDERED;
@@ -119,6 +119,12 @@ SWIGTYPE **keys
 %ignore ARROW_FLAG_NULLABLE;
 %ignore kuzu_query_result_get_arrow_schema;
 %ignore kuzu_query_result_get_next_arrow_chunk;
+
+// Initial attempt at ArrowArray stuff
+// %apply void *VOID_INT_PTR { void ** };
+// %apply void *VOID_INT_PTR { void * };
+// %typemap(cstype) ArrowArray **children "ArrowArray[]"
+
 
 // --------------------
 // Map the kuzu_value_get_{type} methods to use "out {type}"

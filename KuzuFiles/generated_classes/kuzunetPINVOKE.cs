@@ -854,6 +854,9 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_node_val_to_string")]
   public static extern int kuzu_node_val_to_string(global::System.Runtime.InteropServices.HandleRef jarg1, out string jarg2);
 
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_rel_val_get_id_val")]
+  public static extern int kuzu_rel_val_get_id_val(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
+
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_rel_val_get_src_id_val")]
   public static extern int kuzu_rel_val_get_src_id_val(global::System.Runtime.InteropServices.HandleRef jarg1, global::System.Runtime.InteropServices.HandleRef jarg2);
 

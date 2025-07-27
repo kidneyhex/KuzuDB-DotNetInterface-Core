@@ -709,6 +709,11 @@ public class kuzunet {
     return ret;
   }
 
+  public static kuzu_state kuzu_rel_val_get_id_val(kuzu_value rel_val, kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
+    return ret;
+  }
+
   public static kuzu_state kuzu_rel_val_get_src_id_val(kuzu_value rel_val, kuzu_value out_value) {
     kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_rel_val_get_src_id_val(kuzu_value.getCPtr(rel_val), kuzu_value.getCPtr(out_value));
     return ret;

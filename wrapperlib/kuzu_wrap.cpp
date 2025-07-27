@@ -3051,6 +3051,20 @@ SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_node_val_to_string(void * jarg1, void * j
 }
 
 
+SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_id_val(void * jarg1, void * jarg2) {
+  int jresult ;
+  kuzu_value *arg1 = (kuzu_value *) 0 ;
+  kuzu_value *arg2 = (kuzu_value *) 0 ;
+  kuzu_state result;
+  
+  arg1 = (kuzu_value *)jarg1; 
+  arg2 = (kuzu_value *)jarg2; 
+  result = (kuzu_state)kuzu_rel_val_get_id_val(arg1,arg2);
+  jresult = (int)result; 
+  return jresult;
+}
+
+
 SWIGEXPORT int SWIGSTDCALL CSharp_kuzu_rel_val_get_src_id_val(void * jarg1, void * jarg2) {
   int jresult ;
   kuzu_value *arg1 = (kuzu_value *) 0 ;

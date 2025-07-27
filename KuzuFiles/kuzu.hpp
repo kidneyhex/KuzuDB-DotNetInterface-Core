@@ -150,77 +150,6 @@ static std::map<K, V> copyMap(const std::map<K, V>& objects) {
     }
     return result;
 }
-
-#include <cstdint>
-#include <string>
-
-namespace kuzu {
-namespace common {
-
-enum class ExpressionType : uint8_t {
-    // Boolean Connection Expressions
-    OR = 0,
-    XOR = 1,
-    AND = 2,
-    NOT = 3,
-
-    // Comparison Expressions
-    EQUALS = 10,
-    NOT_EQUALS = 11,
-    GREATER_THAN = 12,
-    GREATER_THAN_EQUALS = 13,
-    LESS_THAN = 14,
-    LESS_THAN_EQUALS = 15,
-
-    // Null Operator Expressions
-    IS_NULL = 50,
-    IS_NOT_NULL = 51,
-
-    PROPERTY = 60,
-
-    LITERAL = 70,
-
-    STAR = 80,
-
-    VARIABLE = 90,
-    PATH = 91,
-    PATTERN = 92, // Node & Rel pattern
-
-    PARAMETER = 100,
-
-    // At parsing stage, both aggregate and scalar functions have type FUNCTION.
-    // After binding, only scalar function have type FUNCTION.
-    FUNCTION = 110,
-
-    AGGREGATE_FUNCTION = 130,
-
-    SUBQUERY = 190,
-
-    CASE_ELSE = 200,
-
-    GRAPH = 210,
-
-    LAMBDA = 220,
-
-    // NOTE: this enum has type uint8_t so don't assign over 255.
-    INVALID = 255,
-};
-
-struct ExpressionTypeUtil {
-    static bool isUnary(ExpressionType type);
-    static bool isBinary(ExpressionType type);
-    static bool isBoolean(ExpressionType type);
-    static bool isComparison(ExpressionType type);
-    static bool isNullOperator(ExpressionType type);
-
-    static ExpressionType reverseComparisonDirection(ExpressionType type);
-
-    static std::string toString(ExpressionType type);
-    static std::string toParsableString(ExpressionType type);
-};
-
-} // namespace common
-} // namespace kuzu
 #include <string>
 
 namespace kuzu {
@@ -250,6 +179,8 @@ struct OPPrintInfo {
     virtual std::string toString() const { return std::string(); }
 
     virtual std::unique_ptr<OPPrintInfo> copy() const { return std::make_unique<OPPrintInfo>(); }
+
+    static std::unique_ptr<OPPrintInfo> EmptyInfo() { return std::make_unique<OPPrintInfo>(); }
 };
 
 } // namespace kuzu
@@ -313,8 +244,6 @@ class BaseGraphTest;
 class PrivateGraphTest;
 class TestHelper;
 class TestRunner;
-class TinySnbDDLTest;
-class TinySnbCopyCSVTransactionTest;
 } // namespace testing
 
 namespace benchmark {
@@ -454,6 +383,15 @@ struct ArrowArrayWrapper : public ArrowArray {
         }
     }
 };
+
+namespace kuzu {
+namespace common {
+struct DatabaseLifeCycleManager {
+    bool isDatabaseClosed = false;
+    void checkDatabaseClosedOrThrow() const;
+};
+} // namespace common
+} // namespace kuzu
 
 #include <cstdint>
 #include <string>
@@ -1058,6 +996,78 @@ private:
 
 #include <cstdint>
 #include <string>
+
+
+namespace kuzu {
+namespace common {
+
+enum class ExpressionType : uint8_t {
+    // Boolean Connection Expressions
+    OR = 0,
+    XOR = 1,
+    AND = 2,
+    NOT = 3,
+
+    // Comparison Expressions
+    EQUALS = 10,
+    NOT_EQUALS = 11,
+    GREATER_THAN = 12,
+    GREATER_THAN_EQUALS = 13,
+    LESS_THAN = 14,
+    LESS_THAN_EQUALS = 15,
+
+    // Null Operator Expressions
+    IS_NULL = 50,
+    IS_NOT_NULL = 51,
+
+    PROPERTY = 60,
+
+    LITERAL = 70,
+
+    STAR = 80,
+
+    VARIABLE = 90,
+    PATH = 91,
+    PATTERN = 92, // Node & Rel pattern
+
+    PARAMETER = 100,
+
+    // At parsing stage, both aggregate and scalar functions have type FUNCTION.
+    // After binding, only scalar function have type FUNCTION.
+    FUNCTION = 110,
+
+    AGGREGATE_FUNCTION = 130,
+
+    SUBQUERY = 190,
+
+    CASE_ELSE = 200,
+
+    GRAPH = 210,
+
+    LAMBDA = 220,
+
+    // NOTE: this enum has type uint8_t so don't assign over 255.
+    INVALID = 255,
+};
+
+struct ExpressionTypeUtil {
+    static bool isUnary(ExpressionType type);
+    static bool isBinary(ExpressionType type);
+    static bool isBoolean(ExpressionType type);
+    static bool isComparison(ExpressionType type);
+    static bool isNullOperator(ExpressionType type);
+
+    static ExpressionType reverseComparisonDirection(ExpressionType type);
+
+    static KUZU_API std::string toString(ExpressionType type);
+    static std::string toParsableString(ExpressionType type);
+};
+
+} // namespace common
+} // namespace kuzu
+
+#include <cstdint>
+#include <string>
 #include <unordered_map>
 #include <unordered_set>
 
@@ -1179,14 +1189,14 @@ namespace main {
 struct Version {
 public:
     /**
-     * @brief Get the version of the Kùzu library.
-     * @return const char* The version of the Kùzu library.
+     * @brief Get the version of the Kuzu library.
+     * @return const char* The version of the Kuzu library.
      */
     KUZU_API static const char* getVersion();
 
     /**
-     * @brief Get the storage version of the Kùzu library.
-     * @return uint64_t The storage version of the Kùzu library.
+     * @brief Get the storage version of the Kuzu library.
+     * @return uint64_t The storage version of the Kuzu library.
      */
     KUZU_API static uint64_t getStorageVersion();
 };
@@ -1205,13 +1215,13 @@ using storage_version_t = uint64_t;
 
 struct StorageVersionInfo {
     static std::unordered_map<std::string, storage_version_t> getStorageVersionInfo() {
-        return {{"0.8.0.1", 37}, {"0.8.2", 36}, {"0.8.1", 36}, {"0.8.0", 36}, {"0.7.1.1", 35},
-            {"0.7.0", 34}, {"0.6.0.6", 33}, {"0.6.0.5", 32}, {"0.6.0.2", 31}, {"0.6.0.1", 31},
-            {"0.6.0", 28}, {"0.5.0", 28}, {"0.4.2", 27}, {"0.4.1", 27}, {"0.4.0", 27},
-            {"0.3.2", 26}, {"0.3.1", 26}, {"0.3.0", 26}, {"0.2.1", 25}, {"0.2.0", 25},
-            {"0.1.0", 24}, {"0.0.12.3", 24}, {"0.0.12.2", 24}, {"0.0.12.1", 24}, {"0.0.12", 23},
-            {"0.0.11", 23}, {"0.0.10", 23}, {"0.0.9", 23}, {"0.0.8", 17}, {"0.0.7", 15},
-            {"0.0.6", 9}, {"0.0.5", 8}, {"0.0.4", 7}, {"0.0.3", 1}};
+        return {{"0.11.1", 39}, {"0.11.0", 39}, {"0.10.0", 38}, {"0.9.0", 37}, {"0.8.0", 36},
+            {"0.7.1.1", 35}, {"0.7.0", 34}, {"0.6.0.6", 33}, {"0.6.0.5", 32}, {"0.6.0.2", 31},
+            {"0.6.0.1", 31}, {"0.6.0", 28}, {"0.5.0", 28}, {"0.4.2", 27}, {"0.4.1", 27},
+            {"0.4.0", 27}, {"0.3.2", 26}, {"0.3.1", 26}, {"0.3.0", 26}, {"0.2.1", 25},
+            {"0.2.0", 25}, {"0.1.0", 24}, {"0.0.12.3", 24}, {"0.0.12.2", 24}, {"0.0.12.1", 24},
+            {"0.0.12", 23}, {"0.0.11", 23}, {"0.0.10", 23}, {"0.0.9", 23}, {"0.0.8", 17},
+            {"0.0.7", 15}, {"0.0.6", 9}, {"0.0.5", 8}, {"0.0.4", 7}, {"0.0.3", 1}};
     }
 
     static KUZU_API storage_version_t getStorageVersion();
@@ -1250,11 +1260,11 @@ public:
     void resetCurrentOffset() { currentOffset = 0; }
 };
 
-class InMemOverflowBuffer {
+class KUZU_API InMemOverflowBuffer {
 
 public:
     explicit InMemOverflowBuffer(storage::MemoryManager* memoryManager)
-        : memoryManager{memoryManager}, currentBlock{nullptr} {};
+        : memoryManager{memoryManager} {};
 
     DEFAULT_BOTH_MOVE(InMemOverflowBuffer);
 
@@ -1267,7 +1277,6 @@ public:
         // memoryManager->freeBlock, but it should not because this InMemOverflowBuffer still
         // needs them.
         other.blocks.clear();
-        currentBlock = other.currentBlock;
     }
 
     // Releases all memory accumulated for string overflows so far and re-initializes its state to
@@ -1275,18 +1284,24 @@ public:
     // they will error.
     void resetBuffer();
 
+    // Manually set the underlying memory buffer to evicted to avoid double free
+    void preventDestruction();
+
+    storage::MemoryManager* getMemoryManager() { return memoryManager; }
+
 private:
     bool requireNewBlock(uint64_t sizeToAllocate) {
-        return currentBlock == nullptr ||
-               (currentBlock->currentOffset + sizeToAllocate) > currentBlock->size();
+        return blocks.empty() ||
+               (currentBlock()->currentOffset + sizeToAllocate) > currentBlock()->size();
     }
 
     void allocateNewBlock(uint64_t size);
 
+    BufferBlock* currentBlock() { return blocks.back().get(); }
+
 private:
     std::vector<std::unique_ptr<BufferBlock>> blocks;
     storage::MemoryManager* memoryManager;
-    BufferBlock* currentBlock;
 };
 
 } // namespace common
@@ -1303,9 +1318,9 @@ struct ClientConfigDefault {
     // 0 means timeout is disabled by default.
     static constexpr uint64_t TIMEOUT_IN_MS = 0;
     static constexpr uint32_t VAR_LENGTH_MAX_DEPTH = 30;
+    static constexpr uint64_t SPARSE_FRONTIER_THRESHOLD = 1000;
     static constexpr bool ENABLE_SEMI_MASK = true;
     static constexpr bool ENABLE_ZONE_MAP = true;
-    static constexpr bool ENABLE_GDS = true;
     static constexpr bool ENABLE_PROGRESS_BAR = false;
     static constexpr uint64_t SHOW_PROGRESS_AFTER = 1000;
     static constexpr common::PathSemantic RECURSIVE_PATTERN_SEMANTIC = common::PathSemantic::WALK;
@@ -1313,6 +1328,7 @@ struct ClientConfigDefault {
     static constexpr bool DISABLE_MAP_KEY_CHECK = true;
     static constexpr uint64_t WARNING_LIMIT = 8 * 1024;
     static constexpr bool ENABLE_PLAN_OPTIMIZER = true;
+    static constexpr bool ENABLE_INTERNAL_CATALOG = false;
 };
 
 struct ClientConfig {
@@ -1324,14 +1340,14 @@ struct ClientConfig {
     bool enableSemiMask = ClientConfigDefault::ENABLE_SEMI_MASK;
     // If using zone map in scan.
     bool enableZoneMap = ClientConfigDefault::ENABLE_ZONE_MAP;
-    // If compiling recursive pattern as GDS.
-    bool enableGDS = ClientConfigDefault::ENABLE_GDS;
     // Number of threads for execution.
     uint64_t numThreads = 1;
     // Timeout (milliseconds).
     uint64_t timeoutInMS = ClientConfigDefault::TIMEOUT_IN_MS;
     // Variable length maximum depth.
     uint32_t varLengthMaxDepth = ClientConfigDefault::VAR_LENGTH_MAX_DEPTH;
+    // Threshold determines when to switch from sparse frontier to dense frontier
+    uint64_t sparseFrontierThreshold = ClientConfigDefault::SPARSE_FRONTIER_THRESHOLD;
     // If using progress bar.
     bool enableProgressBar = ClientConfigDefault::ENABLE_PROGRESS_BAR;
     // time before displaying progress bar
@@ -1340,10 +1356,13 @@ struct ClientConfig {
     common::PathSemantic recursivePatternSemantic = ClientConfigDefault::RECURSIVE_PATTERN_SEMANTIC;
     // Scale factor for recursive pattern cardinality estimation.
     uint32_t recursivePatternCardinalityScaleFactor = ClientConfigDefault::RECURSIVE_PATTERN_FACTOR;
-    // maximum number of cached warnings
+    // Maximum number of cached warnings
     uint64_t warningLimit = ClientConfigDefault::WARNING_LIMIT;
     bool disableMapKeyCheck = ClientConfigDefault::DISABLE_MAP_KEY_CHECK;
+    // If enable plan optimizer
     bool enablePlanOptimizer = ClientConfigDefault::ENABLE_PLAN_OPTIMIZER;
+    // If use internal catalog during binding
+    bool enableInternalCatalog = ClientConfigDefault::ENABLE_INTERNAL_CATALOG;
 };
 
 } // namespace main
@@ -1479,7 +1498,7 @@ public:
     KUZU_API static std::string toString(date_t date);
     // Try to convert text in a buffer to a date; returns true if parsing was successful
     KUZU_API static bool tryConvertDate(const char* buf, uint64_t len, uint64_t& pos,
-        date_t& result);
+        date_t& result, bool allowTrailing = false);
 
     // private:
     // Returns true if (year) is a leap year, and false otherwise
@@ -1711,6 +1730,12 @@ public:
     // Convert a timestamp object to a std::string in the format "YYYY-MM-DD hh:mm:ss".
     KUZU_API static std::string toString(timestamp_t timestamp);
 
+    // Date header is in the format: %Y%m%d.
+    KUZU_API static std::string getDateHeader(const timestamp_t& timestamp);
+
+    // Timestamp header is in the format: %Y%m%dT%H%M%SZ.
+    KUZU_API static std::string getDateTimeHeader(const timestamp_t& timestamp);
+
     KUZU_API static date_t getDate(timestamp_t timestamp);
 
     KUZU_API static dtime_t getTime(timestamp_t timestamp);
@@ -1762,11 +1787,22 @@ public:
 
 #include <string>
 #include <string_view>
-#include <type_traits>
-
+#if USE_STD_FORMAT
+#include <format>
+#else
+#endif
 
 namespace kuzu {
 namespace common {
+
+#if USE_STD_FORMAT
+
+template<typename... Args>
+inline std::string stringFormat(std::format_string<Args...> format, Args&&... args) {
+    return std::format(format, std::forward<Args>(args)...);
+}
+
+#else
 
 namespace string_format_detail {
 #define MAP_STD_TO_STRING(typ)                                                                     \
@@ -1794,9 +1830,9 @@ MAP_SELF(const char*);
 // Also covers std::string
 MAP_SELF(std::string_view)
 
-// chars are mapped to themselves, but signed char and unsigned char (which are used for int8_t and
+// Chars are mapped to themselves, but signed char and unsigned char (which are used for int8_t and
 // uint8_t respectively), need to be cast to be properly output as integers. This is consistent with
-// fmt's behaviour.
+// fmt's behavior.
 MAP_SELF(char)
 inline std::string map(signed char v) {
     return std::to_string(int(v));
@@ -1852,15 +1888,17 @@ inline void stringFormatHelper(std::string& ret, std::string_view format, Arg&& 
 }
 } // namespace string_format_detail
 
-//! Formats `args` according to `format`. Accepts {} for formatting the argument and {{}} for
-//! a literal {}. Formatting is done with std::ostream::operator<<.
+// Formats `args` according to `format`. Accepts {} for formatting the argument and {{}} for
+// a literal {}. Formatting is done with std::ostream::operator<<.
 template<typename... Args>
-inline std::string stringFormat(std::string_view format, Args... args) {
+inline std::string stringFormat(std::string_view format, Args&&... args) {
     std::string ret;
     ret.reserve(32); // Optimistic pre-allocation.
     string_format_detail::stringFormatHelper(ret, format, std::forward<Args>(args)...);
     return ret;
 }
+
+#endif
 
 } // namespace common
 } // namespace kuzu
@@ -1877,12 +1915,14 @@ namespace common {
     // LCOV_EXCL_STOP
 }
 
-#if defined(KUZU_RUNTIME_CHECKS) || !defined(NDEBUG)
-#define RUNTIME_CHECK(code) code
-#define KU_ASSERT(condition)                                                                       \
+#define KU_ASSERT_UNCONDITIONAL(condition)                                                         \
     static_cast<bool>(condition) ?                                                                 \
         void(0) :                                                                                  \
         kuzu::common::kuAssertFailureInternal(#condition, __FILE__, __LINE__)
+
+#if defined(KUZU_RUNTIME_CHECKS) || !defined(NDEBUG)
+#define RUNTIME_CHECK(code) code
+#define KU_ASSERT(condition) KU_ASSERT_UNCONDITIONAL(condition)
 #else
 #define KU_ASSERT(condition) void(0)
 #define RUNTIME_CHECK(code) void(0)
@@ -2045,7 +2085,7 @@ const uint64_t NULL_HIGH_MASKS[65] = {0x0, 0x8000000000000000, 0xc00000000000000
     0xffffffffffffffe0, 0xfffffffffffffff0, 0xfffffffffffffff8, 0xfffffffffffffffc,
     0xfffffffffffffffe, 0xffffffffffffffff};
 
-class NullMask {
+class KUZU_API NullMask {
 public:
     static constexpr uint64_t NO_NULL_ENTRY = 0;
     static constexpr uint64_t ALL_NULL_ENTRY = ~uint64_t(NO_NULL_ENTRY);
@@ -2147,7 +2187,8 @@ public:
 
     // Fast calculation of the minimum and maximum null values
     // (essentially just three states, all null, all non-null and some null)
-    static std::pair<bool, bool> getMinMax(const uint64_t* nullEntries, uint64_t numValues);
+    static std::pair<bool, bool> getMinMax(const uint64_t* nullEntries, uint64_t offset,
+        uint64_t numValues);
 
 private:
     static inline std::pair<uint64_t, uint64_t> getNullEntryAndBitPos(uint64_t pos) {
@@ -2210,9 +2251,9 @@ using idx_t = uint32_t;
 constexpr idx_t INVALID_IDX = UINT32_MAX;
 using block_idx_t = uint64_t;
 constexpr block_idx_t INVALID_BLOCK_IDX = UINT64_MAX;
-using struct_field_idx_t = uint8_t;
+using struct_field_idx_t = uint16_t;
 using union_field_idx_t = struct_field_idx_t;
-constexpr struct_field_idx_t INVALID_STRUCT_FIELD_IDX = UINT8_MAX;
+constexpr struct_field_idx_t INVALID_STRUCT_FIELD_IDX = UINT16_MAX;
 using row_idx_t = uint64_t;
 constexpr row_idx_t INVALID_ROW_IDX = UINT64_MAX;
 constexpr uint32_t UNDEFINED_CAST_COST = UINT32_MAX;
@@ -2279,8 +2320,8 @@ struct list_entry_t {
     offset_t offset;
     list_size_t size;
 
-    list_entry_t() : offset{INVALID_OFFSET}, size{UINT32_MAX} {}
-    list_entry_t(offset_t offset, list_size_t size) : offset{offset}, size{size} {}
+    constexpr list_entry_t() : offset{INVALID_OFFSET}, size{UINT32_MAX} {}
+    constexpr list_entry_t(offset_t offset, list_size_t size) : offset{offset}, size{size} {}
 };
 
 struct struct_entry_t {
@@ -2299,10 +2340,14 @@ struct int128_t;
 struct ku_string_t;
 
 template<typename T>
-concept IntegerTypes =
+concept SignedIntegerTypes =
     std::is_same_v<T, int8_t> || std::is_same_v<T, int16_t> || std::is_same_v<T, int32_t> ||
-    std::is_same_v<T, int64_t> || std::is_same_v<T, uint8_t> || std::is_same_v<T, uint16_t> ||
-    std::is_same_v<T, uint32_t> || std::is_same_v<T, uint64_t> || std::is_same_v<T, int128_t>;
+    std::is_same_v<T, int64_t> || std::is_same_v<T, int128_t>;
+
+template<typename T>
+concept IntegerTypes =
+    SignedIntegerTypes<T> || std::is_same_v<T, uint8_t> || std::is_same_v<T, uint16_t> ||
+    std::is_same_v<T, uint32_t> || std::is_same_v<T, uint64_t>;
 
 template<typename T>
 concept FloatingPointTypes = std::is_same_v<T, float> || std::is_same_v<T, double>;
@@ -2497,11 +2542,11 @@ public:
     static LogicalType POINTER() { return LogicalType(LogicalTypeID::POINTER); }
     static KUZU_API LogicalType STRUCT(std::vector<StructField>&& fields);
 
-    static KUZU_API LogicalType RECURSIVE_REL(std::unique_ptr<StructTypeInfo> typeInfo);
+    static KUZU_API LogicalType RECURSIVE_REL(std::vector<StructField>&& fields);
 
-    static KUZU_API LogicalType NODE(std::unique_ptr<StructTypeInfo> typeInfo);
+    static KUZU_API LogicalType NODE(std::vector<StructField>&& fields);
 
-    static KUZU_API LogicalType REL(std::unique_ptr<StructTypeInfo> typeInfo);
+    static KUZU_API LogicalType REL(std::vector<StructField>&& fields);
 
     static KUZU_API LogicalType UNION(std::vector<StructField>&& fields);
 
@@ -2537,7 +2582,7 @@ private:
     TypeCategory category = TypeCategory::INTERNAL;
 };
 
-class ExtraTypeInfo {
+class KUZU_API ExtraTypeInfo {
 public:
     virtual ~ExtraTypeInfo() = default;
 
@@ -2601,7 +2646,7 @@ protected:
     uint32_t precision, scale;
 };
 
-class ListTypeInfo : public ExtraTypeInfo {
+class KUZU_API ListTypeInfo : public ExtraTypeInfo {
 public:
     ListTypeInfo() = default;
     explicit ListTypeInfo(LogicalType childType) : childType{std::move(childType)} {}
@@ -2623,7 +2668,7 @@ protected:
     LogicalType childType;
 };
 
-class ArrayTypeInfo final : public ListTypeInfo {
+class KUZU_API ArrayTypeInfo final : public ListTypeInfo {
 public:
     ArrayTypeInfo() : numElements{0} {};
     explicit ArrayTypeInfo(LogicalType childType, uint64_t numElements)
@@ -2743,8 +2788,6 @@ struct KUZU_API StructType {
     static const StructField& getField(const LogicalType& type, const std::string& key);
 
     static struct_field_idx_t getFieldIdx(const LogicalType& type, const std::string& key);
-
-    static LogicalType getNodeType(const catalog::NodeTableCatalogEntry& entry);
 };
 
 struct KUZU_API MapType {
@@ -2756,7 +2799,7 @@ struct KUZU_API MapType {
 struct KUZU_API UnionType {
     static constexpr union_field_idx_t TAG_FIELD_IDX = 0;
 
-    static constexpr auto TAG_FIELD_TYPE = LogicalTypeID::INT8;
+    static constexpr auto TAG_FIELD_TYPE = LogicalTypeID::UINT16;
 
     static constexpr char TAG_FIELD_NAME[] = "tag";
 
@@ -2807,6 +2850,7 @@ struct KUZU_API LogicalTypeUtils {
     // Also combines structs by the union of their fields. As such, currently, it is not guaranteed
     // for casting to work from input types to resulting types. Ideally this changes
     static LogicalType combineTypes(const LogicalType& left, const LogicalType& right);
+    static LogicalType combineTypes(const std::vector<LogicalType>& types);
 
     // makes a copy of the type with any occurences of ANY replaced with replacement
     static LogicalType purgeAny(const LogicalType& type, const LogicalType& replacement);
@@ -2900,6 +2944,7 @@ public:
 #include <memory>
 #include <unordered_map>
 #include <unordered_set>
+#include <vector>
 
 
 namespace kuzu {
@@ -2942,7 +2987,7 @@ public:
         : Expression{expressionType, std::move(dataType), expression_vector{},
               std::move(uniqueName)} {}
     DELETE_COPY_DEFAULT_MOVE(Expression);
-    virtual ~Expression() = default;
+    virtual ~Expression();
 
     void setUniqueName(const std::string& name) { uniqueName = name; }
     std::string getUniqueName() const {
@@ -2973,10 +3018,6 @@ public:
     bool operator==(const Expression& rhs) const { return uniqueName == rhs.uniqueName; }
 
     std::string toString() const { return hasAlias() ? alias : toStringInternal(); }
-
-    virtual std::unique_ptr<Expression> copy() const {
-        throw common::InternalException("Unimplemented expression copy().");
-    }
 
     template<class TARGET>
     TARGET& cast() {
@@ -3034,38 +3075,113 @@ struct ExpressionEquality {
 namespace kuzu {
 namespace common {
 
-class SelectionVector {
+class ValueVector;
 
+// A lightweight, immutable view over a SelectionVector, or a subsequence of a selection vector
+// SelectionVectors are also SelectionViews so that you can pass a SelectionVector to functions
+// which take a SelectionView&
+class SelectionView {
+protected:
     // In DYNAMIC mode, selectedPositions points to a mutable buffer that can be modified through
-    // getMutableBuffer In STATIC mode, selectedPositions points to the beginning of
-    // INCREMENTAL_SELECTED_POS In STATIC_FILTERED mode, selectedPositions points to some position
-    // in INCREMENTAL_SELECTED_POS
-    //      If reading manually in STATIC_FILTERED mode, you should read getSelectedPositions()[0],
-    //      and then you can assume that the next getSelSize() positions are selected
-    //      (This also works in STATIC mode)
+    // getMutableBuffer In STATIC mode, selectedPositions points to somewhere in
+    // INCREMENTAL_SELECTED_POS
+    // Note that the vector is considered unfiltered only if it is both STATIC and the first
+    // selected position is 0
     enum class State {
         DYNAMIC,
         STATIC,
     };
 
 public:
+    // STATIC selectionView over 0..selectedSize
+    explicit SelectionView(sel_t selectedSize);
+
+    template<class Func>
+    void forEach(Func&& func) const {
+        if (state == State::DYNAMIC) {
+            for (size_t i = 0; i < selectedSize; i++) {
+                func(selectedPositions[i]);
+            }
+        } else {
+            const auto start = selectedPositions[0];
+            for (size_t i = start; i < start + selectedSize; i++) {
+                func(i);
+            }
+        }
+    }
+
+    template<class Func>
+    void forEachBreakWhenFalse(Func&& func) const {
+        if (state == State::DYNAMIC) {
+            for (size_t i = 0; i < selectedSize; i++) {
+                if (!func(selectedPositions[i])) {
+                    break;
+                }
+            }
+        } else {
+            const auto start = selectedPositions[0];
+            for (size_t i = start; i < start + selectedSize; i++) {
+                if (!func(i)) {
+                    break;
+                }
+            }
+        }
+    }
+
+    sel_t getSelSize() const { return selectedSize; }
+
+    sel_t operator[](sel_t index) const {
+        KU_ASSERT(index < selectedSize);
+        return selectedPositions[index];
+    }
+
+    bool isUnfiltered() const { return state == State::STATIC && selectedPositions[0] == 0; }
+    bool isStatic() const { return state == State::STATIC; }
+
+    std::span<const sel_t> getSelectedPositions() const {
+        return std::span<const sel_t>(selectedPositions, selectedSize);
+    }
+
+protected:
+    static SelectionView slice(std::span<const sel_t> selectedPositions, State state) {
+        return SelectionView(selectedPositions, state);
+    }
+
+    // Intended to be used only as a subsequence of a SelectionVector in SelectionVector::slice
+    explicit SelectionView(std::span<const sel_t> selectedPositions, State state)
+        : selectedPositions{selectedPositions.data()}, selectedSize{selectedPositions.size()},
+          state{state} {}
+
+protected:
+    const sel_t* selectedPositions;
+    sel_t selectedSize;
+    State state;
+};
+
+class SelectionVector : public SelectionView {
+public:
     explicit SelectionVector(sel_t capacity)
-        : selectedSize{0}, capacity{capacity}, selectedPositions{nullptr}, state{State::STATIC} {
-        selectedPositionsBuffer = std::make_unique<sel_t[]>(capacity);
+        : SelectionView{std::span<const sel_t>(), State::STATIC},
+          selectedPositionsBuffer{std::make_unique<sel_t[]>(capacity)}, capacity{capacity} {
         setToUnfiltered();
+    }
+
+    // This View should be considered invalid if the SelectionVector it was created from has been
+    // modified
+    SelectionView slice(sel_t startIndex, sel_t selectedSize) const {
+        return SelectionView::slice(getSelectedPositions().subspan(startIndex, selectedSize),
+            state);
     }
 
     SelectionVector();
 
-    bool isUnfiltered() const { return state == State::STATIC && selectedPositions[0] == 0; }
-
-    void setToUnfiltered();
-    void setToUnfiltered(sel_t size);
+    KUZU_API void setToUnfiltered();
+    KUZU_API void setToUnfiltered(sel_t size);
     void setRange(sel_t startPos, sel_t size) {
         KU_ASSERT(startPos + size <= capacity);
         selectedPositions = selectedPositionsBuffer.get();
         for (auto i = 0u; i < size; ++i) {
-            selectedPositions[i] = startPos + i;
+            selectedPositionsBuffer[i] = startPos + i;
         }
         selectedSize = size;
         state = State::DYNAMIC;
@@ -3092,25 +3208,7 @@ public:
     std::span<sel_t> getMutableBuffer() const {
         return std::span<sel_t>(selectedPositionsBuffer.get(), capacity);
     }
-    std::span<const sel_t> getSelectedPositions() const {
-        return std::span<const sel_t>(selectedPositions, selectedSize);
-    }
 
-    template<class Func>
-    void forEach(Func&& func) const {
-        if (state == State::DYNAMIC) {
-            for (size_t i = 0; i < selectedSize; i++) {
-                func(selectedPositions[i]);
-            }
-        } else {
-            const auto start = selectedPositions[0];
-            for (size_t i = start; i < start + selectedSize; i++) {
-                func(i);
-            }
-        }
-    }
-
-    sel_t getSelSize() const { return selectedSize; }
     void setSelSize(sel_t size) {
         KU_ASSERT(size <= capacity);
         selectedSize = size;
@@ -3122,28 +3220,24 @@ public:
 
     sel_t operator[](sel_t index) const {
         KU_ASSERT(index < capacity);
-        return selectedPositions[index];
+        return const_cast<sel_t&>(selectedPositions[index]);
     }
     sel_t& operator[](sel_t index) {
         KU_ASSERT(index < capacity);
-        return selectedPositions[index];
+        return const_cast<sel_t&>(selectedPositions[index]);
     }
 
+    static std::vector<SelectionVector*> fromValueVectors(
+        const std::vector<std::shared_ptr<common::ValueVector>>& vec);
+
 private:
-    sel_t selectedSize;
-    sel_t capacity;
     std::unique_ptr<sel_t[]> selectedPositionsBuffer;
-    sel_t* selectedPositions;
-    State state;
+    sel_t capacity;
 };
 
 } // namespace common
 } // namespace kuzu
 
-
-namespace arrow {
-class ChunkedArray;
-} // namespace arrow
 
 namespace kuzu {
 namespace common {
@@ -3199,13 +3293,6 @@ private:
     std::vector<std::shared_ptr<ValueVector>> childrenVectors;
 };
 
-class ArrowColumnAuxiliaryBuffer : public AuxiliaryBuffer {
-    friend class ArrowColumnVector;
-
-private:
-    std::shared_ptr<arrow::ChunkedArray> column;
-};
-
 // ListVector layout:
 // To store a list value in the valueVector, we could use two separate vectors.
 // 1. A vector(called offset vector) for the list offsets and length(called list_entry_t): This
@@ -3247,6 +3334,95 @@ class AuxiliaryBufferFactory {
 public:
     static std::unique_ptr<AuxiliaryBuffer> getAuxiliaryBuffer(LogicalType& type,
         storage::MemoryManager* memoryManager);
+};
+
+} // namespace common
+} // namespace kuzu
+
+
+namespace kuzu {
+namespace common {
+
+// Note that this class is NOT thread-safe.
+class SemiMask {
+public:
+    explicit SemiMask(offset_t maxOffset) : maxOffset{maxOffset}, enabled{false} {}
+
+    virtual ~SemiMask() = default;
+
+    virtual void mask(offset_t nodeOffset) = 0;
+    virtual void maskRange(offset_t startNodeOffset, offset_t endNodeOffset) = 0;
+
+    virtual bool isMasked(offset_t startNodeOffset) = 0;
+
+    // include&exclude
+    virtual offset_vec_t range(uint32_t start, uint32_t end) = 0;
+
+    virtual uint64_t getNumMaskedNodes() const = 0;
+
+    virtual offset_vec_t collectMaskedNodes(uint64_t size) const = 0;
+
+    offset_t getMaxOffset() const { return maxOffset; }
+
+    bool isEnabled() const { return enabled; }
+    void enable() { enabled = true; }
+
+private:
+    offset_t maxOffset;
+    bool enabled;
+};
+
+struct SemiMaskUtil {
+    KUZU_API static std::unique_ptr<SemiMask> createMask(offset_t maxOffset);
+};
+
+class NodeOffsetMaskMap {
+public:
+    NodeOffsetMaskMap() = default;
+
+    offset_t getNumMaskedNode() const;
+
+    void addMask(table_id_t tableID, std::unique_ptr<SemiMask> mask) {
+        KU_ASSERT(!maskMap.contains(tableID));
+        maskMap.insert({tableID, std::move(mask)});
+    }
+
+    table_id_map_t<SemiMask*> getMasks() const {
+        table_id_map_t<SemiMask*> result;
+        for (auto& [tableID, mask] : maskMap) {
+            result.emplace(tableID, mask.get());
+        }
+        return result;
+    }
+
+    bool containsTableID(table_id_t tableID) const { return maskMap.contains(tableID); }
+    SemiMask* getOffsetMask(table_id_t tableID) const {
+        KU_ASSERT(containsTableID(tableID));
+        return maskMap.at(tableID).get();
+    }
+
+    void pin(table_id_t tableID) {
+        if (maskMap.contains(tableID)) {
+            pinnedMask = maskMap.at(tableID).get();
+        } else {
+            pinnedMask = nullptr;
+        }
+    }
+    bool hasPinnedMask() const { return pinnedMask != nullptr; }
+    SemiMask* getPinnedMask() const { return pinnedMask; }
+
+    bool valid(offset_t offset) const {
+        KU_ASSERT(pinnedMask != nullptr);
+        return pinnedMask->isMasked(offset);
+    }
+    bool valid(nodeID_t nodeID) const {
+        KU_ASSERT(maskMap.contains(nodeID.tableID));
+        return maskMap.at(nodeID.tableID)->isMasked(nodeID.offset);
+    }
+
+private:
+    table_id_map_t<std::unique_ptr<SemiMask>> maskMap;
+    SemiMask* pinnedMask = nullptr;
 };
 
 } // namespace common
@@ -3308,7 +3484,7 @@ struct DataChunkDescriptor {
     }
 };
 
-struct ResultSetDescriptor {
+struct KUZU_API ResultSetDescriptor {
     std::vector<std::unique_ptr<DataChunkDescriptor>> dataChunkDescriptors;
 
     ResultSetDescriptor() = default;
@@ -3316,8 +3492,13 @@ struct ResultSetDescriptor {
         std::vector<std::unique_ptr<DataChunkDescriptor>> dataChunkDescriptors)
         : dataChunkDescriptors{std::move(dataChunkDescriptors)} {}
     explicit ResultSetDescriptor(planner::Schema* schema);
+    DELETE_BOTH_COPY(ResultSetDescriptor);
 
     std::unique_ptr<ResultSetDescriptor> copy() const;
+
+    static std::unique_ptr<ResultSetDescriptor> EmptyDescriptor() {
+        return std::make_unique<ResultSetDescriptor>();
+    }
 };
 
 } // namespace processor
@@ -3382,20 +3563,13 @@ struct BufferPoolConstants {
 #else
     static constexpr uint64_t DEFAULT_VM_REGION_MAX_SIZE = static_cast<uint64_t>(1) << 43; // (8TB)
 #endif
-    static constexpr uint64_t DEFAULT_BUFFER_POOL_SIZE_FOR_TESTING = 1ull << 26; // (64MB)
 };
 
 struct StorageConstants {
-    static constexpr char OVERFLOW_FILE_SUFFIX[] = ".ovf";
-    static constexpr char WAL_FILE_SUFFIX[] = ".wal";
-    static constexpr char SHADOWING_SUFFIX[] = ".shadow";
-    static constexpr char INDEX_FILE_SUFFIX[] = ".hindex";
-    static constexpr char CATALOG_FILE_NAME[] = "catalog.kz";
-    static constexpr char CATALOG_FILE_NAME_FOR_WAL[] = "catalog.shadow";
-    static constexpr char DATA_FILE_NAME[] = "data.kz";
-    static constexpr char METADATA_FILE_NAME[] = "metadata.kz";
-    static constexpr char METADATA_FILE_NAME_FOR_WAL[] = "metadata.shadow";
-    static constexpr char LOCK_FILE_NAME[] = ".lock";
+    static constexpr page_idx_t DB_HEADER_PAGE_IDX = 0;
+    static constexpr char WAL_FILE_SUFFIX[] = "wal";
+    static constexpr char SHADOWING_SUFFIX[] = "shadow";
+    static constexpr char TEMP_FILE_SUFFIX[] = "tmp";
 
     // The number of pages that we add at one time when we need to grow a file.
     static constexpr uint64_t PAGE_GROUP_SIZE_LOG2 = 10;
@@ -3405,14 +3579,8 @@ struct StorageConstants {
 
     static constexpr double PACKED_CSR_DENSITY = 0.8;
     static constexpr double LEAF_HIGH_CSR_DENSITY = 1.0;
-    // The number of CSR lists in a leaf region.
-    static constexpr uint64_t CSR_LEAF_REGION_SIZE_LOG2 = 10;
-    static constexpr uint64_t CSR_LEAF_REGION_SIZE = static_cast<uint64_t>(1)
-                                                     << CSR_LEAF_REGION_SIZE_LOG2;
 
     static constexpr uint64_t MAX_NUM_ROWS_IN_TABLE = static_cast<uint64_t>(1) << 62;
-
-    static constexpr char TEMP_SPILLING_FILE_NAME[] = ".tmp";
 };
 
 struct TableOptionConstants {
@@ -3422,6 +3590,8 @@ struct TableOptionConstants {
 // Hash Index Configurations
 struct HashIndexConstants {
     static constexpr uint16_t SLOT_CAPACITY_BYTES = 256;
+    static constexpr uint64_t NUM_HASH_INDEXES_LOG2 = 8;
+    static constexpr uint64_t NUM_HASH_INDEXES = 1 << NUM_HASH_INDEXES_LOG2;
 };
 
 struct CopyConstants {
@@ -3457,10 +3627,13 @@ struct CopyConstants {
     static constexpr std::array DEFAULT_CSV_DELIMITER_SEARCH_SPACE = {',', ';', '\t', '|'};
     static constexpr std::array DEFAULT_CSV_QUOTE_SEARCH_SPACE = {'"', '\''};
     static constexpr std::array DEFAULT_CSV_ESCAPE_SEARCH_SPACE = {'"', '\\', '\''};
+    static constexpr std::array DEFAULT_CSV_NULL_STRINGS = {""};
 
     static constexpr const char* INT_CSV_PARSING_OPTIONS[] = {"SKIP", "SAMPLE_SIZE"};
     static constexpr uint64_t DEFAULT_CSV_SKIP_NUM = 0;
     static constexpr uint64_t DEFAULT_CSV_TYPE_DEDUCTION_SAMPLE_SIZE = 256;
+
+    static constexpr const char* LIST_CSV_PARSING_OPTIONS[] = {"NULL_STRINGS"};
 
     // metadata columns used to populate CSV warnings
     static constexpr std::array SHARED_WARNING_DATA_COLUMN_NAMES = {"blockIdx", "offsetInBlock",
@@ -3517,7 +3690,7 @@ struct ParquetConstants {
 };
 
 struct ExportCSVConstants {
-    static constexpr const char* DEFAULT_CSV_NEWLINE = "\n";
+    static constexpr const char* DEFAULT_CSV_NEWLINE = "\n\r";
     static constexpr const char* DEFAULT_NULL_STR = "";
     static constexpr bool DEFAULT_FORCE_QUOTE = false;
     static constexpr uint64_t DEFAULT_CSV_FLUSH_SIZE = 4096 * 8;
@@ -3527,6 +3700,9 @@ struct PortDBConstants {
     static constexpr char INDEX_FILE_NAME[] = "index.cypher";
     static constexpr char SCHEMA_FILE_NAME[] = "schema.cypher";
     static constexpr char COPY_FILE_NAME[] = "copy.cypher";
+    static constexpr const char* SCHEMA_ONLY_OPTION = "SCHEMA_ONLY";
+    static constexpr const char* EXPORT_FORMAT_OPTION = "FORMAT";
+    static constexpr const char* DEFAULT_EXPORT_FORMAT_OPTION = "PARQUET";
 };
 
 struct WarningConstants {
@@ -3861,6 +4037,9 @@ std::string TypeUtils::toString(const union_entry_t& val, void* valueVector);
 } // namespace common
 } // namespace kuzu
 
+#include <atomic>
+#include <mutex>
+
 
 namespace kuzu {
 namespace binder {
@@ -3876,6 +4055,7 @@ namespace main {
 class ClientContext;
 } // namespace main
 namespace storage {
+class LocalWAL;
 class LocalStorage;
 class UndoBuffer;
 class WAL;
@@ -3890,7 +4070,47 @@ class TransactionManager;
 
 enum class TransactionType : uint8_t { READ_ONLY, WRITE, CHECKPOINT, DUMMY, RECOVERY };
 
-class Transaction {
+class LocalCacheManager;
+class KUZU_API LocalCacheObject {
+public:
+    explicit LocalCacheObject(std::string key) : key{std::move(key)} {}
+
+    virtual ~LocalCacheObject() = default;
+
+    std::string getKey() const { return key; }
+
+    template<typename T>
+    T* cast() {
+        return common::ku_dynamic_cast<T*>(this);
+    }
+
+private:
+    std::string key;
+};
+
+class LocalCacheManager {
+public:
+    bool contains(const std::string& key) {
+        std::unique_lock lck{mtx};
+        return cachedObjects.contains(key);
+    }
+    LocalCacheObject& at(const std::string& key) {
+        std::unique_lock lck{mtx};
+        return *cachedObjects.at(key);
+    }
+    bool put(std::unique_ptr<LocalCacheObject> object);
+
+    void remove(const std::string& key) {
+        std::unique_lock lck{mtx};
+        cachedObjects.erase(key);
+    }
+
+private:
+    std::unordered_map<std::string, std::unique_ptr<LocalCacheObject>> cachedObjects;
+    std::mutex mtx;
+};
+
+class KUZU_API Transaction {
     friend class TransactionManager;
 
 public:
@@ -3917,67 +4137,42 @@ public:
     common::transaction_t getStartTS() const { return startTS; }
     common::transaction_t getCommitTS() const { return commitTS; }
     int64_t getCurrentTS() const { return currentTS; }
-    main::ClientContext* getClientContext() const { return clientContext; }
 
-    void checkForceCheckpoint(common::StatementType statementType) {
-        // Note: We always force checkpoint for COPY_FROM statement.
-        if (statementType == common::StatementType::COPY_FROM) {
-            forceCheckpoint = true;
-        }
-    }
+    void setForceCheckpoint() { forceCheckpoint = true; }
     bool shouldAppendToUndoBuffer() const {
-        return getID() > DUMMY_TRANSACTION_ID && !isReadOnly();
+        // Only write transactions and recovery transactions should append to the undo buffer.
+        return isWriteTransaction() || isRecovery();
     }
     bool shouldLogToWAL() const;
+    storage::LocalWAL& getLocalWAL() const {
+        KU_ASSERT(localWAL);
+        return *localWAL;
+    }
 
     bool shouldForceCheckpoint() const;
 
-    KUZU_API void commit(storage::WAL* wal) const;
-    void rollback(storage::WAL* wal) const;
+    void commit(storage::WAL* wal);
+    void rollback(storage::WAL* wal);
 
     uint64_t getEstimatedMemUsage() const;
     storage::LocalStorage* getLocalStorage() const { return localStorage.get(); }
-    bool hasNewlyInsertedNodes(common::table_id_t tableID) const {
-        return maxCommittedNodeOffsets.contains(tableID);
-    }
-    void setMaxCommittedNodeOffset(common::table_id_t tableID, common::offset_t offset) {
-        maxCommittedNodeOffsets[tableID] = offset;
-    }
-    bool isUnCommitted(common::table_id_t tableID, common::offset_t nodeOffset) const {
-        return nodeOffset >= getMinUncommittedNodeOffset(tableID);
-    }
+    LocalCacheManager& getLocalCacheManager() { return localCacheManager; }
+    bool isUnCommitted(common::table_id_t tableID, common::offset_t nodeOffset) const;
     common::row_idx_t getLocalRowIdx(common::table_id_t tableID,
         common::offset_t nodeOffset) const {
-        KU_ASSERT(isUnCommitted(tableID, nodeOffset));
         return nodeOffset - getMinUncommittedNodeOffset(tableID);
     }
     common::offset_t getUncommittedOffset(common::table_id_t tableID,
         common::row_idx_t localRowIdx) const {
         return getMinUncommittedNodeOffset(tableID) + localRowIdx;
     }
-    common::offset_t getMinUncommittedNodeOffset(common::table_id_t tableID) const {
-        // The only case that minUncommittedNodeOffsets doesn't track the given tableID is when the
-        // table is newly created within the same transaction, thus the minUncommittedNodeOffsets
-        // should be 0.
-        return minUncommittedNodeOffsets.contains(tableID) ? minUncommittedNodeOffsets.at(tableID) :
-                                                             0;
-    }
-    common::offset_t getMaxCommittedNodeOffset(common::table_id_t tableID) const {
-        KU_ASSERT(maxCommittedNodeOffsets.contains(tableID));
-        return maxCommittedNodeOffsets.at(tableID);
-    }
-    common::offset_t getCommittedOffsetFromUncommitted(common::table_id_t tableID,
-        common::offset_t uncommittedOffset) const {
-        KU_ASSERT(maxCommittedNodeOffsets.contains(tableID));
-        return maxCommittedNodeOffsets.at(tableID) + getLocalRowIdx(tableID, uncommittedOffset);
-    }
 
     void pushCreateDropCatalogEntry(catalog::CatalogSet& catalogSet,
-        catalog::CatalogEntry& catalogEntry, bool isInternal, bool skipLoggingToWAL = false) const;
+        catalog::CatalogEntry& catalogEntry, bool isInternal, bool skipLoggingToWAL = false);
     void pushAlterCatalogEntry(catalog::CatalogSet& catalogSet, catalog::CatalogEntry& catalogEntry,
-        const binder::BoundAlterInfo& alterInfo) const;
+        const binder::BoundAlterInfo& alterInfo);
     void pushSequenceChange(catalog::SequenceCatalogEntry* sequenceEntry, int64_t kCount,
-        const catalog::SequenceRollbackData& data) const;
+        const catalog::SequenceRollbackData& data);
     void pushInsertInfo(common::node_group_idx_t nodeGroupIdx, common::row_idx_t startRow,
         common::row_idx_t numRows, const storage::VersionRecordHandler* versionRecordHandler) const;
     void pushDeleteInfo(common::node_group_idx_t nodeGroupIdx, common::row_idx_t startRow,
@@ -3985,13 +4180,8 @@ public:
     void pushVectorUpdateInfo(storage::UpdateInfo& updateInfo, common::idx_t vectorIdx,
         storage::VectorUpdateInfo& vectorUpdateInfo) const;
 
-    static Transaction getDummyTransactionFromExistingOne(const Transaction& other);
-
 private:
-    Transaction(TransactionType transactionType, common::transaction_t ID,
-        common::transaction_t startTS,
-        std::unordered_map<common::table_id_t, common::offset_t> minUncommittedNodeOffsets,
-        std::unordered_map<common::table_id_t, common::offset_t> maxCommittedNodeOffsets);
+    common::offset_t getMinUncommittedNodeOffset(common::table_id_t tableID) const;
 
 private:
     TransactionType type;
@@ -4002,16 +4192,10 @@ private:
     main::ClientContext* clientContext;
     std::unique_ptr<storage::LocalStorage> localStorage;
     std::unique_ptr<storage::UndoBuffer> undoBuffer;
+    std::unique_ptr<storage::LocalWAL> localWAL;
+    LocalCacheManager localCacheManager;
     bool forceCheckpoint;
-
-    // For each node table, we keep track of the minimum uncommitted node offset when the
-    // transaction starts. This is mainly used to assign offsets to local nodes and determine if a
-    // given node is transaction local or not.
-    std::unordered_map<common::table_id_t, common::offset_t> minUncommittedNodeOffsets;
-    // For each node table, we keep track of committed node offset when the transaction commits.
-    // This is mainly used to shift bound/nbr node offsets for rel tables within the same
-    // transaction.
-    std::unordered_map<common::table_id_t, common::offset_t> maxCommittedNodeOffsets;
+    std::atomic<bool> hasCatalogChanges;
 };
 
 // TODO(bmwinger): These shouldn't need to be exported
@@ -4038,8 +4222,6 @@ class PreparedStatement {
     friend class ClientContext;
     friend class testing::TestHelper;
     friend class testing::TestRunner;
-    friend class testing::TinySnbDDLTest;
-    friend class testing::TinySnbCopyCSVTransactionTest;
 
 public:
     bool isTransactionStatement() const;
@@ -4061,6 +4243,8 @@ public:
     }
 
     common::StatementType getStatementType() const;
+
+    void validateExecuteParam(const std::string& paramName, common::Value* param) const;
 
     KUZU_API ~PreparedStatement();
 
@@ -4991,10 +5175,12 @@ struct KUZU_API Function {
     std::vector<common::LogicalTypeID> parameterTypeIDs;
     // Currently we only one variable-length function which is list creation. The expectation is
     // that all parameters must have the same type as parameterTypes[0].
-    bool isVarLength;
-    bool isListLambda;
+    // For variable length function. A
+    bool isVarLength = false;
+    bool isListLambda = false;
+    bool isReadOnly = true;
 
-    Function() : isVarLength{false}, isListLambda{false} {};
+    Function() : isVarLength{false}, isListLambda{false}, isReadOnly{true} {};
     Function(std::string name, std::vector<common::LogicalTypeID> parameterTypeIDs)
         : name{std::move(name)}, parameterTypeIDs{std::move(parameterTypeIDs)}, isVarLength{false},
           isListLambda{false} {}
@@ -5072,8 +5258,6 @@ public:
         this->selVector = std::move(selVector_);
     }
 
-    void slice(offset_t offset);
-
 private:
     std::shared_ptr<SelectionVector> selVector;
     // TODO: We should get rid of `fStateType` and merge DataChunkState with SelectionVector.
@@ -5095,7 +5279,7 @@ class ClientContext;
 namespace transaction {
 
 /**
- * If the connection is in AUTO_COMMIT mode any query over the connection will be wrapped around
+ * If the connection is in AUTO_COMMIT mode, any query over the connection will be wrapped around
  * a transaction and committed (even if the query is READ_ONLY).
  * If the connection is in MANUAL transaction mode, which happens only if an application
  * manually begins a transaction (see below), then an application has to manually commit or
@@ -5105,7 +5289,7 @@ namespace transaction {
  * begin[ReadOnly/Write]Transaction at any point, the mode switches to MANUAL. This creates
  * an "active transaction" in the connection. When a connection is in MANUAL mode and the
  * active transaction is rolled back or committed, then the active transaction is removed (so
- * the connection no longer has an active transaction) and the mode automatically switches
+ * the connection no longer has an active transaction), and the mode automatically switches
  * back to AUTO_COMMIT.
  * Note: When a Connection object is deconstructed, if the connection has an active (manual)
  * transaction, then the active transaction is rolled back.
@@ -5130,7 +5314,7 @@ public:
 
     TransactionMode getTransactionMode() const { return mode; }
     bool hasActiveTransaction() const { return activeTransaction != nullptr; }
-    Transaction* getActiveTransaction() const { return activeTransaction.get(); }
+    Transaction* getActiveTransaction() const { return activeTransaction; }
 
     void clearTransaction();
 
@@ -5141,8 +5325,7 @@ private:
     std::mutex mtx;
     main::ClientContext& clientContext;
     TransactionMode mode;
-    // TODO(Guodong): Should hold a raw pointer. Move ownership to TransactionManager.
-    std::unique_ptr<Transaction> activeTransaction;
+    Transaction* activeTransaction;
 };
 
 } // namespace transaction
@@ -5428,6 +5611,9 @@ struct DBConfig {
     uint64_t checkpointThreshold;
     bool forceCheckpointOnClose;
     bool enableSpillingToDisk;
+#if defined(__APPLE__)
+    uint32_t threadQos;
+#endif
 
     explicit DBConfig(const SystemConfig& systemConfig);
 
@@ -5459,6 +5645,7 @@ struct CSVOption {
     bool setDelim;
     bool setQuote;
     bool setHeader;
+    std::vector<std::string> nullStrings;
 
     CSVOption()
         : escapeChar{CopyConstants::DEFAULT_CSV_ESCAPE_CHAR},
@@ -5473,40 +5660,44 @@ struct CSVOption {
           setEscape{CopyConstants::DEFAULT_CSV_SET_DIALECT},
           setDelim{CopyConstants::DEFAULT_CSV_SET_DIALECT},
           setQuote{CopyConstants::DEFAULT_CSV_SET_DIALECT},
-          setHeader{CopyConstants::DEFAULT_CSV_SET_DIALECT} {}
+          setHeader{CopyConstants::DEFAULT_CSV_SET_DIALECT},
+          nullStrings{CopyConstants::DEFAULT_CSV_NULL_STRINGS[0]} {}
 
     EXPLICIT_COPY_DEFAULT_MOVE(CSVOption);
 
     // TODO: COPY FROM and COPY TO should support transform special options, like '\'.
-    std::string toCypher() const {
-        std::string result;
-
-        // Add the option IFF option is set by user.
+    std::unordered_map<std::string, std::string> toOptionsMap(const bool& parallel) const {
+        std::unordered_map<std::string, std::string> result;
+        result["parallel"] = parallel ? "true" : "false";
         if (setHeader) {
-            std::string header = hasHeader ? "true" : "false";
-            result += "header=" + header;
+            result["header"] = hasHeader ? "true" : "false";
         }
         if (setEscape) {
-            if (!result.empty())
-                result += ", "; // Add separator if not the first option
-            result += stringFormat("escape='\\{}'", escapeChar);
+            result["escape"] = stringFormat("escape='\\{}'", escapeChar);
         }
         if (setDelim) {
-            if (!result.empty())
-                result += ", ";
-            result += stringFormat("delim='{}'", delimiter);
+            result["delim"] = stringFormat("delim='{}'", delimiter);
         }
         if (setQuote) {
-            if (!result.empty())
-                result += ", ";
-            result += stringFormat("quote='\\{}'", quoteChar);
+            result["quote"] = stringFormat("quote='\\{}'", quoteChar);
         }
+        if (autoDetection != CopyConstants::DEFAULT_CSV_AUTO_DETECT) {
+            result["auto_detect"] = autoDetection ? "true" : "false";
+        }
+        return result;
+    }
 
-        // If no options, return empty string.
-        if (result.empty()) {
+    static std::string toCypher(const std::unordered_map<std::string, std::string>& options) {
+        if (options.empty()) {
             return "";
         }
-
+        std::string result = "";
+        for (const auto& [key, value] : options) {
+            if (!result.empty()) {
+                result += ", ";
+            }
+            result += key + "=" + value;
+        }
         return "(" + result + ")";
     }
 
@@ -5520,7 +5711,7 @@ struct CSVOption {
                                             // sampleSize is 0
           allowUnbracedList{other.allowUnbracedList}, ignoreErrors{other.ignoreErrors},
           autoDetection{other.autoDetection}, setEscape{other.setEscape}, setDelim{other.setDelim},
-          setQuote{other.setQuote}, setHeader{other.setHeader} {}
+          setQuote{other.setQuote}, setHeader{other.setHeader}, nullStrings{other.nullStrings} {}
 };
 
 struct CSVReaderConfig {
@@ -5530,7 +5721,7 @@ struct CSVReaderConfig {
     CSVReaderConfig() : option{}, parallel{CopyConstants::DEFAULT_CSV_PARALLEL} {}
     EXPLICIT_COPY_DEFAULT_MOVE(CSVReaderConfig);
 
-    static CSVReaderConfig construct(const case_insensitive_map_t<common::Value>& options);
+    static CSVReaderConfig construct(const case_insensitive_map_t<Value>& options);
 
 private:
     CSVReaderConfig(const CSVReaderConfig& other)
@@ -5540,6 +5731,7 @@ private:
 } // namespace common
 } // namespace kuzu
 
+#include <optional>
 #include <utility>
 
 
@@ -5567,6 +5759,25 @@ public:
 
     DELETE_COPY_AND_MOVE(ValueVector);
     ~ValueVector() = default;
+
+    template<typename T>
+    std::optional<T> firstNonNull() const {
+        sel_t selectedSize = state->getSelSize();
+        if (selectedSize == 0) {
+            return std::nullopt;
+        }
+        if (hasNoNullsGuarantee()) {
+            return getValue<T>(state->getSelVector()[0]);
+        } else {
+            for (size_t i = 0; i < selectedSize; i++) {
+                auto pos = state->getSelVector()[i];
+                if (!isNull(pos)) {
+                    return std::make_optional(getValue<T>(pos));
+                }
+            }
+        }
+        return std::nullopt;
+    }
 
     template<class Func>
     void forEachNonNull(Func&& func) const {
@@ -5646,6 +5857,10 @@ public:
     static std::unique_ptr<ValueVector> deSerialize(Deserializer& deSer, storage::MemoryManager* mm,
         std::shared_ptr<DataChunkState> dataChunkState);
 
+    SelectionVector* getSelVectorPtr() const {
+        return state ? &state->getSelVectorUnsafe() : nullptr;
+    }
+
 private:
     uint32_t getDataTypeSize(const LogicalType& type);
     void initializeValueBuffer();
@@ -5672,7 +5887,7 @@ public:
     static void addString(ValueVector* vector, uint32_t vectorPos, ku_string_t& srcStr);
     static void addString(ValueVector* vector, uint32_t vectorPos, const char* srcStr,
         uint64_t length);
-    static void addString(ValueVector* vector, uint32_t vectorPos, const std::string& srcStr);
+    static void addString(ValueVector* vector, uint32_t vectorPos, std::string_view srcStr);
     // Add empty string with space reserved for the provided size
     // Returned value can be modified to set the string contents
     static ku_string_t& reserveString(ValueVector* vector, uint32_t vectorPos, uint64_t length);
@@ -5712,7 +5927,9 @@ public:
         auto& listBuffer = getAuxBufferUnsafe(*vector);
         listBuffer.setDataVector(std::move(dataVector));
     }
-    static void copyListEntryAndBufferMetaData(ValueVector& vector, const ValueVector& other);
+    static void copyListEntryAndBufferMetaData(ValueVector& vector,
+        const SelectionVector& selVector, const ValueVector& other,
+        const SelectionVector& otherSelVector);
     static ValueVector* getDataVector(const ValueVector* vector) {
         KU_ASSERT(validateType(*vector));
         return getAuxBuffer(*vector).getDataVector();
@@ -5817,10 +6034,11 @@ public:
             std::move(vectorToReference));
     }
 
-    static inline void setTagField(ValueVector* vector, union_field_idx_t tag) {
-        KU_ASSERT(vector->dataType.getLogicalTypeID() == LogicalTypeID::UNION);
-        for (auto i = 0u; i < vector->state->getSelVector().getSelSize(); i++) {
-            vector->setValue<struct_field_idx_t>(vector->state->getSelVector()[i], tag);
+    static inline void setTagField(ValueVector& vector, SelectionVector& sel,
+        union_field_idx_t tag) {
+        KU_ASSERT(vector.dataType.getLogicalTypeID() == LogicalTypeID::UNION);
+        for (auto i = 0u; i < sel.getSelSize(); i++) {
+            vector.setValue<struct_field_idx_t>(sel[i], tag);
         }
     }
 };
@@ -5885,6 +6103,7 @@ struct ExtraTableFuncBindInput {
 struct KUZU_API TableFuncBindInput {
     binder::expression_vector params;
     optional_params_t optionalParams;
+    binder::expression_vector optionalParamsLegacy;
     std::unique_ptr<ExtraTableFuncBindInput> extraInput = nullptr;
     binder::Binder* binder = nullptr;
     std::vector<parser::YieldVariable> yieldVariables;
@@ -5970,7 +6189,6 @@ private:
 } // namespace kuzu
 
 #include <string>
-
 
 namespace kuzu {
 namespace main {
@@ -6067,7 +6285,7 @@ public:
     /**
      * @return string of first query result.
      */
-    KUZU_API std::string toString();
+    KUZU_API std::string toString() const;
 
     /**
      * @brief Resets the result tuple iterator.
@@ -6103,6 +6321,9 @@ private:
         std::vector<common::LogicalType> columnTypes);
     void initResultTableAndIterator(std::shared_ptr<processor::FactorizedTable> factorizedTable_);
     void validateQuerySucceed() const;
+    std::pair<std::unique_ptr<processor::FlatTuple>, std::unique_ptr<processor::FlatTupleIterator>>
+    getIterator() const;
+    void checkDatabaseClosedOrThrow() const;
 
 private:
     // execution status
@@ -6122,6 +6343,9 @@ private:
 
     // query iterator
     QueryResultIterator queryResultIterator;
+
+    // database life cycle manager
+    std::shared_ptr<common::DatabaseLifeCycleManager> dbLifeCycleManager;
 };
 
 } // namespace main
@@ -6131,6 +6355,9 @@ private:
 #include <mutex>
 #include <vector>
 
+#if defined(__APPLE__)
+#include <pthread/qos.h>
+#endif
 
 namespace kuzu {
 namespace common {
@@ -6158,7 +6385,6 @@ class StorageExtension;
 namespace main {
 struct ExtensionOption;
 class DatabaseManager;
-class ClientContext;
 
 /**
  * @brief Stores runtime configuration for creating or opening a Database
@@ -6184,10 +6410,17 @@ struct KUZU_API SystemConfig {
      * the WAL file exceeds the checkpoint threshold.
      * @param checkpointThreshold The threshold of the WAL file size in bytes. When the size of the
      * WAL file exceeds this threshold, the database will checkpoint if autoCheckpoint is true.
+     * @param forceCheckpointOnClose If true, the database will force checkpoint when closing.
      */
     explicit SystemConfig(uint64_t bufferPoolSize = -1u, uint64_t maxNumThreads = 0,
         bool enableCompression = true, bool readOnly = false, uint64_t maxDBSize = -1u,
-        bool autoCheckpoint = true, uint64_t checkpointThreshold = 16777216 /* 16MB */);
+        bool autoCheckpoint = true, uint64_t checkpointThreshold = 16777216 /* 16MB */,
+        bool forceCheckpointOnClose = true
+#if defined(__APPLE__)
+        ,
+        uint32_t threadQos = QOS_CLASS_DEFAULT
+#endif
+    );
 
     uint64_t bufferPoolSize;
     uint64_t maxNumThreads;
@@ -6196,10 +6429,14 @@ struct KUZU_API SystemConfig {
     uint64_t maxDBSize;
     bool autoCheckpoint;
     uint64_t checkpointThreshold;
+    bool forceCheckpointOnClose;
+#if defined(__APPLE__)
+    uint32_t threadQos;
+#endif
 };
 
 /**
- * @brief Database class is the main class of KùzuDB. It manages all database components.
+ * @brief Database class is the main class of Kuzu. It manages all database components.
  */
 class Database {
     friend class EmbeddedShell;
@@ -6257,8 +6494,7 @@ private:
     Database(std::string_view databasePath, SystemConfig systemConfig,
         construct_bm_func_t constructBMFunc);
 
-    void openLockFile();
-    void initAndLockDBDir();
+    void validatePathInReadOnly() const;
 
 private:
     std::string databasePath;
@@ -6274,6 +6510,7 @@ private:
     std::unique_ptr<DatabaseManager> databaseManager;
     std::unique_ptr<extension::ExtensionManager> extensionManager;
     QueryIDGenerator queryIDGenerator;
+    std::shared_ptr<common::DatabaseLifeCycleManager> dbLifeCycleManager;
 };
 
 } // namespace main
@@ -6332,12 +6569,12 @@ public:
 
     void resetAuxiliaryBuffer();
 
-    inline uint32_t getNumValueVectors() const { return valueVectors.size(); }
+    uint32_t getNumValueVectors() const { return valueVectors.size(); }
 
-    inline const ValueVector& getValueVector(uint64_t valueVectorPos) const {
+    const ValueVector& getValueVector(uint64_t valueVectorPos) const {
         return *valueVectors[valueVectorPos];
     }
-    inline ValueVector& getValueVectorMutable(uint64_t valueVectorPos) const {
+    ValueVector& getValueVectorMutable(uint64_t valueVectorPos) const {
         return *valueVectors[valueVectorPos];
     }
 
@@ -6423,7 +6660,18 @@ struct BinaryUDFFunctionWrapper {
     }
 };
 
+struct BinarySelectWithBindDataWrapper {
+    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename OP>
+    static void operation(LEFT_TYPE& left, RIGHT_TYPE& right, uint8_t& result,
+        common::ValueVector* leftValueVector, common::ValueVector* rightValueVector,
+        void* dataPtr) {
+        OP::operation(left, right, result, *leftValueVector, *rightValueVector, *leftValueVector,
+            dataPtr);
+    }
+};
+
 struct BinaryFunctionExecutor {
+
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
     static inline void executeOnValue(common::ValueVector& left, common::ValueVector& right,
@@ -6435,168 +6683,78 @@ struct BinaryFunctionExecutor {
             resPos, dataPtr);
     }
 
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
-        typename OP_WRAPPER>
-    static void executeBothFlat(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        auto lPos = left.state->getSelVector()[0];
-        auto rPos = right.state->getSelVector()[0];
-        auto resPos = result.state->getSelVector()[0];
-        result.setNull(resPos, left.isNull(lPos) || right.isNull(rPos));
-        if (!result.isNull(resPos)) {
-            executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                result, lPos, rPos, resPos, dataPtr);
-        }
+    static inline std::tuple<common::sel_t, common::sel_t, common::sel_t> getSelectedPositions(
+        common::SelectionVector* leftSelVector, common::SelectionVector* rightSelVector,
+        common::SelectionVector* resultSelVector, common::sel_t selPos, bool leftFlat,
+        bool rightFlat) {
+        common::sel_t lPos = (*leftSelVector)[leftFlat ? 0 : selPos];
+        common::sel_t rPos = (*rightSelVector)[rightFlat ? 0 : selPos];
+        common::sel_t resPos = (*resultSelVector)[leftFlat && rightFlat ? 0 : selPos];
+        return {lPos, rPos, resPos};
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeFlatUnFlat(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        auto lPos = left.state->getSelVector()[0];
-        auto& rightSelVector = right.state->getSelVector();
-        if (left.isNull(lPos)) {
+    static void executeOnSelectedValues(common::ValueVector& left,
+        common::SelectionVector* leftSelVector, common::ValueVector& right,
+        common::SelectionVector* rightSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        const bool leftFlat = left.state->isFlat();
+        const bool rightFlat = right.state->isFlat();
+
+        const bool allNullsGuaranteed = (rightFlat && right.isNull((*rightSelVector)[0])) ||
+                                        (leftFlat && left.isNull((*leftSelVector)[0]));
+        if (allNullsGuaranteed) {
             result.setAllNull();
-        } else if (right.hasNoNullsGuarantee()) {
-            result.setAllNonNull();
-            rightSelVector.forEach([&](auto i) {
-                executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                    result, lPos, i, i, dataPtr);
-            });
         } else {
-            rightSelVector.forEach([&](auto i) {
-                result.setNull(i, right.isNull(i)); // left is always not null
-                if (!result.isNull(i)) {
+            const bool noNullsGuaranteed = (leftFlat || left.hasNoNullsGuarantee()) &&
+                                           (rightFlat || right.hasNoNullsGuarantee());
+            if (noNullsGuaranteed) {
+                result.setAllNonNull();
+            }
+
+            const auto numSelectedValues =
+                leftFlat ? rightSelVector->getSelSize() : leftSelVector->getSelSize();
+            for (common::sel_t selPos = 0; selPos < numSelectedValues; ++selPos) {
+                auto [lPos, rPos, resPos] = getSelectedPositions(leftSelVector, rightSelVector,
+                    resultSelVector, selPos, leftFlat, rightFlat);
+                if (noNullsGuaranteed) {
                     executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left,
-                        right, result, lPos, i, i, dataPtr);
+                        right, result, lPos, rPos, resPos, dataPtr);
+                } else {
+                    result.setNull(resPos, left.isNull(lPos) || right.isNull(rPos));
+                    if (!result.isNull(resPos)) {
+                        executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left,
+                            right, result, lPos, rPos, resPos, dataPtr);
+                    }
                 }
-            });
+            }
         }
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeUnFlatFlat(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        auto rPos = right.state->getSelVector()[0];
-        auto& leftSelVector = left.state->getSelVector();
-        if (right.isNull(rPos)) {
-            result.setAllNull();
-        } else if (left.hasNoNullsGuarantee()) {
-            result.setAllNonNull();
-            leftSelVector.forEach([&](auto i) {
-                executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                    result, i, rPos, i, dataPtr);
-            });
-        } else {
-            leftSelVector.forEach([&](auto i) {
-                result.setNull(i, left.isNull(i)); // right is always not null
-                if (!result.isNull(i)) {
-                    executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left,
-                        right, result, i, rPos, i, dataPtr);
-                }
-            });
-        }
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
-        typename OP_WRAPPER>
-    static void executeBothUnFlat(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(left.state == right.state);
-        auto& resultSelVector = result.state->getSelVector();
-        if (left.hasNoNullsGuarantee() && right.hasNoNullsGuarantee()) {
-            result.setAllNonNull();
-            resultSelVector.forEach([&](auto i) {
-                executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                    result, i, i, i, dataPtr);
-            });
-        } else {
-            resultSelVector.forEach([&](auto i) {
-                result.setNull(i, left.isNull(i) || right.isNull(i));
-                if (!result.isNull(i)) {
-                    executeOnValue<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left,
-                        right, result, i, i, i, dataPtr);
-                }
-            });
-        }
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC,
-        typename OP_WRAPPER>
-    static void executeSwitch(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
+    static void executeSwitch(common::ValueVector& left, common::SelectionVector* leftSelVector,
+        common::ValueVector& right, common::SelectionVector* rightSelVector,
+        common::ValueVector& result, common::SelectionVector* resultSelVector, void* dataPtr) {
         result.resetAuxiliaryBuffer();
-        if (left.state->isFlat() && right.state->isFlat()) {
-            executeBothFlat<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                result, dataPtr);
-        } else if (left.state->isFlat() && !right.state->isFlat()) {
-            executeFlatUnFlat<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                result, dataPtr);
-        } else if (!left.state->isFlat() && right.state->isFlat()) {
-            executeUnFlatFlat<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                result, dataPtr);
-        } else if (!left.state->isFlat() && !right.state->isFlat()) {
-            executeBothUnFlat<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left, right,
-                result, dataPtr);
-        } else {
-            KU_ASSERT(false);
-        }
+        executeOnSelectedValues<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(left,
+            leftSelVector, right, rightSelVector, result, resultSelVector, dataPtr);
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void execute(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryFunctionWrapper>(left, right,
-            result, nullptr /* dataPtr */);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeString(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryStringFunctionWrapper>(left,
-            right, result, nullptr /* dataPtr */);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeListStruct(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryListStructFunctionWrapper>(
-            left, right, result, nullptr /* dataPtr */);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeMapCreation(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryMapCreationFunctionWrapper>(
-            left, right, result, dataPtr);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeListExtract(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryListExtractFunctionWrapper>(
-            left, right, result, nullptr /* dataPtr */);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeComparison(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryComparisonFunctionWrapper>(
-            left, right, result, nullptr /* dataPtr */);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeUDF(common::ValueVector& left, common::ValueVector& right,
-        common::ValueVector& result, void* dataPtr) {
-        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryUDFFunctionWrapper>(left,
-            right, result, dataPtr);
+    static void execute(common::ValueVector& left, common::SelectionVector* leftSelVector,
+        common::ValueVector& right, common::SelectionVector* rightSelVector,
+        common::ValueVector& result, common::SelectionVector* resultSelVector) {
+        executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC, BinaryFunctionWrapper>(left,
+            leftSelVector, right, rightSelVector, result, resultSelVector, nullptr /* dataPtr */);
     }
 
     struct BinarySelectWrapper {
         template<typename LEFT_TYPE, typename RIGHT_TYPE, typename OP>
         static inline void operation(LEFT_TYPE& left, RIGHT_TYPE& right, uint8_t& result,
-            common::ValueVector* /*leftValueVector*/, common::ValueVector* /*rightValueVector*/) {
+            common::ValueVector* /*leftValueVector*/, common::ValueVector* /*rightValueVector*/,
+            void* /*dataPtr*/) {
             OP::operation(left, right, result);
         }
     };
@@ -6604,7 +6762,8 @@ struct BinaryFunctionExecutor {
     struct BinaryComparisonSelectWrapper {
         template<typename LEFT_TYPE, typename RIGHT_TYPE, typename OP>
         static inline void operation(LEFT_TYPE& left, RIGHT_TYPE& right, uint8_t& result,
-            common::ValueVector* leftValueVector, common::ValueVector* rightValueVector) {
+            common::ValueVector* leftValueVector, common::ValueVector* rightValueVector,
+            void* /*dataPtr*/) {
             OP::operation(left, right, result, leftValueVector, rightValueVector);
         }
     };
@@ -6612,31 +6771,32 @@ struct BinaryFunctionExecutor {
     template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC, typename SELECT_WRAPPER>
     static void selectOnValue(common::ValueVector& left, common::ValueVector& right, uint64_t lPos,
         uint64_t rPos, uint64_t resPos, uint64_t& numSelectedValues,
-        std::span<common::sel_t> selectedPositionsBuffer) {
+        std::span<common::sel_t> selectedPositionsBuffer, void* dataPtr) {
         uint8_t resultValue = 0;
         SELECT_WRAPPER::template operation<LEFT_TYPE, RIGHT_TYPE, FUNC>(
             ((LEFT_TYPE*)left.getData())[lPos], ((RIGHT_TYPE*)right.getData())[rPos], resultValue,
-            &left, &right);
+            &left, &right, dataPtr);
         selectedPositionsBuffer[numSelectedValues] = resPos;
         numSelectedValues += (resultValue == true);
     }
 
     template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC, typename SELECT_WRAPPER>
-    static uint64_t selectBothFlat(common::ValueVector& left, common::ValueVector& right) {
+    static uint64_t selectBothFlat(common::ValueVector& left, common::ValueVector& right,
+        void* dataPtr) {
         auto lPos = left.state->getSelVector()[0];
         auto rPos = right.state->getSelVector()[0];
         uint8_t resultValue = 0;
         if (!left.isNull(lPos) && !right.isNull(rPos)) {
             SELECT_WRAPPER::template operation<LEFT_TYPE, RIGHT_TYPE, FUNC>(
                 ((LEFT_TYPE*)left.getData())[lPos], ((RIGHT_TYPE*)right.getData())[rPos],
-                resultValue, &left, &right);
+                resultValue, &left, &right, dataPtr);
         }
         return resultValue == true;
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename FUNC, typename SELECT_WRAPPER>
     static bool selectFlatUnFlat(common::ValueVector& left, common::ValueVector& right,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         auto lPos = left.state->getSelVector()[0];
         uint64_t numSelectedValues = 0;
         auto selectedPositionsBuffer = selVector.getMutableBuffer();
@@ -6646,13 +6806,13 @@ struct BinaryFunctionExecutor {
         } else if (right.hasNoNullsGuarantee()) {
             rightSelVector.forEach([&](auto i) {
                 selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, lPos, i, i,
-                    numSelectedValues, selectedPositionsBuffer);
+                    numSelectedValues, selectedPositionsBuffer, dataPtr);
             });
         } else {
             rightSelVector.forEach([&](auto i) {
                 if (!right.isNull(i)) {
                     selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, lPos, i,
-                        i, numSelectedValues, selectedPositionsBuffer);
+                        i, numSelectedValues, selectedPositionsBuffer, dataPtr);
                 }
             });
         }
@@ -6662,7 +6822,7 @@ struct BinaryFunctionExecutor {
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename FUNC, typename SELECT_WRAPPER>
     static bool selectUnFlatFlat(common::ValueVector& left, common::ValueVector& right,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         auto rPos = right.state->getSelVector()[0];
         uint64_t numSelectedValues = 0;
         auto selectedPositionsBuffer = selVector.getMutableBuffer();
@@ -6672,13 +6832,13 @@ struct BinaryFunctionExecutor {
         } else if (left.hasNoNullsGuarantee()) {
             leftSelVector.forEach([&](auto i) {
                 selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, i, rPos, i,
-                    numSelectedValues, selectedPositionsBuffer);
+                    numSelectedValues, selectedPositionsBuffer, dataPtr);
             });
         } else {
             leftSelVector.forEach([&](auto i) {
                 if (!left.isNull(i)) {
                     selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, i, rPos,
-                        i, numSelectedValues, selectedPositionsBuffer);
+                        i, numSelectedValues, selectedPositionsBuffer, dataPtr);
                 }
             });
         }
@@ -6689,21 +6849,21 @@ struct BinaryFunctionExecutor {
     // Right, left, and result vectors share the same selectedPositions.
     template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC, typename SELECT_WRAPPER>
     static bool selectBothUnFlat(common::ValueVector& left, common::ValueVector& right,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         uint64_t numSelectedValues = 0;
         auto selectedPositionsBuffer = selVector.getMutableBuffer();
         auto& leftSelVector = left.state->getSelVector();
         if (left.hasNoNullsGuarantee() && right.hasNoNullsGuarantee()) {
             leftSelVector.forEach([&](auto i) {
                 selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, i, i, i,
-                    numSelectedValues, selectedPositionsBuffer);
+                    numSelectedValues, selectedPositionsBuffer, dataPtr);
             });
         } else {
             leftSelVector.forEach([&](auto i) {
                 auto isNull = left.isNull(i) || right.isNull(i);
                 if (!isNull) {
                     selectOnValue<LEFT_TYPE, RIGHT_TYPE, FUNC, SELECT_WRAPPER>(left, right, i, i, i,
-                        numSelectedValues, selectedPositionsBuffer);
+                        numSelectedValues, selectedPositionsBuffer, dataPtr);
                 }
             });
         }
@@ -6712,39 +6872,40 @@ struct BinaryFunctionExecutor {
     }
 
     // BOOLEAN (AND, OR, XOR)
-    template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC>
+    template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC,
+        typename OP_WRAPPER = BinarySelectWrapper>
     static bool select(common::ValueVector& left, common::ValueVector& right,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         if (left.state->isFlat() && right.state->isFlat()) {
-            return selectBothFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinarySelectWrapper>(left, right);
+            return selectBothFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, OP_WRAPPER>(left, right, dataPtr);
         } else if (left.state->isFlat() && !right.state->isFlat()) {
-            return selectFlatUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinarySelectWrapper>(left, right,
-                selVector);
+            return selectFlatUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, OP_WRAPPER>(left, right, selVector,
+                dataPtr);
         } else if (!left.state->isFlat() && right.state->isFlat()) {
-            return selectUnFlatFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinarySelectWrapper>(left, right,
-                selVector);
+            return selectUnFlatFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, OP_WRAPPER>(left, right, selVector,
+                dataPtr);
         } else {
-            return selectBothUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinarySelectWrapper>(left, right,
-                selVector);
+            return selectBothUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, OP_WRAPPER>(left, right, selVector,
+                dataPtr);
         }
     }
 
     // COMPARISON (GT, GTE, LT, LTE, EQ, NEQ)
     template<class LEFT_TYPE, class RIGHT_TYPE, class FUNC>
     static bool selectComparison(common::ValueVector& left, common::ValueVector& right,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         if (left.state->isFlat() && right.state->isFlat()) {
             return selectBothFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinaryComparisonSelectWrapper>(left,
-                right);
+                right, dataPtr);
         } else if (left.state->isFlat() && !right.state->isFlat()) {
             return selectFlatUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinaryComparisonSelectWrapper>(
-                left, right, selVector);
+                left, right, selVector, dataPtr);
         } else if (!left.state->isFlat() && right.state->isFlat()) {
             return selectUnFlatFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinaryComparisonSelectWrapper>(
-                left, right, selVector);
+                left, right, selVector, dataPtr);
         } else {
             return selectBothUnFlat<LEFT_TYPE, RIGHT_TYPE, FUNC, BinaryComparisonSelectWrapper>(
-                left, right, selVector);
+                left, right, selVector, dataPtr);
         }
     }
 };
@@ -6759,10 +6920,10 @@ namespace function {
 struct ConstFunctionExecutor {
 
     template<typename RESULT_TYPE, typename OP>
-    static void execute(common::ValueVector& result) {
+    static void execute(common::ValueVector& result, common::SelectionVector& sel) {
         KU_ASSERT(result.state->isFlat());
         auto resultValues = (RESULT_TYPE*)result.getData();
-        auto idx = result.state->getSelVector()[0];
+        auto idx = sel[0];
         KU_ASSERT(idx == 0);
         OP::operation(resultValues[idx]);
     }
@@ -6777,14 +6938,14 @@ namespace function {
 
 struct PointerFunctionExecutor {
     template<typename RESULT_TYPE, typename OP>
-    static void execute(common::ValueVector& result, void* dataPtr) {
-        if (result.state->getSelVector().isUnfiltered()) {
-            for (auto i = 0u; i < result.state->getSelVector().getSelSize(); i++) {
+    static void execute(common::ValueVector& result, common::SelectionVector& sel, void* dataPtr) {
+        if (sel.isUnfiltered()) {
+            for (auto i = 0u; i < sel.getSelSize(); i++) {
                 OP::operation(result.getValue<RESULT_TYPE>(i), dataPtr);
             }
         } else {
-            for (auto i = 0u; i < result.state->getSelVector().getSelSize(); i++) {
-                auto pos = result.state->getSelVector()[i];
+            for (auto i = 0u; i < sel.getSelSize(); i++) {
+                auto pos = sel[i];
                 OP::operation(result.getValue<RESULT_TYPE>(pos), dataPtr);
             }
         }
@@ -6853,12 +7014,14 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeAllFlat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        auto aPos = a.state->getSelVector()[0];
-        auto bPos = b.state->getSelVector()[0];
-        auto cPos = c.state->getSelVector()[0];
-        auto resPos = result.state->getSelVector()[0];
+    static void executeAllFlat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        common::SelectionVector* cSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        auto aPos = (*aSelVector)[0];
+        auto bPos = (*bSelVector)[0];
+        auto cPos = (*cSelVector)[0];
+        auto resPos = (*resultSelVector)[0];
         result.setNull(resPos, a.isNull(aPos) || b.isNull(bPos) || c.isNull(cPos));
         if (!result.isNull(resPos)) {
             executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c, result,
@@ -6868,29 +7031,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeFlatFlatUnflat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        auto aPos = a.state->getSelVector()[0];
-        auto bPos = b.state->getSelVector()[0];
-        auto& cSelVector = c.state->getSelVector();
+    static void executeFlatFlatUnflat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        common::SelectionVector* cSelVector, common::ValueVector& result, common::SelectionVector*,
+        void* dataPtr) {
+        auto aPos = (*aSelVector)[0];
+        auto bPos = (*bSelVector)[0];
         if (a.isNull(aPos) || b.isNull(bPos)) {
             result.setAllNull();
         } else if (c.hasNoNullsGuarantee()) {
-            if (cSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < cSelVector.getSelSize(); ++i) {
+            if (cSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < cSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, bPos, i, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < cSelVector.getSelSize(); ++i) {
-                    auto pos = cSelVector[i];
+                for (auto i = 0u; i < cSelVector->getSelSize(); ++i) {
+                    auto pos = (*cSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, bPos, pos, pos, dataPtr);
                 }
             }
         } else {
-            if (cSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < cSelVector.getSelSize(); ++i) {
+            if (cSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < cSelVector->getSelSize(); ++i) {
                     result.setNull(i, c.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -6898,8 +7062,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < cSelVector.getSelSize(); ++i) {
-                    auto pos = cSelVector[i];
+                for (auto i = 0u; i < cSelVector->getSelSize(); ++i) {
+                    auto pos = (*cSelVector)[i];
                     result.setNull(pos, c.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -6912,29 +7076,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeFlatUnflatUnflat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(b.state == c.state);
-        auto aPos = a.state->getSelVector()[0];
-        auto& bSelVector = b.state->getSelVector();
+    static void executeFlatUnflatUnflat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        [[maybe_unused]] common::SelectionVector* cSelVector, common::ValueVector& result,
+        common::SelectionVector*, void* dataPtr) {
+        KU_ASSERT(bSelVector == cSelVector);
+        auto aPos = (*aSelVector)[0];
         if (a.isNull(aPos)) {
             result.setAllNull();
         } else if (b.hasNoNullsGuarantee() && c.hasNoNullsGuarantee()) {
-            if (bSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
+            if (bSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, i, i, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
-                    auto pos = bSelVector[i];
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
+                    auto pos = (*bSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, pos, pos, pos, dataPtr);
                 }
             }
         } else {
-            if (bSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
+            if (bSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
                     result.setNull(i, b.isNull(i) || c.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -6942,8 +7107,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
-                    auto pos = bSelVector[i];
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
+                    auto pos = (*bSelVector)[i];
                     result.setNull(pos, b.isNull(pos) || c.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -6956,29 +7121,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeFlatUnflatFlat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        auto aPos = a.state->getSelVector()[0];
-        auto cPos = c.state->getSelVector()[0];
-        auto& bSelVector = b.state->getSelVector();
+    static void executeFlatUnflatFlat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        common::SelectionVector* cSelVector, common::ValueVector& result, common::SelectionVector*,
+        void* dataPtr) {
+        auto aPos = (*aSelVector)[0];
+        auto cPos = (*cSelVector)[0];
         if (a.isNull(aPos) || c.isNull(cPos)) {
             result.setAllNull();
         } else if (b.hasNoNullsGuarantee()) {
-            if (bSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
+            if (bSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, i, cPos, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
-                    auto pos = bSelVector[i];
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
+                    auto pos = (*bSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, aPos, pos, cPos, pos, dataPtr);
                 }
             }
         } else {
-            if (bSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
+            if (bSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
                     result.setNull(i, b.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -6986,8 +7152,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < bSelVector.getSelSize(); ++i) {
-                    auto pos = bSelVector[i];
+                for (auto i = 0u; i < bSelVector->getSelSize(); ++i) {
+                    auto pos = (*bSelVector)[i];
                     result.setNull(pos, b.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7000,26 +7166,27 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeAllUnFlat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(a.state == b.state && b.state == c.state);
-        auto& aSelVector = a.state->getSelVector();
+    static void executeAllUnFlat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, [[maybe_unused]] common::SelectionVector* bSelVector,
+        common::ValueVector& c, [[maybe_unused]] common::SelectionVector* cSelVector,
+        common::ValueVector& result, common::SelectionVector*, void* dataPtr) {
+        KU_ASSERT(aSelVector == bSelVector && bSelVector == cSelVector);
         if (a.hasNoNullsGuarantee() && b.hasNoNullsGuarantee() && c.hasNoNullsGuarantee()) {
-            if (aSelVector.isUnfiltered()) {
-                for (uint64_t i = 0; i < aSelVector.getSelSize(); i++) {
+            if (aSelVector->isUnfiltered()) {
+                for (uint64_t i = 0; i < aSelVector->getSelSize(); i++) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, i, i, i, i, dataPtr);
                 }
             } else {
-                for (uint64_t i = 0; i < aSelVector.getSelSize(); i++) {
-                    auto pos = aSelVector[i];
+                for (uint64_t i = 0; i < aSelVector->getSelSize(); i++) {
+                    auto pos = (*aSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, pos, pos, pos, pos, dataPtr);
                 }
             }
         } else {
-            if (aSelVector.isUnfiltered()) {
-                for (uint64_t i = 0; i < aSelVector.getSelSize(); i++) {
+            if (aSelVector->isUnfiltered()) {
+                for (uint64_t i = 0; i < aSelVector->getSelSize(); i++) {
                     result.setNull(i, a.isNull(i) || b.isNull(i) || c.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7027,8 +7194,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (uint64_t i = 0; i < aSelVector.getSelSize(); i++) {
-                    auto pos = aSelVector[i];
+                for (uint64_t i = 0; i < aSelVector->getSelSize(); i++) {
+                    auto pos = (*aSelVector)[i];
                     result.setNull(pos, a.isNull(pos) || b.isNull(pos) || c.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7041,29 +7208,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeUnflatFlatFlat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        auto bPos = b.state->getSelVector()[0];
-        auto cPos = c.state->getSelVector()[0];
-        auto& aSelVector = a.state->getSelVector();
+    static void executeUnflatFlatFlat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        common::SelectionVector* cSelVector, common::ValueVector& result, common::SelectionVector*,
+        void* dataPtr) {
+        auto bPos = (*bSelVector)[0];
+        auto cPos = (*cSelVector)[0];
         if (b.isNull(bPos) || c.isNull(cPos)) {
             result.setAllNull();
         } else if (a.hasNoNullsGuarantee()) {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, i, bPos, cPos, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = aSelVector[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*aSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, pos, bPos, cPos, pos, dataPtr);
                 }
             }
         } else {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     result.setNull(i, a.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7071,8 +7239,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = aSelVector[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*aSelVector)[i];
                     result.setNull(pos, a.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7085,29 +7253,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeUnflatFlatUnflat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(a.state == c.state);
-        auto& aSelVector = a.state->getSelVector();
-        auto bPos = b.state->getSelVector()[0];
+    static void executeUnflatFlatUnflat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        [[maybe_unused]] common::SelectionVector* cSelVector, common::ValueVector& result,
+        common::SelectionVector*, void* dataPtr) {
+        KU_ASSERT(aSelVector == cSelVector);
+        auto bPos = (*bSelVector)[0];
         if (b.isNull(bPos)) {
             result.setAllNull();
         } else if (a.hasNoNullsGuarantee() && c.hasNoNullsGuarantee()) {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, i, bPos, i, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = aSelVector[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*aSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, pos, bPos, pos, pos, dataPtr);
                 }
             }
         } else {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     result.setNull(i, a.isNull(i) || c.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7115,8 +7284,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = b.state->getSelVector()[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*bSelVector)[i];
                     result.setNull(pos, a.isNull(pos) || c.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7129,29 +7298,30 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeUnflatUnFlatFlat(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(a.state == b.state);
-        auto& aSelVector = a.state->getSelVector();
-        auto cPos = c.state->getSelVector()[0];
+    static void executeUnflatUnFlatFlat(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, [[maybe_unused]] common::SelectionVector* bSelVector,
+        common::ValueVector& c, common::SelectionVector* cSelVector, common::ValueVector& result,
+        common::SelectionVector*, void* dataPtr) {
+        KU_ASSERT(aSelVector == bSelVector);
+        auto cPos = (*cSelVector)[0];
         if (c.isNull(cPos)) {
             result.setAllNull();
         } else if (a.hasNoNullsGuarantee() && b.hasNoNullsGuarantee()) {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, i, i, cPos, i, dataPtr);
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = aSelVector[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*aSelVector)[i];
                     executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
                         result, pos, pos, cPos, pos, dataPtr);
                 }
             }
         } else {
-            if (aSelVector.isUnfiltered()) {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
+            if (aSelVector->isUnfiltered()) {
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
                     result.setNull(i, a.isNull(i) || b.isNull(i));
                     if (!result.isNull(i)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7159,8 +7329,8 @@ struct TernaryFunctionExecutor {
                     }
                 }
             } else {
-                for (auto i = 0u; i < aSelVector.getSelSize(); ++i) {
-                    auto pos = aSelVector[i];
+                for (auto i = 0u; i < aSelVector->getSelSize(); ++i) {
+                    auto pos = (*aSelVector)[i];
                     result.setNull(pos, a.isNull(pos) || b.isNull(pos));
                     if (!result.isNull(pos)) {
                         executeOnValue<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b,
@@ -7173,71 +7343,38 @@ struct TernaryFunctionExecutor {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC,
         typename OP_WRAPPER>
-    static void executeSwitch(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result, void* dataPtr) {
+    static void executeSwitch(common::ValueVector& a, common::SelectionVector* aSelVector,
+        common::ValueVector& b, common::SelectionVector* bSelVector, common::ValueVector& c,
+        common::SelectionVector* cSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         result.resetAuxiliaryBuffer();
         if (a.state->isFlat() && b.state->isFlat() && c.state->isFlat()) {
-            executeAllFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c, result,
-                dataPtr);
+            executeAllFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, aSelVector, b,
+                bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (a.state->isFlat() && b.state->isFlat() && !c.state->isFlat()) {
-            executeFlatFlatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeFlatFlatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (a.state->isFlat() && !b.state->isFlat() && !c.state->isFlat()) {
-            executeFlatUnflatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeFlatUnflatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (a.state->isFlat() && !b.state->isFlat() && c.state->isFlat()) {
-            executeFlatUnflatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeFlatUnflatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (!a.state->isFlat() && !b.state->isFlat() && !c.state->isFlat()) {
-            executeAllUnFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c, result,
-                dataPtr);
+            executeAllUnFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, aSelVector,
+                b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (!a.state->isFlat() && !b.state->isFlat() && c.state->isFlat()) {
-            executeUnflatUnFlatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeUnflatUnFlatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (!a.state->isFlat() && b.state->isFlat() && c.state->isFlat()) {
-            executeUnflatFlatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeUnflatFlatFlat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else if (!a.state->isFlat() && b.state->isFlat() && !c.state->isFlat()) {
-            executeUnflatFlatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a, b, c,
-                result, dataPtr);
+            executeUnflatFlatUnflat<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(a,
+                aSelVector, b, bSelVector, c, cSelVector, result, resultSelVector, dataPtr);
         } else {
             KU_ASSERT(false);
         }
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void execute(common::ValueVector& a, common::ValueVector& b, common::ValueVector& c,
-        common::ValueVector& result) {
-        executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, TernaryFunctionWrapper>(a, b, c,
-            result, nullptr /* dataPtr */);
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeString(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result) {
-        executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, TernaryStringFunctionWrapper>(a, b,
-            c, result, nullptr /* dataPtr */);
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeRegex(common::ValueVector& a, common::ValueVector& b, common::ValueVector& c,
-        common::ValueVector& result, void* dataPtr) {
-        executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, TernaryRegexFunctionWrapper>(a, b,
-            c, result, dataPtr);
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeListStruct(common::ValueVector& a, common::ValueVector& b,
-        common::ValueVector& c, common::ValueVector& result) {
-        executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, TernaryListFunctionWrapper>(a, b,
-            c, result, nullptr /* dataPtr */);
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeUDF(common::ValueVector& a, common::ValueVector& b, common::ValueVector& c,
-        common::ValueVector& result, void* dataPtr) {
-        executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC, TernaryUDFFunctionWrapper>(a, b, c,
-            result, dataPtr);
     }
 };
 
@@ -7263,15 +7400,14 @@ public:
         common::offset_t* offsets, size_t numOffsets, uint8_t* result, size_t numThreads);
 
     // TODO: Should merge following two functions into a single one.
-    uint64_t getNumNodes(const std::string& nodeName);
-    uint64_t getNumRels(const std::string& relName);
+    uint64_t getNumNodes(const std::string& nodeName) const;
+    uint64_t getNumRels(const std::string& relName) const;
 
 private:
-    void scanColumn(storage::Table* table, common::column_id_t columnID, common::offset_t* offsets,
-        size_t size, uint8_t* result);
+    void scanColumn(storage::Table* table, common::column_id_t columnID,
+        const common::offset_t* offsets, size_t size, uint8_t* result) const;
 
 private:
-    Database* database;
     std::unique_ptr<ClientContext> clientContext;
 };
 
@@ -7364,6 +7500,17 @@ struct UnaryCastFunctionWrapper {
     }
 };
 
+struct UnaryCastUnionFunctionWrapper {
+    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
+    static void operation(void* inputVector, uint64_t inputPos, void* resultVector,
+        uint64_t resultPos, void* dataPtr) {
+        auto& inputVector_ = *(common::ValueVector*)inputVector;
+        auto& resultVector_ = *(common::ValueVector*)resultVector;
+        FUNC::operation(inputVector_.getValue<OPERAND_TYPE>(inputPos),
+            resultVector_.getValue<RESULT_TYPE>(resultPos), inputVector_, resultVector_, dataPtr);
+    }
+};
+
 struct UnaryUDFFunctionWrapper {
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
     static inline void operation(void* inputVector, uint64_t inputPos, void* resultVector,
@@ -7376,6 +7523,7 @@ struct UnaryUDFFunctionWrapper {
 };
 
 struct UnaryFunctionExecutor {
+
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC, typename OP_WRAPPER>
     static void executeOnValue(common::ValueVector& inputVector, uint64_t inputPos,
         common::ValueVector& resultVector, uint64_t resultPos, void* dataPtr) {
@@ -7383,76 +7531,75 @@ struct UnaryFunctionExecutor {
             inputPos, (void*)&resultVector, resultPos, dataPtr);
     }
 
+    static std::pair<common::sel_t, common::sel_t> getSelectedPos(common::idx_t selIdx,
+        common::SelectionVector* operandSelVector, common::SelectionVector* resultSelVector,
+        bool operandIsUnfiltered, bool resultIsUnfiltered) {
+        common::sel_t operandPos = operandIsUnfiltered ? selIdx : (*operandSelVector)[selIdx];
+        common::sel_t resultPos = resultIsUnfiltered ? selIdx : (*resultSelVector)[selIdx];
+        return {operandPos, resultPos};
+    }
+
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC, typename OP_WRAPPER>
-    static void executeSwitch(common::ValueVector& operand, common::ValueVector& result,
-        void* dataPtr) {
+    static void executeOnSelectedValues(common::ValueVector& operand,
+        common::SelectionVector* operandSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        const bool noNullsGuaranteed = operand.hasNoNullsGuarantee();
+        if (noNullsGuaranteed) {
+            result.setAllNonNull();
+        }
+
+        const bool operandIsUnfiltered = operandSelVector->isUnfiltered();
+        const bool resultIsUnfiltered = resultSelVector->isUnfiltered();
+
+        for (auto i = 0u; i < operandSelVector->getSelSize(); i++) {
+            const auto [operandPos, resultPos] = getSelectedPos(i, operandSelVector,
+                resultSelVector, operandIsUnfiltered, resultIsUnfiltered);
+            if (noNullsGuaranteed) {
+                executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, operandPos,
+                    result, resultPos, dataPtr);
+            } else {
+                result.setNull(resultPos, operand.isNull(operandPos));
+                if (!result.isNull(resultPos)) {
+                    executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, operandPos,
+                        result, resultPos, dataPtr);
+                }
+            }
+        }
+    }
+
+    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC, typename OP_WRAPPER>
+    static void executeSwitch(common::ValueVector& operand,
+        common::SelectionVector* operandSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         result.resetAuxiliaryBuffer();
-        auto& operandSelVector = operand.state->getSelVector();
         if (operand.state->isFlat()) {
-            auto inputPos = operandSelVector[0];
-            auto resultPos = result.state->getSelVector()[0];
+            auto inputPos = (*operandSelVector)[0];
+            auto resultPos = (*resultSelVector)[0];
             result.setNull(resultPos, operand.isNull(inputPos));
             if (!result.isNull(resultPos)) {
                 executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, inputPos,
                     result, resultPos, dataPtr);
             }
         } else {
-            if (operand.hasNoNullsGuarantee()) {
-                result.setAllNonNull();
-                if (operandSelVector.isUnfiltered()) {
-                    for (auto i = 0u; i < operandSelVector.getSelSize(); i++) {
-                        executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, i,
-                            result, i, dataPtr);
-                    }
-                } else {
-                    for (auto i = 0u; i < operandSelVector.getSelSize(); i++) {
-                        auto pos = operandSelVector[i];
-                        executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, pos,
-                            result, pos, dataPtr);
-                    }
-                }
-            } else {
-                if (operandSelVector.isUnfiltered()) {
-                    for (auto i = 0u; i < operandSelVector.getSelSize(); i++) {
-                        result.setNull(i, operand.isNull(i));
-                        if (!result.isNull(i)) {
-                            executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand, i,
-                                result, i, dataPtr);
-                        }
-                    }
-                } else {
-                    for (auto i = 0u; i < operandSelVector.getSelSize(); i++) {
-                        auto pos = operandSelVector[i];
-                        result.setNull(pos, operand.isNull(pos));
-                        if (!result.isNull(pos)) {
-                            executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand,
-                                pos, result, pos, dataPtr);
-                        }
-                    }
-                }
-            }
+            executeOnSelectedValues<OPERAND_TYPE, RESULT_TYPE, FUNC, OP_WRAPPER>(operand,
+                operandSelVector, result, resultSelVector, dataPtr);
         }
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void execute(common::ValueVector& operand, common::ValueVector& result) {
-        executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC, UnaryFunctionWrapper>(operand, result,
-            nullptr /* dataPtr */);
+    static void execute(common::ValueVector& operand, common::SelectionVector* operandSelVector,
+        common::ValueVector& result, common::SelectionVector* resultSelVector) {
+        executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC, UnaryFunctionWrapper>(operand,
+            operandSelVector, result, resultSelVector, nullptr /* dataPtr */);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeUDF(common::ValueVector& operand, common::ValueVector& result,
-        void* dataPtr) {
-        executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC, UnaryUDFFunctionWrapper>(operand, result,
-            dataPtr);
-    }
-
-    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void executeSequence(common::ValueVector& operand, common::ValueVector& result,
-        void* dataPtr) {
+    static void executeSequence(common::ValueVector& operand,
+        common::SelectionVector* operandSelVector, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         result.resetAuxiliaryBuffer();
-        auto inputPos = operand.state->getSelVector()[0];
-        auto resultPos = result.state->getSelVector()[0];
+        auto inputPos = (*operandSelVector)[0];
+        auto resultPos = (*resultSelVector)[0];
         executeOnValue<OPERAND_TYPE, RESULT_TYPE, FUNC, UnarySequenceFunctionWrapper>(operand,
             inputPos, result, resultPos, dataPtr);
     }
@@ -7511,11 +7658,13 @@ using scalar_func_compile_exec_t =
     std::function<void(FunctionBindData*, const std::vector<std::shared_ptr<common::ValueVector>>&,
         std::shared_ptr<common::ValueVector>&)>;
 // Execute function.
-using scalar_func_exec_t = std::function<void(
-    const std::vector<std::shared_ptr<common::ValueVector>>&, common::ValueVector&, void*)>;
+using scalar_func_exec_t =
+    std::function<void(const std::vector<std::shared_ptr<common::ValueVector>>&,
+        const std::vector<common::SelectionVector*>&, common::ValueVector&,
+        common::SelectionVector*, void*)>;
 // Execute boolean function and write result to selection vector. Fast path for filter.
 using scalar_func_select_t = std::function<bool(
-    const std::vector<std::shared_ptr<common::ValueVector>>&, common::SelectionVector&)>;
+    const std::vector<std::shared_ptr<common::ValueVector>>&, common::SelectionVector&, void*)>;
 
 struct KUZU_API ScalarFunction : public ScalarOrAggregateFunction {
     scalar_func_exec_t execFunc = nullptr;
@@ -7538,162 +7687,212 @@ struct KUZU_API ScalarFunction : public ScalarOrAggregateFunction {
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
     static void TernaryExecFunction(const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr = nullptr) {
         KU_ASSERT(params.size() == 3);
-        TernaryFunctionExecutor::execute<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC>(*params[0],
-            *params[1], *params[2], result);
+        TernaryFunctionExecutor::executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC,
+            TernaryFunctionWrapper>(*params[0], paramSelVectors[0], *params[1], paramSelVectors[1],
+            *params[2], paramSelVectors[2], result, resultSelVector, dataPtr);
     }
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
     static void TernaryStringExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr = nullptr) {
         KU_ASSERT(params.size() == 3);
-        TernaryFunctionExecutor::executeString<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC>(
-            *params[0], *params[1], *params[2], result);
+        TernaryFunctionExecutor::executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC,
+            TernaryStringFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], *params[2], paramSelVectors[2], result, resultSelVector, dataPtr);
     }
 
     template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
     static void TernaryRegexExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
-        TernaryFunctionExecutor::executeRegex<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC>(*params[0],
-            *params[1], *params[2], result, dataPtr);
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        TernaryFunctionExecutor::executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC,
+            TernaryRegexFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], *params[2], paramSelVectors[2], result, resultSelVector, dataPtr);
+    }
+
+    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
+    static void TernaryExecListStructFunction(
+        const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr = nullptr) {
+        KU_ASSERT(params.size() == 3);
+        TernaryFunctionExecutor::executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC,
+            TernaryListFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], *params[2], paramSelVectors[2], result, resultSelVector, dataPtr);
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
     static void BinaryExecFunction(const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* /*dataPtr*/ = nullptr) {
         KU_ASSERT(params.size() == 2);
         BinaryFunctionExecutor::execute<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC>(*params[0],
-            *params[1], result);
+            paramSelVectors[0], *params[1], paramSelVectors[1], result, resultSelVector);
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
     static void BinaryStringExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr = nullptr) {
         KU_ASSERT(params.size() == 2);
-        BinaryFunctionExecutor::executeString<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC>(*params[0],
-            *params[1], result);
+        BinaryFunctionExecutor::executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC,
+            BinaryStringFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], result, resultSelVector, dataPtr);
+    }
+
+    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
+    static void BinaryExecListStructFunction(
+        const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr = nullptr) {
+        KU_ASSERT(params.size() == 2);
+        BinaryFunctionExecutor::executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC,
+            BinaryListStructFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], result, resultSelVector, dataPtr);
+    }
+
+    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
+    static void BinaryExecWithBindData(
+        const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        KU_ASSERT(params.size() == 2);
+        BinaryFunctionExecutor::executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC,
+            BinaryMapCreationFunctionWrapper>(*params[0], paramSelVectors[0], *params[1],
+            paramSelVectors[1], result, resultSelVector, dataPtr);
     }
 
     template<typename LEFT_TYPE, typename RIGHT_TYPE, typename FUNC>
     static bool BinarySelectFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::SelectionVector& selVector) {
+        common::SelectionVector& selVector, void* dataPtr) {
         KU_ASSERT(params.size() == 2);
         return BinaryFunctionExecutor::select<LEFT_TYPE, RIGHT_TYPE, FUNC>(*params[0], *params[1],
-            selVector);
+            selVector, dataPtr);
+    }
+
+    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename FUNC>
+    static bool BinarySelectWithBindData(
+        const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        common::SelectionVector& selVector, void* dataPtr) {
+        KU_ASSERT(params.size() == 2);
+        return BinaryFunctionExecutor::select<LEFT_TYPE, RIGHT_TYPE, FUNC,
+            BinarySelectWithBindDataWrapper>(*params[0], *params[1], selVector, dataPtr);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC,
         typename EXECUTOR = UnaryFunctionExecutor>
     static void UnaryExecFunction(const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
         EXECUTOR::template executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC, UnaryFunctionWrapper>(
-            *params[0], result, dataPtr);
+            *params[0], paramSelVectors[0], result, resultSelVector, dataPtr);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
     static void UnarySequenceExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
-        UnaryFunctionExecutor::executeSequence<OPERAND_TYPE, RESULT_TYPE, FUNC>(*params[0], result,
-            dataPtr);
+        UnaryFunctionExecutor::executeSequence<OPERAND_TYPE, RESULT_TYPE, FUNC>(*params[0],
+            paramSelVectors[0], result, resultSelVector, dataPtr);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
     static void UnaryStringExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* /*dataPtr*/ = nullptr) {
         KU_ASSERT(params.size() == 1);
         UnaryFunctionExecutor::executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
-            UnaryStringFunctionWrapper>(*params[0], result, nullptr /* dataPtr */);
+            UnaryStringFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+            nullptr /* dataPtr */);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC,
         typename EXECUTOR = UnaryFunctionExecutor>
     static void UnaryCastStringExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
         EXECUTOR::template executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
-            UnaryCastStringFunctionWrapper>(*params[0], result, dataPtr);
+            UnaryCastStringFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+            dataPtr);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC,
         typename EXECUTOR = UnaryFunctionExecutor>
     static void UnaryCastExecFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
         EXECUTOR::template executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC, UnaryCastFunctionWrapper>(
-            *params[0], result, dataPtr);
+            *params[0], paramSelVectors[0], result, resultSelVector, dataPtr);
     }
 
-    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
+    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC,
+        typename EXECUTOR = UnaryFunctionExecutor>
+    static void UnaryCastUnionExecFunction(
+        const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
+        KU_ASSERT(params.size() == 1);
+        EXECUTOR::template executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
+            UnaryCastUnionFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+            dataPtr);
+    }
+
+    template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC,
+        typename EXECUTOR = UnaryFunctionExecutor>
     static void UnaryExecNestedTypeFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
-        UnaryFunctionExecutor::executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
-            UnaryNestedTypeFunctionWrapper>(*params[0], result, nullptr /* dataPtr */);
+        EXECUTOR::template executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
+            UnaryNestedTypeFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+            dataPtr);
     }
 
     template<typename OPERAND_TYPE, typename RESULT_TYPE, typename FUNC>
     static void UnaryExecStructFunction(
         const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
+        const std::vector<common::SelectionVector*>& paramSelVectors, common::ValueVector& result,
+        common::SelectionVector* resultSelVector, void* dataPtr) {
         KU_ASSERT(params.size() == 1);
         UnaryFunctionExecutor::executeSwitch<OPERAND_TYPE, RESULT_TYPE, FUNC,
-            UnaryStructFunctionWrapper>(*params[0], result, dataPtr);
+            UnaryStructFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+            dataPtr);
     }
 
     template<typename RESULT_TYPE, typename FUNC>
-    static void NullaryExecFunction(const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
-        KU_ASSERT(params.empty());
-        (void)params;
-        ConstFunctionExecutor::execute<RESULT_TYPE, FUNC>(result);
+    static void NullaryExecFunction(
+        [[maybe_unused]] const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        [[maybe_unused]] const std::vector<common::SelectionVector*>& paramSelVectors,
+        common::ValueVector& result, common::SelectionVector* resultSelVector,
+        void* /*dataPtr*/ = nullptr) {
+        KU_ASSERT(params.empty() && paramSelVectors.empty());
+        ConstFunctionExecutor::execute<RESULT_TYPE, FUNC>(result, *resultSelVector);
     }
 
     template<typename RESULT_TYPE, typename FUNC>
     static void NullaryAuxilaryExecFunction(
-        const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(params.empty());
-        (void)params;
-        PointerFunctionExecutor::execute<RESULT_TYPE, FUNC>(result, dataPtr);
-    }
-
-    template<typename A_TYPE, typename B_TYPE, typename C_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void TernaryExecListStructFunction(
-        const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
-        KU_ASSERT(params.size() == 3);
-        TernaryFunctionExecutor::executeListStruct<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE, FUNC>(
-            *params[0], *params[1], *params[2], result);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void BinaryExecListStructFunction(
-        const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* /*dataPtr*/ = nullptr) {
-        KU_ASSERT(params.size() == 2);
-        BinaryFunctionExecutor::executeListStruct<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC>(
-            *params[0], *params[1], result);
-    }
-
-    template<typename LEFT_TYPE, typename RIGHT_TYPE, typename RESULT_TYPE, typename FUNC>
-    static void BinaryExecMapCreationFunction(
-        const std::vector<std::shared_ptr<common::ValueVector>>& params,
-        common::ValueVector& result, void* dataPtr) {
-        KU_ASSERT(params.size() == 2);
-        BinaryFunctionExecutor::executeMapCreation<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE, FUNC>(
-            *params[0], *params[1], result, dataPtr);
+        [[maybe_unused]] const std::vector<std::shared_ptr<common::ValueVector>>& params,
+        [[maybe_unused]] const std::vector<common::SelectionVector*>& paramSelVectors,
+        common::ValueVector& result, common::SelectionVector* resultSelVector, void* dataPtr) {
+        KU_ASSERT(params.empty() && paramSelVectors.empty());
+        PointerFunctionExecutor::execute<RESULT_TYPE, FUNC>(result, *resultSelVector, dataPtr);
     }
 
     virtual std::unique_ptr<ScalarFunction> copy() const {
@@ -7733,11 +7932,11 @@ enum class PhysicalOperatorType : uint8_t {
     DELETE_,
     DROP,
     DUMMY_SINK,
+    DUMMY_SIMPLE_SINK,
     EMPTY_RESULT,
     EXPORT_DATABASE,
     FILTER,
     FLATTEN,
-    GDS_CALL,
     HASH_JOIN_BUILD,
     HASH_JOIN_PROBE,
     IMPORT_DATABASE,
@@ -7750,13 +7949,12 @@ enum class PhysicalOperatorType : uint8_t {
     LOAD_EXTENSION,
     MERGE,
     MULTIPLICITY_REDUCER,
-    OFFSET_SCAN_NODE_TABLE,
     PARTITIONER,
     PATH_PROPERTY_PROBE,
     PRIMARY_KEY_SCAN_NODE_TABLE,
     PROJECTION,
     PROFILE,
-    RECURSIVE_JOIN,
+    RECURSIVE_EXTEND,
     RESULT_COLLECTOR,
     SCAN_NODE_TABLE,
     SCAN_REL_TABLE,
@@ -7774,15 +7972,13 @@ enum class PhysicalOperatorType : uint8_t {
     UNION_ALL_SCAN,
     UNWIND,
     USE_DATABASE,
+    UNINSTALL_EXTENSION,
 };
 
 class PhysicalOperator;
-class PhysicalOperatorUtils {
-public:
+struct PhysicalOperatorUtils {
     static std::string operatorToString(const PhysicalOperator* physicalOp);
-
-private:
-    static std::string operatorTypeToString(PhysicalOperatorType operatorType);
+    KUZU_API static std::string operatorTypeToString(PhysicalOperatorType operatorType);
 };
 
 struct OperatorMetrics {
@@ -7795,7 +7991,7 @@ struct OperatorMetrics {
 
 using physical_op_vector_t = std::vector<std::unique_ptr<PhysicalOperator>>;
 
-class PhysicalOperator {
+class KUZU_API PhysicalOperator {
 public:
     // Leaf operator
     PhysicalOperator(PhysicalOperatorType operatorType, physical_op_id id,
@@ -7868,7 +8064,7 @@ protected:
     double getExecutionTime(common::Profiler& profiler) const;
     uint64_t getNumOutputTuples(common::Profiler& profiler) const;
 
-    virtual void finalizeInternal(ExecutionContext* /*context*/) {};
+    virtual void finalizeInternal(ExecutionContext* /*context*/) {}
 
 protected:
     physical_op_id id;
@@ -7878,8 +8074,6 @@ protected:
     physical_op_vector_t children;
     ResultSet* resultSet;
     std::unique_ptr<OPPrintInfo> printInfo;
-
-    bool hasBeenFinalized = false;
 };
 
 } // namespace processor
@@ -7948,13 +8142,14 @@ struct UDF {
     static function::scalar_func_exec_t createEmptyParameterExecFunc(RESULT_TYPE (*udfFunc)(),
         const std::vector<common::LogicalTypeID>&) {
         KU_UNUSED(udfFunc); // Disable compiler warnings.
-        return [udfFunc](const std::vector<std::shared_ptr<common::ValueVector>>& params,
-                   common::ValueVector& result, void* /*dataPtr*/ = nullptr) -> void {
-            (void)params;
-            KU_ASSERT(params.size() == 0);
-            auto& resultSelVector = result.state->getSelVector();
-            for (auto i = 0u; i < resultSelVector.getSelSize(); ++i) {
-                auto resultPos = resultSelVector[i];
+        return [udfFunc](
+                   [[maybe_unused]] const std::vector<std::shared_ptr<common::ValueVector>>& params,
+                   [[maybe_unused]] const std::vector<common::SelectionVector*>& paramSelVectors,
+                   common::ValueVector& result, common::SelectionVector* resultSelVector,
+                   void* /*dataPtr*/ = nullptr) -> void {
+            KU_ASSERT(params.empty() && paramSelVectors.empty());
+            for (auto i = 0u; i < resultSelVector->getSelSize(); ++i) {
+                auto resultPos = (*resultSelVector)[i];
                 result.copyFromValue(resultPos, common::Value(udfFunc()));
             }
         };
@@ -7977,10 +8172,13 @@ struct UDF {
         validateType<OPERAND_TYPE>(parameterTypes[0]);
         function::scalar_func_exec_t execFunc =
             [udfFunc](const std::vector<std::shared_ptr<common::ValueVector>>& params,
-                common::ValueVector& result, void* /*dataPtr*/ = nullptr) -> void {
+                const std::vector<common::SelectionVector*>& paramSelVectors,
+                common::ValueVector& result, common::SelectionVector* resultSelVector,
+                void* /*dataPtr*/ = nullptr) -> void {
             KU_ASSERT(params.size() == 1);
-            UnaryFunctionExecutor::executeUDF<OPERAND_TYPE, RESULT_TYPE, UnaryUDFExecutor>(
-                *params[0], result, (void*)udfFunc);
+            UnaryFunctionExecutor::executeSwitch<OPERAND_TYPE, RESULT_TYPE, UnaryUDFExecutor,
+                UnaryUDFFunctionWrapper>(*params[0], paramSelVectors[0], result, resultSelVector,
+                (void*)udfFunc);
         };
         return execFunc;
     }
@@ -8004,10 +8202,13 @@ struct UDF {
         validateType<RIGHT_TYPE>(parameterTypes[1]);
         function::scalar_func_exec_t execFunc =
             [udfFunc](const std::vector<std::shared_ptr<common::ValueVector>>& params,
-                common::ValueVector& result, void* /*dataPtr*/ = nullptr) -> void {
+                const std::vector<common::SelectionVector*>& paramSelVectors,
+                common::ValueVector& result, common::SelectionVector* resultSelVector,
+                void* /*dataPtr*/ = nullptr) -> void {
             KU_ASSERT(params.size() == 2);
-            BinaryFunctionExecutor::executeUDF<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE,
-                BinaryUDFExecutor>(*params[0], *params[1], result, (void*)udfFunc);
+            BinaryFunctionExecutor::executeSwitch<LEFT_TYPE, RIGHT_TYPE, RESULT_TYPE,
+                BinaryUDFExecutor, BinaryUDFFunctionWrapper>(*params[0], paramSelVectors[0],
+                *params[1], paramSelVectors[1], result, resultSelVector, (void*)udfFunc);
         };
         return execFunc;
     }
@@ -8032,10 +8233,14 @@ struct UDF {
         validateType<C_TYPE>(parameterTypes[2]);
         function::scalar_func_exec_t execFunc =
             [udfFunc](const std::vector<std::shared_ptr<common::ValueVector>>& params,
-                common::ValueVector& result, void* /*dataPtr*/ = nullptr) -> void {
+                const std::vector<common::SelectionVector*>& paramSelVectors,
+                common::ValueVector& result, common::SelectionVector* resultSelVector,
+                void* /*dataPtr*/ = nullptr) -> void {
             KU_ASSERT(params.size() == 3);
-            TernaryFunctionExecutor::executeUDF<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE,
-                TernaryUDFExecutor>(*params[0], *params[1], *params[2], result, (void*)udfFunc);
+            TernaryFunctionExecutor::executeSwitch<A_TYPE, B_TYPE, C_TYPE, RESULT_TYPE,
+                TernaryUDFExecutor, TernaryUDFFunctionWrapper>(*params[0], paramSelVectors[0],
+                *params[1], paramSelVectors[1], *params[2], paramSelVectors[2], result,
+                resultSelVector, (void*)udfFunc);
         };
         return execFunc;
     }
@@ -8174,44 +8379,27 @@ struct ExecutionContext;
 class PlanMapper;
 } // namespace processor
 
-namespace transaction {
-class Transaction;
-} // namespace transaction
-
 namespace function {
 
 struct TableFuncBindInput;
 struct TableFuncBindData;
 
-struct TableFuncMorsel {
-    common::offset_t startOffset;
-    common::offset_t endOffset;
-
-    TableFuncMorsel(common::offset_t startOffset, common::offset_t endOffset)
-        : startOffset{startOffset}, endOffset{endOffset} {}
-
-    bool hasMoreToOutput() const { return startOffset != common::INVALID_OFFSET; }
-
-    static TableFuncMorsel createInvalidMorsel() {
-        return {common::INVALID_OFFSET, common::INVALID_OFFSET};
-    }
-
-    bool isInvalid() const {
-        return startOffset == common::INVALID_OFFSET && endOffset == common::INVALID_OFFSET;
-    }
-};
-
+// Shared state
 struct KUZU_API TableFuncSharedState {
-    common::offset_t maxOffset;
-    common::offset_t curOffset;
+    common::row_idx_t numRows = 0;
+    // This for now is only used for QueryHNSWIndex.
+    // TODO(Guodong): This is not a good way to pass semiMasks to QueryHNSWIndex function.
+    // However, to avoid function specific logic when we handle semi mask in mapper, so we can move
+    // HNSW into an extension, we have to let semiMasks be owned by a base class.
+    common::NodeOffsetMaskMap semiMasks;
     std::mutex mtx;
 
-    explicit TableFuncSharedState() : maxOffset{0}, curOffset{0} {}
-    explicit TableFuncSharedState(common::offset_t maxOffset)
-        : maxOffset{maxOffset}, curOffset{0} {}
+    explicit TableFuncSharedState() = default;
+    explicit TableFuncSharedState(common::row_idx_t numRows) : numRows{numRows} {}
     virtual ~TableFuncSharedState() = default;
+    virtual uint64_t getNumRows() const { return numRows; }
 
-    virtual TableFuncMorsel getMorsel();
+    common::table_id_map_t<common::SemiMask*> getSemiMasks() const { return semiMasks.getMasks(); }
 
     template<class TARGET>
     TARGET* ptrCast() {
@@ -8219,6 +8407,7 @@ struct KUZU_API TableFuncSharedState {
     }
 };
 
+// Local state
 struct TableFuncLocalState {
     virtual ~TableFuncLocalState() = default;
 
@@ -8228,6 +8417,7 @@ struct TableFuncLocalState {
     }
 };
 
+// Execution input
 struct TableFuncInput {
     TableFuncBindData* bindData;
     TableFuncLocalState* localState;
@@ -8241,64 +8431,94 @@ struct TableFuncInput {
     DELETE_COPY_DEFAULT_MOVE(TableFuncInput);
 };
 
-// We are in the middle of merging different scan operators into table function. But they organize
-// output vectors in different ways. E.g.
-// - Call functions and scan file functions put all vectors into single data chunk
-// - Factorized table scan instead
-// We introduce this as a temporary solution to unify the interface. In the long term, we should aim
-// to use ResultSet as TableFuncOutput.
+// Execution output.
+// We might want to merge this with TableFuncLocalState. Also not all table function output vectors
+// in a single dataChunk, e.g. FTableScan. In future, if we have more cases, we should consider
+// make TableFuncOutput pure virtual.
 struct TableFuncOutput {
     common::DataChunk dataChunk;
-    std::vector<common::ValueVector*> vectors;
 
-    TableFuncOutput() = default;
-    DELETE_COPY_DEFAULT_MOVE(TableFuncOutput);
+    explicit TableFuncOutput(common::DataChunk dataChunk) : dataChunk{std::move(dataChunk)} {}
+    virtual ~TableFuncOutput() = default;
+
+    void resetState();
+    void setOutputSize(common::offset_t size) const;
 };
 
-struct TableFunctionInitInput final {
+struct KUZU_API TableFuncInitSharedStateInput final {
     TableFuncBindData* bindData;
-    uint64_t queryID;
-    const main::ClientContext& context;
+    processor::ExecutionContext* context;
 
-    explicit TableFunctionInitInput(TableFuncBindData* bindData, uint64_t queryID,
-        const main::ClientContext& context)
-        : bindData{bindData}, queryID{queryID}, context{context} {}
+    TableFuncInitSharedStateInput(TableFuncBindData* bindData, processor::ExecutionContext* context)
+        : bindData{bindData}, context{context} {}
+};
+
+// Init local state
+struct TableFuncInitLocalStateInput {
+    TableFuncSharedState& sharedState;
+    TableFuncBindData& bindData;
+    main::ClientContext* clientContext;
+
+    TableFuncInitLocalStateInput(TableFuncSharedState& sharedState, TableFuncBindData& bindData,
+        main::ClientContext* clientContext)
+        : sharedState{sharedState}, bindData{bindData}, clientContext{clientContext} {}
+};
+
+// Init output
+struct TableFuncInitOutputInput {
+    std::vector<processor::DataPos> outColumnPositions;
+    processor::ResultSet& resultSet;
+
+    TableFuncInitOutputInput(std::vector<processor::DataPos> outColumnPositions,
+        processor::ResultSet& resultSet)
+        : outColumnPositions{std::move(outColumnPositions)}, resultSet{resultSet} {}
 };
 
 using table_func_bind_t = std::function<std::unique_ptr<TableFuncBindData>(main::ClientContext*,
     const TableFuncBindInput*)>;
-using table_func_t = std::function<common::offset_t(const TableFuncInput&, TableFuncOutput&)>;
+using table_func_t =
+    std::function<common::offset_t(const TableFuncInput&, TableFuncOutput& output)>;
 using table_func_init_shared_t =
-    std::function<std::unique_ptr<TableFuncSharedState>(const TableFunctionInitInput&)>;
-using table_func_init_local_t = std::function<std::unique_ptr<TableFuncLocalState>(
-    const TableFunctionInitInput&, TableFuncSharedState*, storage::MemoryManager*)>;
+    std::function<std::shared_ptr<TableFuncSharedState>(const TableFuncInitSharedStateInput&)>;
+using table_func_init_local_t =
+    std::function<std::unique_ptr<TableFuncLocalState>(const TableFuncInitLocalStateInput&)>;
+using table_func_init_output_t =
+    std::function<std::unique_ptr<TableFuncOutput>(const TableFuncInitOutputInput&)>;
 using table_func_can_parallel_t = std::function<bool()>;
 using table_func_progress_t = std::function<double(TableFuncSharedState* sharedState)>;
 using table_func_finalize_t =
     std::function<void(const processor::ExecutionContext*, TableFuncSharedState*)>;
 using table_func_rewrite_t =
     std::function<std::string(main::ClientContext&, const TableFuncBindData& bindData)>;
-using table_func_get_logical_plan_t = std::function<void(const transaction::Transaction*,
-    planner::Planner*, const binder::BoundReadingClause&, std::shared_ptr<planner::LogicalOperator>,
-    const std::vector<std::unique_ptr<planner::LogicalPlan>>&)>;
+using table_func_get_logical_plan_t =
+    std::function<void(planner::Planner*, const binder::BoundReadingClause&,
+        std::vector<std::shared_ptr<binder::Expression>>, planner::LogicalPlan&)>;
 using table_func_get_physical_plan_t = std::function<std::unique_ptr<processor::PhysicalOperator>(
-    const main::ClientContext*, processor::PlanMapper*, const planner::LogicalOperator*)>;
+    processor::PlanMapper*, const planner::LogicalOperator*)>;
+using table_func_infer_input_types =
+    std::function<std::vector<common::LogicalType>(const binder::expression_vector&)>;
 
 struct KUZU_API TableFunction final : Function {
     table_func_t tableFunc = nullptr;
     table_func_bind_t bindFunc = nullptr;
     table_func_init_shared_t initSharedStateFunc = nullptr;
     table_func_init_local_t initLocalStateFunc = nullptr;
+    table_func_init_output_t initOutputFunc = nullptr;
     table_func_can_parallel_t canParallelFunc = [] { return true; };
     table_func_progress_t progressFunc = [](TableFuncSharedState*) { return 0.0; };
     table_func_finalize_t finalizeFunc = [](auto, auto) {};
     table_func_rewrite_t rewriteFunc = nullptr;
     table_func_get_logical_plan_t getLogicalPlanFunc = getLogicalPlan;
     table_func_get_physical_plan_t getPhysicalPlanFunc = getPhysicalPlan;
+    table_func_infer_input_types inferInputTypes = nullptr;
 
     TableFunction() {}
     TableFunction(std::string name, std::vector<common::LogicalTypeID> inputTypes)
         : Function{std::move(name), std::move(inputTypes)} {}
+    ~TableFunction() override;
+    TableFunction(const TableFunction&) = default;
+    TableFunction& operator=(const TableFunction& other) = default;
+    DEFAULT_BOTH_MOVE(TableFunction);
 
     std::string signatureToString() const override {
         return common::LogicalTypeUtils::toString(parameterTypeIDs);
@@ -8306,129 +8526,27 @@ struct KUZU_API TableFunction final : Function {
 
     std::unique_ptr<TableFunction> copy() const { return std::make_unique<TableFunction>(*this); }
 
-    static std::unique_ptr<TableFuncSharedState> initSharedState(
-        const TableFunctionInitInput& input);
+    // Init local state func
     static std::unique_ptr<TableFuncLocalState> initEmptyLocalState(
-        const TableFunctionInitInput& input, TableFuncSharedState* state,
-        storage::MemoryManager* mm);
+        const TableFuncInitLocalStateInput& input);
+    // Init shared state func
+    static std::unique_ptr<TableFuncSharedState> initEmptySharedState(
+        const TableFuncInitSharedStateInput& input);
+    // Init output func
+    static std::unique_ptr<TableFuncOutput> initSingleDataChunkScanOutput(
+        const TableFuncInitOutputInput& input);
+    // Utility functions
     static std::vector<std::string> extractYieldVariables(const std::vector<std::string>& names,
         const std::vector<parser::YieldVariable>& yieldVariables);
-    static void getLogicalPlan(const transaction::Transaction* transaction,
-        planner::Planner* planner, const binder::BoundReadingClause& readingClause,
-        std::shared_ptr<planner::LogicalOperator> logicalOp,
-        const std::vector<std::unique_ptr<planner::LogicalPlan>>& logicalPlans);
+    // Get logical plan func
+    static void getLogicalPlan(planner::Planner* planner,
+        const binder::BoundReadingClause& boundReadingClause, binder::expression_vector predicates,
+        planner::LogicalPlan& plan);
+    // Get physical plan func
     static std::unique_ptr<processor::PhysicalOperator> getPhysicalPlan(
-        const main::ClientContext* clientContext, processor::PlanMapper* planMapper,
-        const planner::LogicalOperator* logicalOp);
+        processor::PlanMapper* planMapper, const planner::LogicalOperator* logicalOp);
+    // Table func
     static common::offset_t emptyTableFunc(const TableFuncInput& input, TableFuncOutput& output);
-};
-
-struct CurrentSettingFunction final {
-    static constexpr const char* name = "CURRENT_SETTING";
-
-    static function_set getFunctionSet();
-};
-
-struct DBVersionFunction final {
-    static constexpr const char* name = "DB_VERSION";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowTablesFunction final {
-    static constexpr const char* name = "SHOW_TABLES";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowWarningsFunction final {
-    static constexpr const char* name = "SHOW_WARNINGS";
-
-    static function_set getFunctionSet();
-};
-
-struct ClearWarningsFunction final {
-    static constexpr const char* name = "CLEAR_WARNINGS";
-
-    static function_set getFunctionSet();
-};
-
-struct TableInfoFunction final {
-    static constexpr const char* name = "TABLE_INFO";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowSequencesFunction final {
-    static constexpr const char* name = "SHOW_SEQUENCES";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowConnectionFunction final {
-    static constexpr const char* name = "SHOW_CONNECTION";
-
-    static function_set getFunctionSet();
-};
-
-struct StorageInfoFunction final {
-    static constexpr const char* name = "STORAGE_INFO";
-
-    static function_set getFunctionSet();
-};
-
-struct StatsInfoFunction final {
-    static constexpr const char* name = "STATS_INFO";
-
-    static function_set getFunctionSet();
-};
-
-struct BMInfoFunction final {
-    static constexpr const char* name = "BM_INFO";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowAttachedDatabasesFunction final {
-    static constexpr const char* name = "SHOW_ATTACHED_DATABASES";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowFunctionsFunction final {
-    static constexpr const char* name = "SHOW_FUNCTIONS";
-
-    static function_set getFunctionSet();
-};
-
-struct CreateProjectGraphFunction final {
-    static constexpr const char* name = "CREATE_PROJECT_GRAPH";
-
-    static function_set getFunctionSet();
-};
-
-struct DropProjectGraphFunction final {
-    static constexpr const char* name = "DROP_PROJECT_GRAPH";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowLoadedExtensionsFunction final {
-    static constexpr const char* name = "SHOW_LOADED_EXTENSIONS";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowOfficialExtensionsFunction final {
-    static constexpr const char* name = "SHOW_OFFICIAL_EXTENSIONS";
-
-    static function_set getFunctionSet();
-};
-
-struct ShowIndexesFunction final {
-    static constexpr const char* name = "SHOW_INDEXES";
-
-    static function_set getFunctionSet();
 };
 
 } // namespace function
@@ -8443,12 +8561,16 @@ struct ScanReplacementData {
     TableFuncBindInput bindInput;
 };
 
-using scan_replace_func_t = std::function<std::unique_ptr<ScanReplacementData>(const std::string&)>;
+using scan_replace_handle_t = uint8_t*;
+using handle_lookup_func_t = std::function<std::vector<scan_replace_handle_t>(const std::string&)>;
+using scan_replace_func_t =
+    std::function<std::unique_ptr<ScanReplacementData>(std::span<scan_replace_handle_t>)>;
 
 struct ScanReplacement {
-    explicit ScanReplacement(scan_replace_func_t replaceFunc)
-        : replaceFunc{std::move(replaceFunc)} {}
+    explicit ScanReplacement(handle_lookup_func_t lookupFunc, scan_replace_func_t replaceFunc)
+        : lookupFunc(std::move(lookupFunc)), replaceFunc{std::move(replaceFunc)} {}
 
+    handle_lookup_func_t lookupFunc;
     scan_replace_func_t replaceFunc;
 };
 
@@ -8508,8 +8630,8 @@ struct ActiveQuery {
 };
 
 /**
- * @brief Contain client side configuration. We make profiler associated per query, so profiler is
- * not maintained in client context.
+ * @brief Contain client side configuration. We make profiler associated per query, so the profiler
+ * is not maintained in the client context.
  */
 class KUZU_API ClientContext {
     friend class Connection;
@@ -8519,7 +8641,8 @@ class KUZU_API ClientContext {
     friend class processor::TableFunctionCall;
     friend class parser::StandaloneCallRewriter;
     friend struct SpillToDiskSetting;
-    friend class main::EmbeddedShell;
+    friend class EmbeddedShell;
+    friend class extension::ExtensionManager;
 
 public:
     explicit ClientContext(Database* database);
@@ -8554,10 +8677,13 @@ public:
 
     // Replace function.
     void addScanReplace(function::ScanReplacement scanReplacement);
-    std::unique_ptr<function::ScanReplacementData> tryReplace(const std::string& objectName) const;
+    std::unique_ptr<function::ScanReplacementData> tryReplaceByName(
+        const std::string& objectName) const;
+    std::unique_ptr<function::ScanReplacementData> tryReplaceByHandle(
+        function::scan_replace_handle_t handle) const;
     // Extension
     void setExtensionOption(std::string name, common::Value value);
-    const main::ExtensionOption* getExtensionOption(std::string optionName) const;
+    const ExtensionOption* getExtensionOption(std::string optionName) const;
     std::string getExtensionDir() const;
 
     // Database component getters.
@@ -8573,15 +8699,19 @@ public:
     transaction::TransactionManager* getTransactionManagerUnsafe() const;
     common::VirtualFileSystem* getVFSUnsafe() const;
     common::RandomEngine* getRandomEngine() const;
+    bool isInMemory() const;
 
     static std::string getEnvVariable(const std::string& name);
+    static std::string getUserHomeDir();
 
     void setDefaultDatabase(AttachedKuzuDatabase* defaultDatabase_);
     bool hasDefaultDatabase() const;
     void setUseInternalCatalogEntry(bool useInternalCatalogEntry) {
         this->useInternalCatalogEntry_ = useInternalCatalogEntry;
     }
-    bool useInternalCatalogEntry() const { return useInternalCatalogEntry_; }
+    bool useInternalCatalogEntry() const {
+        return clientConfig.enableInternalCatalog ? true : useInternalCatalogEntry_;
+    }
 
     void addScalarFunction(std::string name, function::function_set definitions);
     void removeScalarFunction(const std::string& name);
@@ -8591,10 +8721,13 @@ public:
 
     graph::GraphEntrySet& getGraphEntrySetUnsafe();
 
+    const graph::GraphEntrySet& getGraphEntrySet() const;
+
     void cleanUp();
 
     // Query.
-    std::unique_ptr<PreparedStatement> prepare(std::string_view query);
+    std::unique_ptr<PreparedStatement> prepareWithParams(std::string_view query,
+        std::unordered_map<std::string, std::unique_ptr<common::Value>> inputParams = {});
     std::unique_ptr<QueryResult> executeWithParams(PreparedStatement* preparedStatement,
         std::unordered_map<std::string, std::unique_ptr<common::Value>> inputParams,
         std::optional<uint64_t> queryID = std::nullopt);
@@ -8684,6 +8817,9 @@ private:
     std::mutex mtx;
     // Whether the query can access internal tables/sequences or not.
     bool useInternalCatalogEntry_ = false;
+    // Whether the transaction should be rolled back on destruction. If the parent database is
+    // closed, the rollback should be prevented or it will SEGFAULT.
+    bool preventTransactionRollbackOnDestruction = false;
 };
 
 } // namespace main
@@ -8702,7 +8838,6 @@ class Connection {
     friend class testing::PrivateGraphTest;
     friend class testing::TestHelper;
     friend class benchmark::Benchmark;
-    friend class testing::TinySnbDDLTest;
     friend class ConnectionExecuteAsyncWorker;
     friend class ConnectionQueryAsyncWorker;
 
@@ -8740,6 +8875,19 @@ public:
      * @return the prepared statement.
      */
     KUZU_API std::unique_ptr<PreparedStatement> prepare(std::string_view query);
+
+    /**
+     * @brief Prepares the given query and returns the prepared statement.
+     * @param query The query to prepare.
+     * @param inputParams The parameter pack where each arg is a pair with the first element
+     * being parameter name and second element being parameter value. The only parameters that are
+     * relevant during prepare are ones that will be substituted with a scan source. Any other
+     * parameters will either be ignored or will cause an error to be thrown.
+     * @return the prepared statement.
+     */
+    KUZU_API std::unique_ptr<PreparedStatement> prepareWithParams(std::string_view query,
+        std::unordered_map<std::string, std::unique_ptr<common::Value>> inputParams);
+
     /**
      * @brief Executes the given prepared statement with args and returns the result.
      * @param preparedStatement The prepared statement to execute.
@@ -8838,6 +8986,7 @@ private:
 private:
     Database* database;
     std::unique_ptr<ClientContext> clientContext;
+    std::shared_ptr<common::DatabaseLifeCycleManager> dbLifeCycleManager;
 };
 
 } // namespace main
