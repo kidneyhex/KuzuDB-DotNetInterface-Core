@@ -14,7 +14,7 @@ namespace KuzuDB_ConsoleCore
             using kuzu_connection conn = new();
             using kuzu_system_config config = kuzu_default_system_config();
 
-            var state = kuzu_database_init("test", config, db);
+            var state = kuzu_database_init("", config, db);
             if (state == kuzu_state.KuzuError)
             {
                 Console.WriteLine("Could not create DB");
