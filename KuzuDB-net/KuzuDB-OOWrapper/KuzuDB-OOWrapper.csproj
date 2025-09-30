@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>KuzuDB.OOWrapper</RootNamespace>
+    <AssemblyName>KuzuDB-OOWrapper</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>KuzuDB.OOWrapper</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>KuzuDB .NET Team</Authors>
+    <Description>Object-oriented wrapper for KuzuDB .NET Core API</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KuzuDB-NetCore\KuzuDB-NetCore.csproj" />
+  </ItemGroup>
+
+</Project>
