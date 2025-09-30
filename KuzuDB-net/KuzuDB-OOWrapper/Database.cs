@@ -19,14 +19,11 @@ namespace KuzuDB.OOWrapper
         /// <summary>
         /// Initializes a new instance of the Database class.
         /// </summary>
-        /// <param name="databasePath">The path to the database directory.</param>
+        /// <param name="databasePath">The path to the database file. If null, a database will exist in memory only.</param>
         /// <param name="config">Optional system configuration. If null, default configuration is used.</param>
         public Database(string databasePath, SystemConfig? config = null)
         {
-            if (string.IsNullOrEmpty(databasePath))
-                throw new ArgumentException("Database path cannot be null or empty.", nameof(databasePath));
-
-            DatabasePath = databasePath;
+            DatabasePath = (string.IsNullOrEmpty(databasePath)) ? "": databasePath;
             
             _config = config?.GetNativeConfig() ?? kuzunet.kuzu_default_system_config();
             _database = new kuzu_database();
