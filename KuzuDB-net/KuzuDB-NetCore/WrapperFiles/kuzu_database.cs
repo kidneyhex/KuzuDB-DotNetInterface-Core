@@ -12,6 +12,7 @@
 public class kuzu_database : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
+  private bool disposed = false;
 
   internal kuzu_database(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
@@ -47,15 +48,20 @@ public class kuzu_database : global::System.IDisposable {
   protected virtual void Dispose(bool disposing) 
   {
     lock(this) {
-      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
-
-        if (swigCMemOwn) {
-          swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_database(swigCPtr);
+      if (!disposed && swigCPtr.Handle != global::System.IntPtr.Zero) {
+        try {
+          // Use kuzu_database_destroy for proper cleanup instead of direct delete
+          kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
         }
-
+        catch (System.Exception)
+        {
+          // Ignore errors during cleanup to prevent crashes in finalizer
+        }
+        
+        // Don't call delete_kuzu_database as kuzu_database_destroy should handle cleanup
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+        swigCMemOwn = false;
+        disposed = true;
       }
     }
   }

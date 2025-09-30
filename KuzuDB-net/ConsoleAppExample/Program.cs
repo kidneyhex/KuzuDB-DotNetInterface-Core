@@ -10,8 +10,8 @@ namespace ConsoleAppExample
         static void Main(string[] args)
         {
             // Wipe out old test DB if it exists
-            if (System.IO.Directory.Exists("test"))
-                System.IO.Directory.Delete("test", true);
+            if (System.IO.File.Exists("test"))
+                System.IO.File.Delete("test");
 
             using (kuzu_database db = new kuzu_database())
             using (kuzu_connection conn = new kuzu_connection())

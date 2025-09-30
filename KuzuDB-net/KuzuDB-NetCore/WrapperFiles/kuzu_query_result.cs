@@ -12,6 +12,7 @@
 public class kuzu_query_result : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
+  private bool disposed;
 
   internal kuzu_query_result(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
@@ -47,15 +48,22 @@ public class kuzu_query_result : global::System.IDisposable {
   protected virtual void Dispose(bool disposing) 
   {
     lock(this) {
-      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
-
-        if (swigCMemOwn) {
-          swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_query_result(swigCPtr);
+      if (!disposed && swigCPtr.Handle != global::System.IntPtr.Zero) {
+        try
+        {
+          if (disposing)
+          {
+            kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
+          }
+        } 
+        catch (System.Exception)
+        {
+          //Ignore errors during finalizer
         }
 
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+        swigCMemOwn = false;
+        disposed = true;
       }
     }
   }

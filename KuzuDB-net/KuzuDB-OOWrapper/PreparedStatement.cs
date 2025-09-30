@@ -22,6 +22,18 @@ namespace KuzuDB.OOWrapper
         public string? ErrorMessage { get; private set; }
 
         /// <summary>
+        /// Gets the connection associated with this prepared statement.
+        /// </summary>
+        public Connection Connection
+        {
+            get
+            {
+                EnsureNotDisposed();
+                return _connection;
+            }
+        }
+
+        /// <summary>
         /// Initializes a new instance of the PreparedStatement class.
         /// </summary>
         /// <param name="preparedStatement">The native prepared statement.</param>
@@ -50,13 +62,8 @@ namespace KuzuDB.OOWrapper
             var queryResult = new kuzu_query_result();
             var state = kuzunet.kuzu_connection_execute(_connection.GetNativeConnection(), _preparedStatement, queryResult);
             
-            if (state != kuzu_state.KuzuSuccess)
-            {
-                var errorMessage = kuzunet.kuzu_query_result_get_error_message(queryResult);
-                queryResult.Dispose();
-                throw new KuzuException($"Statement execution failed: {errorMessage}");
-            }
-
+            // Always return QueryResult, even for failed execution
+            // The QueryResult constructor will handle the success/failure status
             return new QueryResult(queryResult);
         }
 
@@ -169,6 +176,8 @@ namespace KuzuDB.OOWrapper
         {
             if (string.IsNullOrEmpty(paramName))
                 throw new ArgumentException("Parameter name cannot be null or empty.", nameof(paramName));
+            if (value == null)
+                throw new ArgumentNullException(nameof(value), "Cannot bind null string value. Use a Value object with null instead.");
 
             EnsureNotDisposed();
             EnsureSuccess();

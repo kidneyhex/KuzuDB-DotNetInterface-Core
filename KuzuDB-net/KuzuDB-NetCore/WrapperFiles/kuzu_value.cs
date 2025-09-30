@@ -12,6 +12,7 @@
 public class kuzu_value : global::System.IDisposable {
   private global::System.Runtime.InteropServices.HandleRef swigCPtr;
   protected bool swigCMemOwn;
+  private bool disposed = false;
 
   internal kuzu_value(global::System.IntPtr cPtr, bool cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
@@ -47,21 +48,29 @@ public class kuzu_value : global::System.IDisposable {
   protected virtual void Dispose(bool disposing) 
   {
     lock(this) {
-      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
-
-        if (swigCMemOwn) {
-          swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_value(swigCPtr);
+      if (!disposed && swigCPtr.Handle != global::System.IntPtr.Zero) {
+        try {
+          // Only call destroy if we're being disposed explicitly, not from finalizer
+          if (disposing) {
+            kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
+          }
         }
-
+        catch (System.Exception)
+        {
+          // Ignore errors during cleanup to prevent crashes in finalizer
+        }
+        
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+        swigCMemOwn = false;
+        disposed = true;
       }
     }
   }
 
 
   public kuzu_value() : this(kuzunetPINVOKE.new_kuzu_value(), true) {
+    // Suppress finalizer to prevent GC issues - rely on explicit disposal
+    global::System.GC.SuppressFinalize(this);
   }
 
 }

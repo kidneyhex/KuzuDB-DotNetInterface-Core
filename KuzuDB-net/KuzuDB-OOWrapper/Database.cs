@@ -23,12 +23,12 @@ namespace KuzuDB.OOWrapper
         /// <param name="config">Optional system configuration. If null, default configuration is used.</param>
         public Database(string databasePath, SystemConfig? config = null)
         {
-            DatabasePath = (string.IsNullOrEmpty(databasePath)) ? "": databasePath;
+            DatabasePath = (string.IsNullOrWhiteSpace(databasePath)) ? "": databasePath;
             
             _config = config?.GetNativeConfig() ?? kuzunet.kuzu_default_system_config();
             _database = new kuzu_database();
             
-            var state = kuzunet.kuzu_database_init(databasePath, _config, _database);
+            var state = kuzunet.kuzu_database_init(DatabasePath, _config, _database);
             if (state != kuzu_state.KuzuSuccess)
             {
                 throw new KuzuException($"Failed to initialize database at path: {databasePath}");

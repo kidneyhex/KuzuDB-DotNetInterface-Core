@@ -11,6 +11,8 @@ namespace KuzuDB.OOWrapper
     {
         private kuzu_query_result _queryResult;
         private bool _disposed = false;
+        private ulong _numColumns;
+        private ulong _numTuples;
 
         /// <summary>
         /// Gets a value indicating whether the query was successful.
@@ -25,12 +27,26 @@ namespace KuzuDB.OOWrapper
         /// <summary>
         /// Gets the number of columns in the result.
         /// </summary>
-        public ulong NumColumns { get; private set; }
+        public ulong NumColumns 
+        { 
+            get 
+            { 
+                EnsureNotDisposed(); 
+                return _numColumns; 
+            }
+        }
 
         /// <summary>
         /// Gets the number of tuples (rows) in the result.
         /// </summary>
-        public ulong NumTuples { get; private set; }
+        public ulong NumTuples 
+        { 
+            get 
+            { 
+                EnsureNotDisposed(); 
+                return _numTuples; 
+            }
+        }
 
         /// <summary>
         /// Initializes a new instance of the QueryResult class.
@@ -47,8 +63,8 @@ namespace KuzuDB.OOWrapper
             }
             else
             {
-                NumColumns = kuzunet.kuzu_query_result_get_num_columns(_queryResult);
-                NumTuples = kuzunet.kuzu_query_result_get_num_tuples(_queryResult);
+                _numColumns = kuzunet.kuzu_query_result_get_num_columns(_queryResult);
+                _numTuples = kuzunet.kuzu_query_result_get_num_tuples(_queryResult);
             }
         }
 

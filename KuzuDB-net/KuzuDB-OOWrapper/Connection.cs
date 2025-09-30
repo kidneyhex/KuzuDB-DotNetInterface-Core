@@ -47,13 +47,8 @@ namespace KuzuDB.OOWrapper
             var queryResult = new kuzu_query_result();
             var state = kuzunet.kuzu_connection_query(_connection, query, queryResult);
             
-            if (state != kuzu_state.KuzuSuccess)
-            {
-                var errorMessage = kuzunet.kuzu_query_result_get_error_message(queryResult);
-                queryResult.Dispose();
-                throw new KuzuException($"Query execution failed: {errorMessage}");
-            }
-
+            // Always return QueryResult, even for failed queries
+            // The QueryResult constructor will handle the success/failure status
             return new QueryResult(queryResult);
         }
 
@@ -72,13 +67,8 @@ namespace KuzuDB.OOWrapper
             var preparedStatement = new kuzu_prepared_statement();
             var state = kuzunet.kuzu_connection_prepare(_connection, query, preparedStatement);
             
-            if (state != kuzu_state.KuzuSuccess)
-            {
-                var errorMessage = kuzunet.kuzu_prepared_statement_get_error_message(preparedStatement);
-                preparedStatement.Dispose();
-                throw new KuzuException($"Statement preparation failed: {errorMessage}");
-            }
-
+            // Always return PreparedStatement, even for failed preparation
+            // The PreparedStatement constructor will handle the success/failure status
             return new PreparedStatement(preparedStatement, this);
         }
 

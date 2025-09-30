@@ -85,7 +85,14 @@ namespace KuzuDB.OOWrapper
         /// <summary>
         /// Gets the number of columns in this row.
         /// </summary>
-        public ulong ColumnCount => _queryResult.NumColumns;
+        public ulong ColumnCount 
+        { 
+            get
+            {
+                EnsureNotDisposed();
+                return _queryResult.NumColumns;
+            }
+        }
 
         /// <summary>
         /// Converts the row to a string representation.
