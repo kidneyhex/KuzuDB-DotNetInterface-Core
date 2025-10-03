@@ -1,33 +1,69 @@
-# To update the version of KuzuDB
+# KuzuDB .NET Interface - Build Instructions
 
-## Presteps
-1) Download the latest version of KuzuDB's library from here:
+## Overview
+This repository contains a simplified SWIG-based .NET wrapper for KuzuDB.
+
+## Branch Structure
+- **`rough-draft`** - Main development branch with stable KuzuDB version
+- **`simplified-swig-interface`** - Contains an even rougher draft attempting to rework things
+
+## Prerequisites
+
+### 1. KuzuDB Native Libraries
+Download the latest version of KuzuDB's library from:
 https://github.com/kuzudb/kuzu/releases/
 
-Look for the `libkuzu-windows-x86_64.zip` file and download that. Unzip it and copy the files from there to the `KuzuFiles` folder.
+Look for the `libkuzu-windows-x86_64.zip` file, download and extract it, then copy the files to the `KuzuFiles` folder:
+- `kuzu_shared.dll`
+- `kuzu_shared.lib` 
+- `kuzu.h`
+- `kuzu.hpp`
 
-2) Download and install SWIG from https://www.swig.org/download.html
+### 2. SWIG (C++ to C# Wrapper Generator)
+Download and install SWIG from: https://www.swig.org/download.html
 
-3) Update the path to SWIG in `refresh.bat`
+Update the path to SWIG in `refresh.bat` (currently set to `p:\home\tools\swigwin\swig.exe`)
 
-## Building
+### 3. Visual Studio Build Tools
+Ensure you have Visual Studio 2022 with C++ build tools installed. The build process requires:
+- CMake (available in VS environment)
+- Ninja build system (available in VS environment)
+- MSVC C++ compiler
 
-### 1 - REFRESH.BAT
+## Building Process
 
-Run `refresh.bat` or manually do the steps in it.
+### Method 1: Using Batch Files (Recommended)
 
-This will delete the old kuzu wrapper files, and run SWIG to regenerate new wrapper files
+#### Step 1: Generate SWIG Wrappers
+```batch
+.\refresh.bat
+```
+This will:
+- Delete old wrapper files from `KuzuFiles\generated_classes\`
+- Run SWIG to generate new C# wrapper classes from `SWIG-InputFile\kuzu.i`
+- Generate C++ wrapper code in `wrapperlib\kuzu_wrap.cpp`
 
+#### Step 2: Build Native Library
+```batch
+.\rebuild.bat
+```
+This will:
+- Configure the build with CMake
+- Compile the native `kuzunet.dll` using Ninja
+- **Note:** This step requires Visual Studio environment variables
 
-### 2 - REBUILD.BAT  
-Open an "x64 Native Tools Commandline" and go to the `\wrapperlib` folder.
+#### Step 3: Deploy to .NET Projects
+```batch
+.\overwrite.bat
+```
+This will:
+- Copy generated C# classes to both .NET Framework and .NET Core projects
+- Copy `kuzunet.dll` and `kuzu_shared.dll` to project directories
 
-Run `wrapperlib\rebuild.bat` from inside that commandline -- so that it has access to the Visual Studio CMake and Build commands.
+### Method 2: Manual Build with VS Environment
 
-This will generate the new kuzunet.dll for .NET to use
+If you need to run the build with Visual Studio environment manually:
 
-
-### 3 - OVERWRITE.BAT
-Run `overwrite.bat`
-
-This moves the new version of the kuzu wrapper down into the .NET projects.
+```powershell
+cmd /c '"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat" x64 && cd wrapperlib && cd build && cmake -G Ninja .. -DCMAKE_BUILD_TYPE=Release && ninja'
+```

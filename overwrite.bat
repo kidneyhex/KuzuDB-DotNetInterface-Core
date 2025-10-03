@@ -1,5 +1,5 @@
-REM STEP 1) refresh.bet
-REM STEP 2) wrapperlib\rebuild.bat
+REM STEP 1) refresh.bat
+REM STEP 2) rebuild.bat
 REM STEP 3) overwrite.bat ** YOU ARE HERE
 
 REM This copies the newly created CSharp classes to the .NET projects
