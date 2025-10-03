@@ -48,13 +48,10 @@ public class kuzu_database : global::System.IDisposable {
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_database(swigCPtr);
+          kuzunetPINVOKE.kuzu_database_destroy(kuzu_database.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }

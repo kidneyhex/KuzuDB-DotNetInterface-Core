@@ -48,18 +48,25 @@ public class kuzu_query_result : global::System.IDisposable {
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_query_result(swigCPtr);
+          kuzunetPINVOKE.kuzu_query_result_destroy(kuzu_query_result.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
+
+  public bool _is_owned_by_cpp {
+    set {
+      kuzunetPINVOKE.kuzu_query_result__is_owned_by_cpp_set(swigCPtr, value);
+    } 
+    get {
+      bool ret = kuzunetPINVOKE.kuzu_query_result__is_owned_by_cpp_get(swigCPtr);
+      return ret;
+    } 
+  }
 
   public kuzu_query_result() : this(kuzunetPINVOKE.new_kuzu_query_result(), true) {
   }

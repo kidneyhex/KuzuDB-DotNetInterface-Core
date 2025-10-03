@@ -300,13 +300,13 @@ public class kuzunet {
 
   public static kuzu_value kuzu_value_create_null() {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_null();
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_null_with_data_type(kuzu_logical_type data_type) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_null_with_data_type(kuzu_logical_type.getCPtr(data_type));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
@@ -321,163 +321,163 @@ public class kuzunet {
 
   public static kuzu_value kuzu_value_create_default(kuzu_logical_type data_type) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_default(kuzu_logical_type.getCPtr(data_type));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_bool(bool val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_bool(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_int8(sbyte val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_int8(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_int16(short val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_int16(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_int32(int val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_int32(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_int64(long val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_int64(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_uint8(byte val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_uint8(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_uint16(ushort val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_uint16(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_uint32(uint val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_uint32(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_uint64(ulong val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_uint64(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_int128(kuzu_int128_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_int128(kuzu_int128_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_float(float val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_float(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_double(double val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_double(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_internal_id(kuzu_internal_id_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_internal_id(kuzu_internal_id_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_date(kuzu_date_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_date(kuzu_date_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_timestamp_ns(kuzu_timestamp_ns_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_timestamp_ns(kuzu_timestamp_ns_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_timestamp_ms(kuzu_timestamp_ms_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_timestamp_ms(kuzu_timestamp_ms_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_timestamp_sec(kuzu_timestamp_sec_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_timestamp_sec(kuzu_timestamp_sec_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_timestamp_tz(kuzu_timestamp_tz_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_timestamp_tz(kuzu_timestamp_tz_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_timestamp(kuzu_timestamp_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_timestamp(kuzu_timestamp_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_interval(kuzu_interval_t val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_interval(kuzu_interval_t.getCPtr(val_));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     if (kuzunetPINVOKE.SWIGPendingException.Pending) throw kuzunetPINVOKE.SWIGPendingException.Retrieve();
     return ret;
   }
 
   public static kuzu_value kuzu_value_create_string(string val_) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_create_string(val_);
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_list(ulong num_elements, kuzu_value[] elements, kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_list(num_elements, elements, out_value);
+  public static kuzu_state kuzu_value_create_list(ulong num_elements, kuzu_value[] elements, out kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_list(num_elements, elements, out out_value);
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_struct(ulong num_fields, string[] field_names, kuzu_value[] field_values, kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_struct(num_fields, field_names, field_values, out_value);
+  public static kuzu_state kuzu_value_create_struct(ulong num_fields, SWIGTYPE_p_p_char field_names, kuzu_value[] field_values, out kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_struct(num_fields, SWIGTYPE_p_p_char.getCPtr(field_names), field_values, out out_value);
     return ret;
   }
 
-  public static kuzu_state kuzu_value_create_map(ulong num_fields, kuzu_value[] keys, kuzu_value[] values, kuzu_value out_value) {
-    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_map(num_fields, keys, values, out_value);
+  public static kuzu_state kuzu_value_create_map(ulong num_fields, kuzu_value[] keys, kuzu_value[] values, out kuzu_value out_value) {
+    kuzu_state ret = (kuzu_state)kuzunetPINVOKE.kuzu_value_create_map(num_fields, keys, values, out out_value);
     return ret;
   }
 
   public static kuzu_value kuzu_value_clone(kuzu_value value) {
     global::System.IntPtr cPtr = kuzunetPINVOKE.kuzu_value_clone(kuzu_value.getCPtr(value));
-    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, false);
+    kuzu_value ret = (cPtr == global::System.IntPtr.Zero) ? null : new kuzu_value(cPtr, true);
     return ret;
   }
 

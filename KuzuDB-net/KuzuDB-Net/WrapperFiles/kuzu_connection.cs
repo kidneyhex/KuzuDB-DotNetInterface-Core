@@ -48,13 +48,10 @@ public class kuzu_connection : global::System.IDisposable {
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_connection(swigCPtr);
+          kuzunetPINVOKE.kuzu_connection_destroy(kuzu_connection.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }

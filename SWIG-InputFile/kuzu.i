@@ -7,9 +7,6 @@
 #include "kuzu.h"
 %}
 
-
-
-
 %include "typemaps.i"
 %include "arrays_csharp.i"
 
@@ -28,6 +25,32 @@
 %apply unsigned long long { uint64_t };
 %apply long long { int64_t };
 
+// Mark functions that allocate a fresh kuzu_value so SWIG sets swigCMemOwn=true
+%newobject kuzu_value_create_null;
+%newobject kuzu_value_create_null_with_data_type;
+%newobject kuzu_value_create_default;
+%newobject kuzu_value_create_bool;
+%newobject kuzu_value_create_int8;
+%newobject kuzu_value_create_int16;
+%newobject kuzu_value_create_int32;
+%newobject kuzu_value_create_int64;
+%newobject kuzu_value_create_uint8;
+%newobject kuzu_value_create_uint16;
+%newobject kuzu_value_create_uint32;
+%newobject kuzu_value_create_uint64;
+%newobject kuzu_value_create_int128;
+%newobject kuzu_value_create_float;
+%newobject kuzu_value_create_double;
+%newobject kuzu_value_create_internal_id;
+%newobject kuzu_value_create_date;
+%newobject kuzu_value_create_timestamp_ns;
+%newobject kuzu_value_create_timestamp_ms;
+%newobject kuzu_value_create_timestamp_sec;
+%newobject kuzu_value_create_timestamp_tz;
+%newobject kuzu_value_create_timestamp;
+%newobject kuzu_value_create_interval;
+%newobject kuzu_value_create_string;
+%newobject kuzu_value_clone;
 
 // -----------------
 // If you want to have things like kuzu_connection_init create a 
@@ -78,17 +101,21 @@
 %typemap(imtype) (uint8_t **out_result) "out byte[]";
 %typemap(csin) (uint8_t **out_result) "out $csinput";
 
-%typemap(cstype) (kuzu_value **out_value) "kuzu_value";
-%typemap(imtype) (kuzu_value **out_value) "kuzu_value";
-%typemap(csin) (kuzu_value **out_value) "$csinput";
+// Correct borrowed kuzu_value** patterns -> out kuzu_value (non-owning wrapper)
+// Remove previous incorrect direct mapping.
+%typemap(cstype) (kuzu_value **out_value) "out kuzu_value";
+%typemap(imtype) (kuzu_value **out_value) "out kuzu_value";
+%typemap(csin) (kuzu_value **out_value) "out $csinput";
+
+%typemap(cstype) (kuzu_value **out_key) "out kuzu_value";
+%typemap(imtype) (kuzu_value **out_key) "out kuzu_value";
+%typemap(csin) (kuzu_value **out_key) "out $csinput";
+
+// If needed additional out pointers can be added similarly.
 
 %typemap(cstype) char **out_column_name "out string";
 %typemap(imtype) char **out_column_name "out string";
 %typemap(csin) char **out_column_name "out $csinput";
-
-%typemap(cstype) (char **field_names) "string[]";
-%typemap(imtype) (char **field_names) "string[]";
-%typemap(csin) (char **field_names) "$csinput";
 
 %typemap(cstype) 
 SWIGTYPE **elements, 
@@ -157,28 +184,11 @@ SWIGTYPE **keys
 %ignore _query_result;
 %ignore _query_summary;
 %ignore _bound_values;
-%ignore _is_owned_by_cpp;
+// Stop ignoring _is_owned_by_cpp so we could (optionally) inspect ownership.
+//%ignore _is_owned_by_cpp;
 
-// // ------------------
-// // Add {class}.Destroy for the following:
-// %typemap(cscode) 
-// kuzu_connection, 
-// kuzu_database, 
-// kuzu_value, 
-// kuzu_prepared_statement, 
-// kuzu_flat_tuple, 
-// kuzu_data_type, 
-// kuzu_query_summary,
-// kuzu_query_result
-// %{
-// 	public void Destroy() {
-//         $modulePINVOKE.$1_type_destroy($csclassname.getCPtr(this));
-// 	}
-// %}
-
-
-// Replace destructor and dispose to call destroy automatically
-// This way both the SWIG wrapper and kuzu object get disposed by using statements
+// Replace destructor and dispose to call destroy only when owning.
+// This avoids double free of borrowed objects.
 %typemap(csdisposing, methodname="Dispose", methodmodifiers="protected", parameters="bool disposing") 
 kuzu_connection, 
 kuzu_database, 
@@ -192,19 +202,15 @@ kuzu_query_result
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        $modulePINVOKE.$csclassname_destroy($csclassname.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          $modulePINVOKE.delete_$csclassname(swigCPtr);
+          $modulePINVOKE.$csclassname_destroy($csclassname.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 %}
-
 
 // --------------------------
 // Experimenting with adding methods to kuzu_value
@@ -216,33 +222,31 @@ kuzu_query_result
 // 		$modulePINVOKE.kuzu_value_as_string($csclassname.getCPtr(this), out string result);
 // 		return result;
 // 	}
-
+//
 // 	public int AsInt32() {
 // 		$modulePINVOKE.kuzu_value_as_int32($csclassname.getCPtr(this), out int result);
 // 		return result;
 // 	}
-
+//
 // 	public long AsInt64() {
 // 		$modulePINVOKE.kuzu_value_as_int64($csclassname.getCPtr(this), out long result);
 // 		return result;
-// 	}	
-
+// 	}
+//
 // 	public short AsInt16() {
 // 		$modulePINVOKE.kuzu_value_as_int16($csclassname.getCPtr(this), out short result);
 // 		return result;
 // 	}
-
+//
 // 	public double AsDouble() {
 // 		$modulePINVOKE.kuzu_value_as_double($csclassname.getCPtr(this), out double result);
 // 		return result;
 // 	}
-
+//
 // %}
-
 
 %include <windows.i>
 %include "kuzu.h"
-
 
 // Not sure how to make SWIG give tm a class; so doing it manually...
 %inline %{

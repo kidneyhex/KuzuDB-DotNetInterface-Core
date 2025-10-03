@@ -48,13 +48,10 @@ public class kuzu_prepared_statement : global::System.IDisposable {
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_prepared_statement(swigCPtr);
+          kuzunetPINVOKE.kuzu_prepared_statement_destroy(kuzu_prepared_statement.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }

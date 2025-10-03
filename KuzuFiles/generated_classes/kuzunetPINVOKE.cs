@@ -290,11 +290,23 @@ class kuzunetPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_prepared_statement")]
   public static extern void delete_kuzu_prepared_statement(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__is_owned_by_cpp_set")]
+  public static extern void kuzu_query_result__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_query_result__is_owned_by_cpp_get")]
+  public static extern bool kuzu_query_result__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_query_result")]
   public static extern global::System.IntPtr new_kuzu_query_result();
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_query_result")]
   public static extern void delete_kuzu_query_result(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__is_owned_by_cpp_set")]
+  public static extern void kuzu_flat_tuple__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_flat_tuple__is_owned_by_cpp_get")]
+  public static extern bool kuzu_flat_tuple__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_flat_tuple")]
   public static extern global::System.IntPtr new_kuzu_flat_tuple();
@@ -307,6 +319,12 @@ class kuzunetPINVOKE {
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_delete_kuzu_logical_type")]
   public static extern void delete_kuzu_logical_type(global::System.Runtime.InteropServices.HandleRef jarg1);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__is_owned_by_cpp_set")]
+  public static extern void kuzu_value__is_owned_by_cpp_set(global::System.Runtime.InteropServices.HandleRef jarg1, bool jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value__is_owned_by_cpp_get")]
+  public static extern bool kuzu_value__is_owned_by_cpp_get(global::System.Runtime.InteropServices.HandleRef jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_new_kuzu_value")]
   public static extern global::System.IntPtr new_kuzu_value();
@@ -705,13 +723,13 @@ class kuzunetPINVOKE {
   public static extern global::System.IntPtr kuzu_value_create_string(string jarg1);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_list")]
-  public static extern int kuzu_value_create_list(ulong jarg1, kuzu_value[] jarg2, kuzu_value jarg3);
+  public static extern int kuzu_value_create_list(ulong jarg1, kuzu_value[] jarg2, out kuzu_value jarg3);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_struct")]
-  public static extern int kuzu_value_create_struct(ulong jarg1, string[] jarg2, kuzu_value[] jarg3, kuzu_value jarg4);
+  public static extern int kuzu_value_create_struct(ulong jarg1, global::System.Runtime.InteropServices.HandleRef jarg2, kuzu_value[] jarg3, out kuzu_value jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_create_map")]
-  public static extern int kuzu_value_create_map(ulong jarg1, kuzu_value[] jarg2, kuzu_value[] jarg3, kuzu_value jarg4);
+  public static extern int kuzu_value_create_map(ulong jarg1, kuzu_value[] jarg2, kuzu_value[] jarg3, out kuzu_value jarg4);
 
   [global::System.Runtime.InteropServices.DllImport("kuzunet", EntryPoint="CSharp_kuzu_value_clone")]
   public static extern global::System.IntPtr kuzu_value_clone(global::System.Runtime.InteropServices.HandleRef jarg1);

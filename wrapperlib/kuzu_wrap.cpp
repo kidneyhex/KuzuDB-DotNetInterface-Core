@@ -602,6 +602,28 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_prepared_statement(void * jarg1) 
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (kuzu_query_result *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_query_result__is_owned_by_cpp_get(void * jarg1) {
+  unsigned int jresult ;
+  kuzu_query_result *arg1 = (kuzu_query_result *) 0 ;
+  bool result;
+  
+  arg1 = (kuzu_query_result *)jarg1; 
+  result = (bool) ((arg1)->_is_owned_by_cpp);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void * SWIGSTDCALL CSharp_new_kuzu_query_result() {
   void * jresult ;
   kuzu_query_result *result = 0 ;
@@ -617,6 +639,28 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_query_result(void * jarg1) {
   
   arg1 = (kuzu_query_result *)jarg1; 
   delete arg1;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (kuzu_flat_tuple *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_flat_tuple__is_owned_by_cpp_get(void * jarg1) {
+  unsigned int jresult ;
+  kuzu_flat_tuple *arg1 = (kuzu_flat_tuple *) 0 ;
+  bool result;
+  
+  arg1 = (kuzu_flat_tuple *)jarg1; 
+  result = (bool) ((arg1)->_is_owned_by_cpp);
+  jresult = result; 
+  return jresult;
 }
 
 
@@ -653,6 +697,28 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_kuzu_logical_type(void * jarg1) {
   
   arg1 = (kuzu_logical_type *)jarg1; 
   delete arg1;
+}
+
+
+SWIGEXPORT void SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_set(void * jarg1, unsigned int jarg2) {
+  kuzu_value *arg1 = (kuzu_value *) 0 ;
+  bool arg2 ;
+  
+  arg1 = (kuzu_value *)jarg1; 
+  arg2 = jarg2 ? true : false; 
+  if (arg1) (arg1)->_is_owned_by_cpp = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_kuzu_value__is_owned_by_cpp_get(void * jarg1) {
+  unsigned int jresult ;
+  kuzu_value *arg1 = (kuzu_value *) 0 ;
+  bool result;
+  
+  arg1 = (kuzu_value *)jarg1; 
+  result = (bool) ((arg1)->_is_owned_by_cpp);
+  jresult = result; 
+  return jresult;
 }
 
 

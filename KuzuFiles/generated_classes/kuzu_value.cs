@@ -48,18 +48,25 @@ public class kuzu_value : global::System.IDisposable {
   {
     lock(this) {
       if (swigCPtr.Handle != global::System.IntPtr.Zero) {
-        kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
-
         if (swigCMemOwn) {
           swigCMemOwn = false;
-          kuzunetPINVOKE.delete_kuzu_value(swigCPtr);
+          kuzunetPINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
         }
-
         swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
       }
     }
   }
 
+
+  public bool _is_owned_by_cpp {
+    set {
+      kuzunetPINVOKE.kuzu_value__is_owned_by_cpp_set(swigCPtr, value);
+    } 
+    get {
+      bool ret = kuzunetPINVOKE.kuzu_value__is_owned_by_cpp_get(swigCPtr);
+      return ret;
+    } 
+  }
 
   public kuzu_value() : this(kuzunetPINVOKE.new_kuzu_value(), true) {
   }
