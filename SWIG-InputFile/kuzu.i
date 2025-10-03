@@ -10,9 +10,7 @@
 %include "typemaps.i"
 %include "arrays_csharp.i"
 
-//%pragma(csharp) moduleclassmodifiers="internal sealed class";
-//%typemap(csclassmodifiers) SWIGTYPE "internal sealed class";
-
+// Map fixed-width integer types to C# equivalents
 %apply unsigned char { uint8_t };
 %apply signed char { int8_t };
 
@@ -51,41 +49,6 @@
 %newobject kuzu_value_create_interval;
 %newobject kuzu_value_create_string;
 %newobject kuzu_value_clone;
-
-// -----------------
-// If you want to have things like kuzu_connection_init create a 
-//   connection and pass it as an "out" parameter you could do this
-//   Side effect is that disposing with using statements gets harder
-
-// // kuzu_connection
-// %typemap(cstype) (kuzu_connection *out_connection) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(kuzu_connection *out_connection) "$csclassname.getCPtr($csinput)";
-
-// // kuzu_database
-// %typemap(cstype) (kuzu_database *out_database) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(kuzu_database *out_database) "$csclassname.getCPtr($csinput)";
-
-// // kuzu_query_result
-// %typemap(cstype) (kuzu_query_result *out_query_result) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(kuzu_query_result *out_query_result) "$csclassname.getCPtr($csinput)";
-
-// // ArrowSchema
-// %typemap(cstype) (ArrowSchema *out_schema) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(ArrowSchema *out_schema) "$csclassname.getCPtr($csinput)";
-
-// // kuzu_value
-// %typemap(cstype) (kuzu_value *out_value) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(kuzu_value *out_value) "$csclassname.getCPtr($csinput)";
-
-// // kuzu_flat_tuple
-// %typemap(cstype) (kuzu_flat_tuple *out_flat_tuple) "$csclassname";
-// %typemap(csin, pre="    $1_name = new $csclassname();") 
-// 	(kuzu_flat_tuple *out_flat_tuple) "$csclassname.getCPtr($csinput)";
 
 
 // --------------
@@ -212,38 +175,6 @@ kuzu_query_result
   }
 %}
 
-// --------------------------
-// Experimenting with adding methods to kuzu_value
-// Note: should add these as a partial class or extension methods?
-
-// %typemap(cscode) kuzu_value 
-// %{
-// 	public string AsString() {
-// 		$modulePINVOKE.kuzu_value_as_string($csclassname.getCPtr(this), out string result);
-// 		return result;
-// 	}
-//
-// 	public int AsInt32() {
-// 		$modulePINVOKE.kuzu_value_as_int32($csclassname.getCPtr(this), out int result);
-// 		return result;
-// 	}
-//
-// 	public long AsInt64() {
-// 		$modulePINVOKE.kuzu_value_as_int64($csclassname.getCPtr(this), out long result);
-// 		return result;
-// 	}
-//
-// 	public short AsInt16() {
-// 		$modulePINVOKE.kuzu_value_as_int16($csclassname.getCPtr(this), out short result);
-// 		return result;
-// 	}
-//
-// 	public double AsDouble() {
-// 		$modulePINVOKE.kuzu_value_as_double($csclassname.getCPtr(this), out double result);
-// 		return result;
-// 	}
-//
-// %}
 
 %include <windows.i>
 %include "kuzu.h"
