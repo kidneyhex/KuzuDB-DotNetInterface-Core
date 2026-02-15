@@ -7,4 +7,4 @@
 
 @REM TODO: Update this path to your local SWIG installation
 @REM Get Swig from here: https://www.swig.org/download.html
-"P:\Home\Tools\swigwin\swigwin-4.3.1\swig.exe" -c++ -csharp -IKuzuFiles/ -outdir "KuzuFiles/generated_classes/" -o wrapperlib/kuzu_wrap.cpp SWIG-InputFile/kuzu.i
+"P:\Home\Tools\swigwin\swigwin-4.4.1\swig.exe" -c++ -csharp -IKuzuFiles/ -outdir "KuzuFiles/generated_classes/" -o wrapperlib/kuzu_wrap.cpp SWIG-InputFile/kuzu.i

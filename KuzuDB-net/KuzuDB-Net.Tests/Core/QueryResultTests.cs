@@ -60,6 +60,21 @@ namespace KuzuDB_Net_Tests.Core
         }
 
         [TestMethod]
+        public void QueryResult_GetColumnNames_RepeatedCalls_ShouldBeStable()
+        {
+            EnsureKuzuAvailable();
+
+            using var result = ExecuteQuery("MATCH (q:QueryTest) RETURN q.id, q.name, q.value");
+
+            for (var i = 0; i < 200; i++)
+            {
+                var state = kuzu_query_result_get_column_name(result, 1, out string col);
+                Assert.AreEqual(kuzu_state.KuzuSuccess, state);
+                Assert.AreEqual("q.name", col);
+            }
+        }
+
+        [TestMethod]
         public void QueryResult_GetColumnDataTypes_ShouldWork()
         {
             EnsureKuzuAvailable();

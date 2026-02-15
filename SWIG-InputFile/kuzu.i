@@ -56,10 +56,32 @@
 %typemap(cstype) (char **out_result) "out string";
 %typemap(imtype) (char **out_result) "out string";
 %typemap(csin) (char **out_result) "out $csinput";
+%typemap(argout) (char **out_result) {
+  if (*$1) {
+    char *tmp = *$1;
+    *$1 = SWIG_csharp_string_callback((const char *)tmp);
+    kuzu_destroy_string(tmp);
+  }
+}
 
-// Ignore blob and strings; C# will handle destroying (maybe?)
+// Hide kuzu_destroy_string/blob from the public C# API.
+// SWIG's string callback copies char* returns to managed memory but does NOT free
+// the native pointer. The %typemap(ret) below calls kuzu_destroy_string in the C
+// wrapper after the callback has copied the data, preventing native string leaks.
 %ignore kuzu_destroy_string;
 %ignore kuzu_destroy_blob;
+
+// Free native strings returned by C API functions. kuzu_destroy_string is still
+// available in the C wrapper because kuzu.h is included in the %{ %} block above.
+%typemap(ret) char* kuzu_prepared_statement_get_error_message,
+              char* kuzu_query_result_get_error_message,
+              char* kuzu_query_result_to_string,
+              char* kuzu_flat_tuple_to_string,
+              char* kuzu_value_to_string,
+              char* kuzu_get_version
+%{
+  if ($1) kuzu_destroy_string($1);
+%}
 %typemap(cstype) (uint8_t **out_result) "out byte[]";
 %typemap(imtype) (uint8_t **out_result) "out byte[]";
 %typemap(csin) (uint8_t **out_result) "out $csinput";
@@ -79,6 +101,13 @@
 %typemap(cstype) char **out_column_name "out string";
 %typemap(imtype) char **out_column_name "out string";
 %typemap(csin) char **out_column_name "out $csinput";
+%typemap(argout) char **out_column_name {
+  if (*$1) {
+    char *tmp = *$1;
+    *$1 = SWIG_csharp_string_callback((const char *)tmp);
+    kuzu_destroy_string(tmp);
+  }
+}
 
 %typemap(cstype) 
 SWIGTYPE **elements, 
@@ -101,7 +130,9 @@ SWIGTYPE **field_values,
 SWIGTYPE **keys
 "$csinput"
 
-// Ignore the Arrow array stuff -- I'm not sure how to get SWIG to handle it
+// Arrow C Data Interface -- not yet supported.
+// TODO: Proper C# interop for ArrowArray/ArrowSchema would require custom typemaps
+//       or a dedicated managed wrapper (e.g. Apache.Arrow). Ignored for now.
 %ignore ArrowArray;
 %ignore ArrowSchema;
 %ignore ARROW_FLAG_DICTIONARY_ORDERED;
@@ -110,10 +141,9 @@ SWIGTYPE **keys
 %ignore kuzu_query_result_get_arrow_schema;
 %ignore kuzu_query_result_get_next_arrow_chunk;
 
-// Initial attempt at ArrowArray stuff
-// %apply void *VOID_INT_PTR { void ** };
-// %apply void *VOID_INT_PTR { void * };
-// %typemap(cstype) ArrowArray **children "ArrowArray[]"
+// TODO: const char** field_names in kuzu_value_create_struct generates an unusable
+//       SWIGTYPE_p_p_char proxy. A proper typemap mapping const char** → string[]
+//       with MarshalAs attributes is needed to make struct creation callable from C#.
 
 
 // --------------------
@@ -150,15 +180,33 @@ SWIGTYPE **keys
 // Stop ignoring _is_owned_by_cpp so we could (optionally) inspect ownership.
 //%ignore _is_owned_by_cpp;
 
+// kuzu_logical_type needs a dedicated dispose because the C API destroy function
+// is kuzu_data_type_destroy, not kuzu_logical_type_destroy (naming mismatch 
+// between the struct typedef and the API convention).
+%typemap(csdisposing, methodname="Dispose", methodmodifiers="protected", parameters="bool disposing") 
+kuzu_logical_type
+%{
+  {
+    lock(this) {
+      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        if (swigCMemOwn) {
+          swigCMemOwn = false;
+          $modulePINVOKE.kuzu_data_type_destroy(kuzu_logical_type.getCPtr(this));
+        }
+        swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+      }
+    }
+  }
+%}
+
 // Replace destructor and dispose to call destroy only when owning.
-// This avoids double free of borrowed objects.
+// This avoids double free of borrowed objects (e.g. kuzu_value returned by
+// kuzu_flat_tuple_get_value is borrowed and must NOT be destroyed by C#).
 %typemap(csdisposing, methodname="Dispose", methodmodifiers="protected", parameters="bool disposing") 
 kuzu_connection, 
 kuzu_database, 
-kuzu_value, 
 kuzu_prepared_statement, 
 kuzu_flat_tuple, 
-kuzu_data_type, 
 kuzu_query_summary,
 kuzu_query_result
 %{
@@ -175,11 +223,41 @@ kuzu_query_result
   }
 %}
 
+// kuzu_value created via default constructor has no internal value pointer yet.
+// In that case, call delete_kuzu_value instead of kuzu_value_destroy to avoid
+// crashing in native code. For real values, keep using kuzu_value_destroy.
+%inline %{
+static int kuzu_value_has_internal(kuzu_value* value) {
+    return (value && value->_value) ? 1 : 0;
+}
+%}
+
+%typemap(csdisposing, methodname="Dispose", methodmodifiers="protected", parameters="bool disposing") 
+kuzu_value
+%{
+  {
+    lock(this) {
+      if (swigCPtr.Handle != global::System.IntPtr.Zero) {
+        if (swigCMemOwn) {
+          swigCMemOwn = false;
+          if ($modulePINVOKE.kuzu_value_has_internal(kuzu_value.getCPtr(this)) != 0) {
+            $modulePINVOKE.kuzu_value_destroy(kuzu_value.getCPtr(this));
+          } else {
+            $modulePINVOKE.delete_kuzu_value(kuzu_value.getCPtr(this));
+          }
+        }
+        swigCPtr = new global::System.Runtime.InteropServices.HandleRef(null, global::System.IntPtr.Zero);
+      }
+    }
+  }
+%}
+
 
 %include <windows.i>
 %include "kuzu.h"
 
-// Not sure how to make SWIG give tm a class; so doing it manually...
+// Workaround: SWIG doesn't automatically wrap <time.h>'s struct tm as a C# class,
+// so we define it inline under #ifdef SWIG to generate a proper managed wrapper.
 %inline %{
 #ifdef SWIG
 typedef struct {

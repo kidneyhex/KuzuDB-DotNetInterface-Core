@@ -182,6 +182,51 @@ namespace KuzuDB_Net_Tests.Core
         }
 
         [TestMethod]
+        public void Value_DateToString_ShouldReturnValidString()
+        {
+            EnsureKuzuAvailable();
+
+            using var result = ExecuteQuery("MATCH (v:ValueTest) RETURN v.created_date");
+            Assert.IsTrue(kuzu_query_result_has_next(result));
+
+            using var tuple = new kuzu_flat_tuple();
+            kuzu_query_result_get_next(result, tuple);
+
+            using var value = new kuzu_value();
+            kuzu_flat_tuple_get_value(tuple, 0, value);
+
+            using var dateValue = new kuzu_date_t();
+            kuzu_value_get_date(value, dateValue);
+
+            var state = kuzu_date_to_string(dateValue, out string dateString);
+            Assert.AreEqual(kuzu_state.KuzuSuccess, state);
+            Assert.IsTrue(!string.IsNullOrEmpty(dateString));
+        }
+
+        [TestMethod]
+        public void Value_NodePropertyNameAndToString_ShouldWork()
+        {
+            EnsureKuzuAvailable();
+
+            using var result = ExecuteQuery("MATCH (v:ValueTest) RETURN v");
+            Assert.IsTrue(kuzu_query_result_has_next(result));
+
+            using var tuple = new kuzu_flat_tuple();
+            kuzu_query_result_get_next(result, tuple);
+
+            using var nodeValue = new kuzu_value();
+            kuzu_flat_tuple_get_value(tuple, 0, nodeValue);
+
+            var nameState = kuzu_node_val_get_property_name_at(nodeValue, 0, out string name);
+            Assert.AreEqual(kuzu_state.KuzuSuccess, nameState);
+            Assert.IsTrue(!string.IsNullOrEmpty(name));
+
+            var stringState = kuzu_node_val_to_string(nodeValue, out string nodeString);
+            Assert.AreEqual(kuzu_state.KuzuSuccess, stringState);
+            Assert.IsTrue(!string.IsNullOrEmpty(nodeString));
+        }
+
+        [TestMethod]
         public void Value_NullValues_ShouldBeDetected()
         {
             EnsureKuzuAvailable();

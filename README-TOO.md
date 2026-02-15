@@ -3,6 +3,21 @@
 ## Overview
 This repository contains a simplified SWIG-based .NET wrapper for KuzuDB.
 
+## Quickstart
+Run these in order from the repo root:
+
+```batch
+.\refresh.bat
+.\rebuild.bat
+.\overwrite.bat
+```
+
+Quick notes on each script:
+- `refresh.bat` regenerates the SWIG C# classes and the C++ wrapper (`wrapperlib\kuzu_wrap.cpp`).
+- `rebuild.bat` builds `kuzunet.dll` using CMake + Ninja (requires VS environment variables).
+- `overwrite.bat` copies the generated C# files and native DLLs into the .NET projects.
+
+
 ## Branch Structure
 - **`rough-draft`** - Main development branch with stable KuzuDB version
 - **`simplified-swig-interface`** - Contains an even rougher draft attempting to rework things
