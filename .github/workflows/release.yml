@@ -1,0 +1,63 @@
+name: Release (Windows x64)
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  build-release:
+    runs-on: windows-latest
+    env:
+      KUZU_VERSION: v0.11.3
+      KUZU_ZIP: libkuzu-windows-x86_64.zip
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Download Kuzu native libraries
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          $url = "https://github.com/kuzudb/kuzu/releases/download/${env:KUZU_VERSION}/${env:KUZU_ZIP}"
+          Invoke-WebRequest -Uri $url -OutFile $env:KUZU_ZIP
+          Expand-Archive -Path $env:KUZU_ZIP -DestinationPath "KuzuFiles" -Force
+
+      - name: Build native wrapper (kuzunet.dll)
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          cmake -S wrapperlib -B wrapperlib/build -G "Visual Studio 17 2022" -A x64
+          cmake --build wrapperlib/build --config Release
+
+      - name: Stage native DLLs for managed build
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          Copy-Item -Path "wrapperlib/build/Release/kuzunet.dll" -Destination "KuzuDB-net/KuzuDB-Net/kuzunet.dll" -Force
+          Copy-Item -Path "KuzuFiles/kuzu_shared.dll" -Destination "KuzuDB-net/KuzuDB-Net/kuzu_shared.dll" -Force
+
+      - name: Build managed library (KuzuDB.dll)
+        run: dotnet build "KuzuDB-net/KuzuDB-Net/KuzuDB-Net.csproj" -c Release -p:Platform=x64
+
+      - name: Prepare release assets
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Stop"
+          New-Item -ItemType Directory -Path dist -Force | Out-Null
+          Copy-Item -Path "KuzuDB-net/KuzuDB-Net/bin/x64/Release/netstandard2.0/KuzuDB.dll" -Destination "dist/KuzuDB.dll" -Force
+          Copy-Item -Path "wrapperlib/build/Release/kuzunet.dll" -Destination "dist/kuzunet.dll" -Force
+          Copy-Item -Path "KuzuFiles/kuzu_shared.dll" -Destination "dist/kuzu_shared.dll" -Force
+
+      - name: Upload release assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
